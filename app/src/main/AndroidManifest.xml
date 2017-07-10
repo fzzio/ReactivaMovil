@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="reactiva.reactivamovil">
 
     <application
@@ -10,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--Put here the name of your activity-->
+
+        <!-- Put here the name of your activity -->
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".VerCita"
+            android:label="@string/title_activity_ver_cita"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
