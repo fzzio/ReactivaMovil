@@ -9,11 +9,11 @@ import android.view.View;
 
 public class VerCita extends AppCompatActivity {
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_cita);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -24,6 +24,6 @@ public class VerCita extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
+    }*/
 
 }
