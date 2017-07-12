@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editText17"
+            android:layout_width="590dp"
+            android:layout_height="767dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="         NO HAY TERAPIAS ACTIVAS"
+            android:textSize="36sp"
+            tools:layout_editor_absoluteY="59dp"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Nueva Terapia"
+            tools:layout_editor_absoluteY="3dp"
+            tools:layout_editor_absoluteX="467dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </GridLayout>
+</LinearLayout>
