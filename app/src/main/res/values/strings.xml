@@ -16,4 +16,24 @@
         completions."
     </string>
     <string name="title_activity_ver_cita">VerCita</string>
+    <string name="section_1">Nadia Pezantes</string>
+    <string name="hour_1">00:12:00</string>
+    <string name="section_2">Angel Pena</string>
+    <string name="hour_2">01:02:52</string>
+    <string name="section_3">Luz Piedrahita</string>
+    <string name="hour_3">00:26:09</string>
+    <string name="section_4">Andrés Cárdenas</string>
+    <string name="hour_4">00:23:09</string>
+    <string name="item_11">Nadia Pezantes</string>
+    <string name="item_12">22 años</string>
+    <string name="item_13">Sala 2</string>
+    <string name="item_21">Angel Peña</string>
+    <string name="item_22">25 años</string>
+    <string name="item_23">Sala 1</string>
+    <string name="item_31">Luz Piedrahita</string>
+    <string name="item_32">30 años</string>
+    <string name="item_33">Sala 1</string>
+    <string name="item_41">Andrés Cárdenas</string>
+    <string name="item_42">30 años</string>
+    <string name="item_43">Sala 1</string>
 </resources>

@@ -22,7 +22,7 @@ public class VerTerapia extends AppCompatActivity {
         section2 = findViewById(R.id.section2);
         section3 = findViewById(R.id.section3);
 
-        View header1 = findViewById(R.id.header1);
+        final View header1 = findViewById(R.id.header1);
         header1.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -31,10 +31,28 @@ public class VerTerapia extends AppCompatActivity {
                 if (section1.getVisibility() == View.GONE)
                 {
                     section1.setVisibility(View.VISIBLE);
+                    v.setVisibility(View.GONE);
                 }
                 else
                 {
                     section1.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        section1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (header1.getVisibility() == View.GONE)
+                {
+                    header1.setVisibility(View.VISIBLE);
+                    v.setVisibility(View.GONE);
+                }
+                else
+                {
+                    header1.setVisibility(View.GONE);
                 }
             }
         });
