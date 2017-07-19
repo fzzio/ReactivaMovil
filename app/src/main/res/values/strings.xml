@@ -36,4 +36,11 @@
     <string name="item_41">Andrés Cárdenas</string>
     <string name="item_42">30 años</string>
     <string name="item_43">Sala 1</string>
+
+
+
+    <string name="parrafo_prueba">
+        Lorem ipsum dolor sit amet,consectetur adipiscing elit,\n sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n
+        Ut enim ad minim veniam,\n quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    </string>
 </resources>
