@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Iterator;
 import java.util.List;
 /**
  * Created by edgardan on 18/07/2017.
@@ -38,43 +39,28 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
         holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
 
-        /*final int mExpandedPosition = -1;
-        final boolean isExpanded = position==mExpandedPosition;
-        holder.row_item.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.itemView.setActivated(isExpanded);
+        //boolean isExpanded = position==mExpandedPosition;
+        //holder.itemView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        //holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1:position;
-                TransitionManager.beginDelayedTransition(recyclerView);//recyclerView es un groupView
-                notifyDataSetChanged();
-            }
-        });*/
-
-        /*if (position == expandedPosition) {
-            holder.itemView.findViewById(R.id.header).setVisibility(View.VISIBLE);
-        } else {
-            holder.itemView.findViewById(R.id.header).setVisibility(View.GONE);
-        }*/
-
-        /*holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                TerapiaViewHolder holder = (TerapiaViewHolder) view.getTag();
-                String theString = listaTerapias.get(holder.get(position));
-
-                // Check for an expanded view, collapse if you find one
-                if (expandedPosition >= 0) {
-                    int prev = expandedPosition;
-                    notifyItemChanged(prev);
+                /*for (Iterator<ItemTerapiaView> i = listaTerapias.iterator(); i.hasNext();) {
+                    ItemTerapiaView item = i.next();
+                    item.setEstado(false);
                 }
-                // Set the current position to "expanded"
-                expandedPosition = holder.get(position);
-                notifyItemChanged(expandedPosition);
-
-                Toast.makeText(mContext, "Clicked: "+theString, Toast.LENGTH_SHORT).show();
+                listaTerapias.get(position).setEstado(true);*/
+                boolean isExpanded = position==expandedPosition;
+                expandedPosition = isExpanded ? -1:position;
+                if (position == expandedPosition) {
+                    v.findViewById(R.id.header).setVisibility(View.VISIBLE);
+                    v.findViewById(R.id.section).setVisibility(View.GONE);
+                } else {
+                    v.findViewById(R.id.header).setVisibility(View.GONE);//check v
+                    v.findViewById(R.id.section).setVisibility(View.VISIBLE);
+                }
             }
-        });*/
+        });
     }
 
     /*@Override

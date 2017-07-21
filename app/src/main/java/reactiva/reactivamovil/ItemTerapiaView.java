@@ -8,11 +8,13 @@ public class ItemTerapiaView {
     private int profile_pic;
     private String nombre;
     private String temporizador;
+    //private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
     public ItemTerapiaView(int profile_pic, String nombre, String temporizador) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
+        //this.estado = false;
     }
 
     public int getProfile_pic() {
@@ -38,4 +40,12 @@ public class ItemTerapiaView {
     public void setTemporizador(String temporizador) {
         this.temporizador = temporizador;
     }
+
+    /*public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }*/
 }
