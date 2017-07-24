@@ -35,12 +35,13 @@ tools:paddingRight="50dp">
 <ScrollView
     android:id="@+id/login_form"
     android:layout_width="match_parent"
-    android:layout_height="254dp">
+    android:layout_height="254dp"
+    android:layout_weight="0.33">
 
     <LinearLayout
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -74,6 +75,7 @@ tools:paddingRight="50dp">
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:color="#b67727"
+            android:paddingTop="15dp"
             android:text="CONTRASEÑA"
             android:textAlignment="viewStart"
             android:textColor="#b67727"
@@ -98,24 +100,43 @@ tools:paddingRight="50dp">
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/lbl_forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#b67727"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textAlignment="center"
+            android:textColor="#2e4766"
+            android:textColorHighlight="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
         <Button
             android:id="@+id/email_sign_in_button"
             style="@android:style/Widget.Material.Button.Borderless"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
-            android:layout_marginTop="16dp"
-            android:background="#2e4766"
-            android:elevation="10dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            android:layout_weight="0.34"
+            android:background="@drawable/rounded_button"
+            android:elevation="15dp"
             android:ellipsize="middle"
             android:gravity="center_horizontal|fill_horizontal|center"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
             android:text="Ingresar"
             android:textAlignment="center"
+            android:textColor="#ffffff"
             android:textSize="18sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>
+
 </LinearLayout>
