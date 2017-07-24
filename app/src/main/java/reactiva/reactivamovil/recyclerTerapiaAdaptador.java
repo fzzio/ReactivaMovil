@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Iterator;
 import java.util.List;
 /**
@@ -38,6 +40,10 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.profile_pic.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
         holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
+        holder.txtHora.setText(listaTerapias.get(position).getHora());
+        holder.txtNombreDetalle.setText(listaTerapias.get(position).getNombre_detalle());
+        holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
+        holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
 
         //boolean isExpanded = position==mExpandedPosition;
         //holder.itemView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
@@ -63,41 +69,6 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         });
     }
 
-    /*@Override
-    public void onClick(View view) {
-        TerapiaViewHolder holder = (TerapiaViewHolder) view.getTag();
-        String theString = mDataset.get(holder.getPosition());
-
-        // Check for an expanded view, collapse if you find one
-        if (expandedPosition >= 0) {
-            int prev = expandedPosition;
-            notifyItemChanged(prev);
-        }
-        // Set the current position to "expanded"
-        expandedPosition = holder.getPosition();
-        notifyItemChanged(expandedPosition);
-
-        Toast.makeText(mContext, "Clicked: "+theString, Toast.LENGTH_SHORT).show();
-    }*/
-
-    /**
-     * Create a ViewHolder to represent your cell layout
-     * and data element structure
-     */
-    /*public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle;
-        TextView tvSubTitle;
-        RelativeLayout llExpandArea;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            tvSubTitle = (TextView) itemView.findViewById(R.id.tvSubTitle);
-            llExpandArea = (RelativeLayout) itemView.findViewById(R.id.header);
-        }
-    }*/
-
     @Override
     public int getItemCount() {
         return listaTerapias.size();
@@ -107,12 +78,20 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         ImageView profile_pic;
         TextView txtNombre;
         TextView txtTemporizador;
+        TextView txtHora;
+        TextView txtNombreDetalle;
+        TextView txtEdadDetalle;
+        TextView txtSalaDetalle;
 
         public TerapiaViewHolder(View itemView) {
             super(itemView);
             profile_pic = (ImageView) itemView.findViewById(R.id.image_profile_pic);
             txtNombre = (TextView) itemView.findViewById(R.id.txtName);
             txtTemporizador = (TextView) itemView.findViewById(R.id.txt_temporizador);
+            txtHora = (TextView) itemView.findViewById(R.id.txt_hora);
+            txtNombreDetalle = (TextView) itemView.findViewById(R.id.txtNameDetalle);
+            txtEdadDetalle = (TextView) itemView.findViewById(R.id.txtEdadDetalle);
+            txtSalaDetalle = (TextView) itemView.findViewById(R.id.txtSalaDetalle);
         }
     }
 
