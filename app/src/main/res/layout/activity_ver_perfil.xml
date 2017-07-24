@@ -240,13 +240,13 @@
                 android:background="#c0c0c0"
                 ></View>
 
-           <!-- <FrameLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:id="@+id/frameTerapAnteriores">-->
+                android:id="@+id/frameTerapAnteriores">
 
                <ScrollView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
 
@@ -258,7 +258,7 @@
 
                 </ScrollView>
 
-            <!--</FrameLayout>-->
+            </FrameLayout>
 
 
 

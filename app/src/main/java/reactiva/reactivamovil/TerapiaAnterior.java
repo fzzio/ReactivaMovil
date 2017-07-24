@@ -9,9 +9,9 @@ public class TerapiaAnterior {
     String fechaTerapiaAnterior;
     String terapistaTerapiaAnterior;
     String comentTerapiaAnterior;
-    int galleryFotos;
+    String galleryFotos;
 
-    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior, String comentTerapiaAnterior, int galleryFotos) {
+    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior, String comentTerapiaAnterior, String galleryFotos) {
         this.fechaTerapiaAnterior = fechaTerapiaAnterior;
         this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
         this.comentTerapiaAnterior = comentTerapiaAnterior;
@@ -30,7 +30,7 @@ public class TerapiaAnterior {
         return comentTerapiaAnterior;
     }
 
-    public int getGalleryFotos() {
+    public String getGalleryFotos() {
         return galleryFotos;
     }
 
@@ -46,7 +46,7 @@ public class TerapiaAnterior {
         this.comentTerapiaAnterior = comentTerapiaAnterior;
     }
 
-    public void setGalleryFotos(int galleryFotos) {
+    public void setGalleryFotos(String galleryFotos) {
         this.galleryFotos = galleryFotos;
     }
 }

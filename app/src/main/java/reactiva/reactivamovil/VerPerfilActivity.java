@@ -30,21 +30,21 @@ public class VerPerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver_perfil);
 
 
-        //LinearLayoutManager llm = new LinearLayoutManager(this);
-        //llm.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
 
 
         //ASOCIO MIS FRAMES A LOS FRAMES DE LA VISTA
         frameObservMed = (FrameLayout) findViewById(R.id.frameObMed);
 
-       // frameTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
+        frameTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
 
 
         //ASOCIO MIS RYCLERVIEWS A LOS DE LA VISTA PRINCIPAL
         //OBSERVACIONES MEDICAS
         listaDeObservacionesMedicas = (RecyclerView) findViewById(R.id.rvObsMedicas);
         //TERAPIAS MEDICAS ANTERIORES
-        //listaDeTerapiasAnteriores = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
+        listaDeTerapiasAnteriores = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
 
 
         ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
@@ -53,14 +53,14 @@ public class VerPerfilActivity extends AppCompatActivity {
         listaDeObservacionesMedicas.setLayoutManager(llmobsmed);
 
 
-        /*LinearLayoutManager llmterapante = new LinearLayoutManager(this);
+        LinearLayoutManager llmterapante = new LinearLayoutManager(this);
         llmterapante.setOrientation(LinearLayoutManager.VERTICAL);
-        listaDeTerapiasAnteriores.setLayoutManager(llmterapante);*/
+        listaDeTerapiasAnteriores.setLayoutManager(llmterapante);
 
         //INICIALIZO EL ADAPTADOR DE OBSERVACIONES MEDICAS
         incializarListaDeObservacionesMedicas();
 
-        //inicializarListaDeTerapiasAnteriores();
+        inicializarListaDeTerapiasAnteriores();
 
         inicializarAdaptadorObservacionesMedicas();
 
@@ -68,15 +68,15 @@ public class VerPerfilActivity extends AppCompatActivity {
         //INICIALIZO EL ADAPTADOR DE TERAPIAS ANTERIORES
 
 
-        //inicializarAdaptadorTerapiasAnteriores();
+        inicializarAdaptadorTerapiasAnteriores();
 
 
         ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
         frameObservMed.addView(listaDeObservacionesMedicas);
 
 
-        //((ScrollView)listaDeTerapiasAnteriores.getParent()).removeView(listaDeTerapiasAnteriores);
-        //frameTerapiasAnteriores.addView(listaDeTerapiasAnteriores);
+        ((ScrollView)listaDeTerapiasAnteriores.getParent()).removeView(listaDeTerapiasAnteriores);
+        frameTerapiasAnteriores.addView(listaDeTerapiasAnteriores);
 
 
 
@@ -111,14 +111,14 @@ public class VerPerfilActivity extends AppCompatActivity {
     public void inicializarListaDeTerapiasAnteriores() {
 
         terapiasAnterioresData = new ArrayList<TerapiaAnterior>();
-        terapiasAnterioresData.add(new TerapiaAnterior("15 jul. 2017","Daniel Garcia","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("10 jul. 2017","Ariel Cedenio","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("5 jul. 2017","Ariel Cedenio","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("1 jul. 2017","Rosa Maria","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("25 jun. 2017","Juan Piguave","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("20 jun. 2017","Luis Ernesto","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("15 jun. 2017","Sara Poveda","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
-        terapiasAnterioresData.add(new TerapiaAnterior("10 jun. 2017","Silvia Paredes","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",1));
+        terapiasAnterioresData.add(new TerapiaAnterior("15 jul. 2017","Daniel Garcia","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("10 jul. 2017","Ariel Cedenio","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("5 jul. 2017","Ariel Cedenio","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("1 jul. 2017","Rosa Maria","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("25 jun. 2017","Juan Piguave","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("20 jun. 2017","Luis Ernesto","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("15 jun. 2017","Sara Poveda","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
+        terapiasAnterioresData.add(new TerapiaAnterior("10 jun. 2017","Silvia Paredes","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
 
     }
 
