@@ -1,28 +1,27 @@
 package reactiva.reactivamovil;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 
 /**
  * Created by edgardan on 12/07/2017.
  */
 
-public class VerTerapia extends AppCompatActivity {
+public class VerTerapiaFragment extends Fragment {
     View section1, section2, section3;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedinstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_terapias);
+        section1 = getView().findViewById(R.id.section1);
+        section2 = getView().findViewById(R.id.section2);
+        section3 = getView().findViewById(R.id.section3);
 
-        section1 = findViewById(R.id.section1);
-        section2 = findViewById(R.id.section2);
-        section3 = findViewById(R.id.section3);
-
-        final View header1 = findViewById(R.id.header1);
+        final View header1 = getView().findViewById(R.id.header1);
         header1.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -57,7 +56,7 @@ public class VerTerapia extends AppCompatActivity {
             }
         });
 
-        View header2 = findViewById(R.id.header2);
+        View header2 = getView().findViewById(R.id.header2);
         header2.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -74,7 +73,7 @@ public class VerTerapia extends AppCompatActivity {
             }
         });
 
-        View header3 = findViewById(R.id.header3);
+        View header3 = getView().findViewById(R.id.header3);
         header3.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -90,6 +89,8 @@ public class VerTerapia extends AppCompatActivity {
                 }
             }
         });
+
+        return inflater.inflate(R.layout.fragment_ver_terapias,container,false);
     }
 
 }

@@ -2,7 +2,10 @@ package reactiva.reactivamovil;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -15,18 +18,15 @@ import java.util.Calendar;
  * Created by Fernando on 09/07/2017.
  */
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarFragment extends Fragment{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedinstanceState) {
 
-
-        final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
+        final MaterialCalendarView materialCalendarView = (MaterialCalendarView) getView().findViewById(R.id.calendarView);
 
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(1900, 1, 1))
+                .setMinimumDate(CalendarDay.from(2010, 1, 1))
                 .setMaximumDate(CalendarDay.from(2100, 12, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
@@ -38,13 +38,13 @@ public class CalendarActivity extends AppCompatActivity {
 
                 materialCalendarView.state().edit()
                         .setFirstDayOfWeek(Calendar.MONDAY)
-                        .setMinimumDate(CalendarDay.from(1900, 1, 1))
+                        .setMinimumDate(CalendarDay.from(2010, 1, 1))
                         .setMaximumDate(CalendarDay.from(2100, 12, 31))
                         .setCalendarDisplayMode(CalendarMode.WEEKS)
                         .commit();
 
             }
         });
-
+        return inflater.inflate(R.layout.fragment_calendar,container,false);
     }
 }

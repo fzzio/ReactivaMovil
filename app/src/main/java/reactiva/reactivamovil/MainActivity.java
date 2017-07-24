@@ -117,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            //ojo section_label por appbar
+            TextView textView = (TextView) rootView.findViewById(R.id.appbar);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
@@ -137,13 +138,31 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            //return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    VerTerapiaFragment v_terapia_fragment = new VerTerapiaFragment();
+                    return v_terapia_fragment;
+                case 1:
+                    CalendarFragment calendario = new CalendarFragment();
+                    return  calendario;
+                    //return "AGENDA";
+                case 2:
+                    //return "PACIENTES";
+                case 3:
+                    return null;
+                    //return "HISTORIAL";
+                case 4:
+                    VerPerfilFragment v_perfil_fragment = new VerPerfilFragment();
+                    return v_perfil_fragment;
+            }
+            return null;
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 5;
         }
 
         @Override

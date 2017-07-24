@@ -1,17 +1,18 @@
 package reactiva.reactivamovil;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ArrayAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
-public class VerPerfilActivity extends AppCompatActivity {
+public class VerPerfilFragment extends Fragment {
 
 
     //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
@@ -25,61 +26,32 @@ public class VerPerfilActivity extends AppCompatActivity {
     private RecyclerView listaDeTerapiasAnteriores;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_perfil);
-
-
-        //LinearLayoutManager llm = new LinearLayoutManager(this);
-        //llm.setOrientation(LinearLayoutManager.VERTICAL);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedinstanceState){
 
         //ASOCIO MIS FRAMES A LOS FRAMES DE LA VISTA
-        frameObservMed = (FrameLayout) findViewById(R.id.frameObMed);
-
-       // frameTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
-
+        frameObservMed = (FrameLayout) getView().findViewById(R.id.frameObMed);
+        // frameTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
 
         //ASOCIO MIS RYCLERVIEWS A LOS DE LA VISTA PRINCIPAL
         //OBSERVACIONES MEDICAS
-        listaDeObservacionesMedicas = (RecyclerView) findViewById(R.id.rvObsMedicas);
+        listaDeObservacionesMedicas = (RecyclerView) getView().findViewById(R.id.rvObsMedicas);
         //TERAPIAS MEDICAS ANTERIORES
         //listaDeTerapiasAnteriores = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
-
-
+        frameObservMed = (FrameLayout) getView().findViewById(R.id.frameObMed);
         ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
-        LinearLayoutManager llmobsmed = new LinearLayoutManager(this);
+        LinearLayoutManager llmobsmed = new LinearLayoutManager(this.getContext());
         llmobsmed.setOrientation(LinearLayoutManager.VERTICAL);
         listaDeObservacionesMedicas.setLayoutManager(llmobsmed);
 
-
-        /*LinearLayoutManager llmterapante = new LinearLayoutManager(this);
-        llmterapante.setOrientation(LinearLayoutManager.VERTICAL);
-        listaDeTerapiasAnteriores.setLayoutManager(llmterapante);*/
-
-        //INICIALIZO EL ADAPTADOR DE OBSERVACIONES MEDICAS
         incializarListaDeObservacionesMedicas();
-
-        //inicializarListaDeTerapiasAnteriores();
-
         inicializarAdaptadorObservacionesMedicas();
 
-
         //INICIALIZO EL ADAPTADOR DE TERAPIAS ANTERIORES
-
-
         //inicializarAdaptadorTerapiasAnteriores();
-
-
         ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
         frameObservMed.addView(listaDeObservacionesMedicas);
 
-
-        //((ScrollView)listaDeTerapiasAnteriores.getParent()).removeView(listaDeTerapiasAnteriores);
-        //frameTerapiasAnteriores.addView(listaDeTerapiasAnteriores);
-
-
-
+        return inflater.inflate(R.layout.fragment_ver_perfil,container,false);
     }
 
     ///INICIALIZO MI ADAPTADOR CON EL ARRAYLITS DE MIS OBSERVACIONES MEDICAS
