@@ -22,7 +22,7 @@ tools:paddingRight="50dp">
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_weight="0.34"
-        app:srcCompat="@drawable/Rea_login" />
+        app:srcCompat="@drawable/rea_login" />
 
 <ProgressBar
     android:id="@+id/login_progress"

@@ -21,7 +21,7 @@ import java.util.Calendar;
 public class CalendarFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedinstanceState) {
-/*
+
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) getView().findViewById(R.id.calendarView);
 
         materialCalendarView.state().edit()
@@ -44,7 +44,7 @@ public class CalendarFragment extends Fragment{
                         .commit();
 
             }
-        });*/
+        });
         return inflater.inflate(R.layout.fragment_calendar,container,false);
     }
 }
