@@ -5,7 +5,7 @@
     <TextView
         android:layout_width="300dp"
         android:layout_height="20dp"
-        android:text="7:00 AM    María Jóse Velasco Ibarra"
+        android:text="6:00 AM    María Jóse Velasco Ibarra"
         android:textSize="18sp"
         android:id="@+id/cita"/>
 
