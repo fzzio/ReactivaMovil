@@ -17,12 +17,12 @@ tools:paddingLeft="50dp"
 tools:paddingRight="50dp">
 
 <!-- Login progress -->
-<ImageView
-    android:id="@+id/imageView3"
-    android:layout_width="match_parent"
-    android:layout_height="380dp"
-    app:srcCompat="@drawable/osa_login"
-    android:layout_weight="0.34" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_weight="0.34"
+        app:srcCompat="@drawable/Rea_login" />
 
 <ProgressBar
     android:id="@+id/login_progress"

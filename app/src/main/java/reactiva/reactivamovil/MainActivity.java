@@ -1,8 +1,6 @@
 package reactiva.reactivamovil;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,8 +17,16 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity {
+    int[] icons = {
+            R.drawable.agenda,
+            R.drawable.historial,
+            R.drawable.paciente,
+            R.drawable.agenda_activo,
+            R.drawable.historial_activo,
+            R.drawable.paciente_activo,
+    };
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -53,7 +59,27 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager){
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        tab.setIcon(icons[tab.getPosition()+3]);
+                    }
 
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        tab.setIcon(icons[tab.getPosition()]);
+                    }
+                }
+        );
+
+
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+*/
     }
 
 
@@ -84,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -147,12 +174,15 @@ public class MainActivity extends AppCompatActivity {
                     CalendarFragment calendario = new CalendarFragment();
                     return  calendario;
                     //return "AGENDA";
-                case 2:
+                //case 2:
+                  //  return v_terapia_fragmen;
                     //return "PACIENTES";
-                case 3:
-                    return null;
+                //case 3:
+                  //  CalendarFragment calendar = new CalendarFragment();
+                    //return  calendar;
+                    //return null;
                     //return "HISTORIAL";
-                case 4:
+                case 2:
                     VerPerfilFragment v_perfil_fragment = new VerPerfilFragment();
                     return v_perfil_fragment;
             }
@@ -162,23 +192,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 3;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
+            /*switch (position) {
                 case 0:
                     return "TERAPIAS";
                 case 1:
                     return "AGENDA";
                 case 2:
                     return "PACIENTES";
-                case 3:
+                /*case 3:
                     return "HISTORIAL";
                 case 4:
-                    return "PERFIL";
-            }
+                    return "PERFIL";*/
+            /*}*/
             return null;
         }
     }

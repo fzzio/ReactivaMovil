@@ -17,6 +17,7 @@ public class VerTerapiaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedinstanceState)
     {
+        /*
         section1 = getView().findViewById(R.id.section1);
         section2 = getView().findViewById(R.id.section2);
         section3 = getView().findViewById(R.id.section3);
@@ -89,8 +90,9 @@ public class VerTerapiaFragment extends Fragment {
                 }
             }
         });
-
+*/
         return inflater.inflate(R.layout.fragment_ver_terapias,container,false);
+
     }
 
 }
