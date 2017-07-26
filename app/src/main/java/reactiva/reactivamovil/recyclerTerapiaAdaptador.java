@@ -68,7 +68,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 }
                 listaTerapias.get(position).setEstado(true);*/
 
-                button = (Button) v.findViewById(R.id.buttonShowCustomDialog);
+                /*button = (Button) v.findViewById(R.id.buttonShowCustomDialog);
 
                 // custom dialog
                 //Dialog dialog;
@@ -91,7 +91,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     }
                 });
 
-                dialog.show();
+                dialog.show();*/
 
                 boolean isExpanded = position==expandedPosition;
                 expandedPosition = isExpanded ? -1:position;
