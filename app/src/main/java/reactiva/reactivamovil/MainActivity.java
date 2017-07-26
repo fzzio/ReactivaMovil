@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -42,21 +45,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
+    private void setIcons(){
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -77,6 +66,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        setIcons();
 
 
         /*
@@ -89,6 +95,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+        ImageButton button = (ImageButton) findViewById(R.id.btn_menu);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button click
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(mViewPager);
+                if(tabLayout.getVisibility()==View.VISIBLE){
+                    showTabs(false);
+                }else {
+                    showTabs(true);
+                }
+
+            }
+        });
+    }
+    public void showTabs(boolean show) {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+        if (show) {
+            tabLayout.setVisibility(View.VISIBLE);
+            setIcons();
+            //tabLayout.animate().scaleY(1).setInterpolator(new DecelerateInterpolator()).start();
+
+        } else {
+            //tabLayout.animate().scaleY(0).setInterpolator(new AccelerateInterpolator()).start();
+            tabLayout.setVisibility(View.GONE);
+        }
     }
 
 
