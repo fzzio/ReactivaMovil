@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_terapias"
+        android:title="Mi Agenda">
+    </item>
+    <item android:id="@+id/nav_calendarView"
+        android:title="Calendario">
+    </item>
+    <item android:id="@+id/nav_settings"
+        android:title="Configuración">
+    </item>
+    <item android:id="@+id/nav_logout"
+        android:title="Cerrar Sesión">
+    </item>
+
+</menu>
