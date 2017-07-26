@@ -1,10 +1,13 @@
 package reactiva.reactivamovil;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,9 +25,15 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     List<ItemTerapiaView> listaTerapias;
     private int expandedPosition = -1;
+    Context context;
 
-    public recyclerTerapiaAdaptador(List<ItemTerapiaView> listaTerapias){
+    private Button button;
+    private Dialog dialog;
+    //final Context context = button.getContext();
+
+    public recyclerTerapiaAdaptador(List<ItemTerapiaView> listaTerapias, Context context){
         this.listaTerapias = listaTerapias;
+        this.context = context;
     }
 
     @Override
@@ -36,7 +45,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     @Override
     //aqui se establecen los valores de la vista
+    //Bind Data
     public void onBindViewHolder(TerapiaViewHolder holder, final int position) {
+
         holder.profile_pic.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
         holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
@@ -56,6 +67,32 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     item.setEstado(false);
                 }
                 listaTerapias.get(position).setEstado(true);*/
+
+                button = (Button) v.findViewById(R.id.buttonShowCustomDialog);
+
+                // custom dialog
+                //Dialog dialog;
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.terapia_comentario);
+                dialog.setTitle("Title...");
+
+                // set the custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.text);
+                text.setText("Android custom dialog example!");
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                //image.setImageResource(R.drawable.ic_launcher);
+
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                // if button is clicked, close the custom dialog
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
                 boolean isExpanded = position==expandedPosition;
                 expandedPosition = isExpanded ? -1:position;
                 if (position == expandedPosition) {
@@ -67,6 +104,37 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 }
             }
         });
+
+        /*button = (Button) findViewById(R.id.buttonShowCustomDialog);
+        // add button listener
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                // custom dialog
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.terapia_comentario);
+                dialog.setTitle("Title...");
+
+                // set the custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.text);
+                text.setText("Android custom dialog example!");
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                //image.setImageResource(R.drawable.ic_launcher);
+
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                // if button is clicked, close the custom dialog
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });*/
     }
 
     @Override
