@@ -1,18 +1,23 @@
 package reactiva.reactivamovil;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
-public class VerPerfilActivity extends AppCompatActivity {
+public class VerPerfilActivity extends AppCompatActivity implements View.OnClickListener{
 
+
+    private Button btnHistorialTerapias;
 
     //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
     ArrayList<ObservacionMedica> observacionMedicas;
@@ -29,8 +34,11 @@ public class VerPerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_perfil);
 
+        btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        btnHistorialTerapias.setOnClickListener(this);
+
+       /* LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
 
@@ -79,9 +87,14 @@ public class VerPerfilActivity extends AppCompatActivity {
         frameTerapiasAnteriores.addView(listaDeTerapiasAnteriores);
 
 
-
+*/
     }
 
+
+
+
+
+/*
     ///INICIALIZO MI ADAPTADOR CON EL ARRAYLITS DE MIS OBSERVACIONES MEDICAS
     public void inicializarAdaptadorObservacionesMedicas() {
         ObservacionMedicaAdaptador adaptador = new ObservacionMedicaAdaptador(observacionMedicas);
@@ -120,7 +133,12 @@ public class VerPerfilActivity extends AppCompatActivity {
         terapiasAnterioresData.add(new TerapiaAnterior("15 jun. 2017","Sara Poveda","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
         terapiasAnterioresData.add(new TerapiaAnterior("10 jun. 2017","Silvia Paredes","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","1"));
 
+    }*/
+
+
+    @Override
+    public void onClick(View v) {
+        Intent mostrarHistorialterapias = new Intent(this,VerHistorialTerapias.class);
+        startActivity(mostrarHistorialterapias);
     }
-
-
 }

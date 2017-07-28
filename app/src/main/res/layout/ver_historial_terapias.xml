@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#79cabe"
+    tools:context="reactiva.reactivamovil.VerHistorialTerapias">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNombreCompletoPaciente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="20dp"
+                    android:textSize="22dp"
+                    android:text="Roberto Andres Guerrero Aviles"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="#c0c0c0"
+                    ></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ULTIMA OBSERVACION MEDICA"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"/>
+
+
+                <LinearLayout
+                    android:layout_width="530dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="30dp"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvFechaUltimaObsMedica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10 jul. 2017 "
+                        android:textStyle="bold"
+                        android:textColor="#1c3651"
+                        android:textSize="16dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="left"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="6dp"
+                        android:textStyle="bold"
+                        android:textColor="#1c3651"
+                        android:textSize="16dp"
+                        android:text="Dr. Jose Morales"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"
+                        android:textColor="#1c3651"
+                        android:textSize="17dp"
+                        android:text="@string/parrafo_prueba"/>
+
+
+                </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="15dp"
+                        android:textSize="17dp"
+                        android:textColor="#FFF"
+                        android:text="REGISTRO" />
+
+
+                    <RelativeLayout
+                        android:layout_width="450dp"
+                        android:layout_height="20dp"
+                        android:background="#fff"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textStyle="bold"
+                            android:text="FECHA"
+                            android:textColor="#1c3651"
+                            android:id="@+id/textView13"
+                            android:layout_marginStart="22dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="#1c3651"
+                            android:text="TERAPISTA"
+                            android:id="@+id/textView14"
+                            android:layout_marginStart="126dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/textView13" />
+
+                    </RelativeLayout>
+
+                    <!--<FrameLayout
+                        android:layout_width="450dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/frameTerapAnteriores">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <android.support.v7.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rvTerapiasAnteriores" />
+
+                        </ScrollView>
+
+                    </FrameLayout>-->
+
+                </LinearLayout>
+</FrameLayout>
