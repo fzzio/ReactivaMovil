@@ -66,14 +66,14 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
             }
         });*/
 
-        List<ItemTerapiaView> listaTerapias = Arrays.asList(new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", "Sala 2"),
-                new ItemTerapiaView(R.drawable.profile_f,"Pedro Lainez","00:24:05", "00:24:05", "Pedro Lainez", "33 años", "Sala 1"),
-                new ItemTerapiaView(R.drawable.profile_f,"Edgar Moreira","00:10:13", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"),
-                new ItemTerapiaView(R.drawable.profile_f,"Maria Chavez","00:17:09", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"),
-                new ItemTerapiaView(R.drawable.profile_f,"Karen Mera","00:06:25", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"),
-                new ItemTerapiaView(R.drawable.profile_f,"Jaime Banchon","00:09:54", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"),
-                new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"),
-                new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:10:13", "Edgar Moreira", "24 años", "Sala 4"));
+        List<ItemTerapiaView> listaTerapias = Arrays.asList(new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años"),
+                new ItemTerapiaView(R.drawable.profile_h,"Pedro Lainez","00:24:05", "00:24:05", "Pedro Lainez", "33 años"),
+                new ItemTerapiaView(R.drawable.profile_h,"Edgar Moreira","00:10:13", "00:10:13", "Edgar Moreira", "24 años"),
+                new ItemTerapiaView(R.drawable.profile_f,"Maria Chavez","00:17:09", "00:17:09", "Maria Chavez", "22 años"),
+                new ItemTerapiaView(R.drawable.profile_f,"Karen Mera","00:06:25", "00:06:25", "Karen Mera", "16 años"),
+                new ItemTerapiaView(R.drawable.profile_h,"Jaime Banchon","00:09:54", "00:09:54", "Jaime Banchon", "50 años"),
+                new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:17:13", "Susana Carrasco", "44 años"),
+                new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:19:22", "Estefania Loor", "33 años"));
         recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(listaTerapias, this.getApplication());
         rv.setAdapter(Adaptador);
 

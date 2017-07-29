@@ -50,11 +50,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
         holder.profile_pic.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
-        holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
+        //holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
+        holder.profile_pic_detalle.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtHora.setText(listaTerapias.get(position).getHora());
         holder.txtNombreDetalle.setText(listaTerapias.get(position).getNombre_detalle());
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
-        holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
+        //holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
 
         //boolean isExpanded = position==mExpandedPosition;
         //holder.itemView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
@@ -144,22 +145,24 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     public static class TerapiaViewHolder extends RecyclerView.ViewHolder{
         ImageView profile_pic;
+        ImageView profile_pic_detalle;
         TextView txtNombre;
-        TextView txtTemporizador;
+        //TextView txtTemporizador;
         TextView txtHora;
         TextView txtNombreDetalle;
         TextView txtEdadDetalle;
-        TextView txtSalaDetalle;
+        //TextView txtSalaDetalle;
 
         public TerapiaViewHolder(View itemView) {
             super(itemView);
             profile_pic = (ImageView) itemView.findViewById(R.id.image_profile_pic);
             txtNombre = (TextView) itemView.findViewById(R.id.txtName);
-            txtTemporizador = (TextView) itemView.findViewById(R.id.txt_temporizador);
+            //txtTemporizador = (TextView) itemView.findViewById(R.id.txt_temporizador);
+            profile_pic_detalle = (ImageView) itemView.findViewById(R.id.imageViewProfile);
             txtHora = (TextView) itemView.findViewById(R.id.txt_hora);
             txtNombreDetalle = (TextView) itemView.findViewById(R.id.txtNameDetalle);
             txtEdadDetalle = (TextView) itemView.findViewById(R.id.txtEdadDetalle);
-            txtSalaDetalle = (TextView) itemView.findViewById(R.id.txtSalaDetalle);
+            //txtSalaDetalle = (TextView) itemView.findViewById(R.id.txtSalaDetalle);
         }
     }
 
