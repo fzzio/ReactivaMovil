@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -77,6 +78,10 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(listaTerapias, this.getApplication());
         rv.setAdapter(Adaptador);
 
+        TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
+        contador.setText(listaTerapias.size() + " terapias activas");
+        funciones_del_menu();
+
     }
     private void funciones_del_menu(){
         clicks_del_menu();
@@ -147,11 +152,14 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
+                ConstraintLayout cont_terapias = (ConstraintLayout) findViewById(R.id.layout_count_terapias);
                 if(menu_activo()){
                     lyt_menu.setVisibility(LinearLayout.GONE);
+                    cont_terapias.setVisibility(ConstraintLayout.VISIBLE);
                     btn_oc.setImageDrawable(getDrawable(R.drawable.menu));
                 }else {
                     lyt_menu.setVisibility(LinearLayout.VISIBLE);
+                    cont_terapias.setVisibility(ConstraintLayout.GONE);
                     btn_oc.setImageDrawable(getDrawable(R.drawable.menu_close));
                 }
             }

@@ -2,8 +2,10 @@ package reactiva.reactivamovil;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,31 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
         //holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
 
+        if(position%4 == 0)
+        {
+            //int color = R.color.colorRosado;
+            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#cb7cb3"));
+            holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#cb7cb3"));
+        }else if(position%4 == 1)
+        {
+            //int color = R.color.colorRosado;
+            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#B9ACC7"));
+            holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#B9ACC7"));
+        }else if(position%4 == 2)
+        {
+            //int color = R.color.colorRosado;
+            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#8E7CB8"));
+            holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#8E7CB8"));
+        }else if(position%4 == 3)
+        {
+            //int color = R.color.colorRosado;
+            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#664C8E"));
+            holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#664C8E"));
+        }
         //boolean isExpanded = position==mExpandedPosition;
         //holder.itemView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         //holder.itemView.setActivated(isExpanded);
@@ -103,6 +130,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     v.findViewById(R.id.header).setVisibility(View.GONE);//check v
                     v.findViewById(R.id.section).setVisibility(View.VISIBLE);
                 }
+                //Log.d("Title", "Value: " + Integer.toString(position));
             }
         });
 
