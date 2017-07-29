@@ -33,6 +33,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
 
 
+
         frameRegistroTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
         registroDeTerapiasAnteriores    = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
 
