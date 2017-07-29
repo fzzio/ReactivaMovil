@@ -57,10 +57,10 @@ public class ObservacionMedicaAdaptador extends RecyclerView.Adapter<Observacion
 
         public ObservacionMedicaViewHolder(View itemView) {
             super(itemView);
-
+/*
             tvFechaObsMed    = (TextView) itemView.findViewById(R.id.fechaObsMed);
             tvMedicoObs      = (TextView) itemView.findViewById(R.id.medicoObsMed);
-            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.detalleObsMed);
+            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.detalleObsMed);*/
         }
     }
 }
