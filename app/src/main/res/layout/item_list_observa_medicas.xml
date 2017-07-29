@@ -2,44 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="55dp"
+    android:background="#4ab3bf"
     android:id="@+id/layoutObsMed">
 
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:layout_marginTop="2dp"
+           android:orientation="horizontal"
+           android:id="@+id/linearLayout">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/FechaDoc"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true">
+           <TextView
+               android:id="@+id/tvHoraObsMedica"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="#1c3651"
+               android:textAlignment="center"
+               android:gravity="center_vertical"
+               android:textStyle="bold"
+               android:background="@drawable/circle_for_bitacora_item"
+               android:text="9:00" />
+
+           <View
+               android:layout_width="41dp"
+               android:layout_height="1dp"
+               android:layout_gravity="center_vertical"
+               android:background="#0062a3"
+               ></View>
+
+           <View
+               android:layout_width="6dp"
+               android:layout_height="6dp"
+               android:layout_gravity="center_vertical"
+               android:background="@drawable/solid_circle"
+               ></View>
+
+
+       </LinearLayout>
 
         <TextView
-            android:id="@+id/fechaObsMed"
-            android:layout_width="90dp"
+            android:id="@+id/tvDetalleObsMedica"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
+            android:text="Inicio"
             android:textColor="#1c3651"
             android:textStyle="bold"
-            android:text="29 Julio -" />
-
-
-        <TextView
-            android:id="@+id/medicoObsMed"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Dr. Jose Morales: "
-            android:textColor="#1c3651"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-        <TextView
-            android:id="@+id/detalleObsMed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/parrafo_prueba2"
-            android:textColor="#1c3651"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/FechaDoc" />
-
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:layout_marginStart="20dp" />
 
 
 </RelativeLayout>

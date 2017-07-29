@@ -24,10 +24,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
     private FrameLayout frameObservMed;
     private RecyclerView listaDeObservacionesMedicas;
 
-    //ELEMENTOS NECESARIO PARA LA LISTA DE TERAPIAS ANTERIORES
-    ArrayList<TerapiaAnterior> terapiasAnterioresData;
-    private FrameLayout frameTerapiasAnteriores;
-    private RecyclerView listaDeTerapiasAnteriores;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

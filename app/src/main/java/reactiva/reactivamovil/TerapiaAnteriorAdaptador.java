@@ -4,9 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static reactiva.reactivamovil.R.drawable.view_therapy;
 
 /**
  * Created by Nancy on 2017-07-16.
@@ -35,8 +38,7 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
         TerapiaAnterior terapiaAnt = terapiasAnteriores.get(position);
         terapiaAnteriorViewHolder.tvFechaTerapiaAnterior.setText(terapiaAnt.getFechaTerapiaAnterior());
         terapiaAnteriorViewHolder.tvTerapistaTerapiaAnterior.setText(terapiaAnt.getTerapistaTerapiaAnterior());
-        terapiaAnteriorViewHolder.tvComentTerapiaAnterior.setText(terapiaAnt.getComentTerapiaAnterior());
-        terapiaAnteriorViewHolder.tvGallery.setText(terapiaAnt.getGalleryFotos());
+        terapiaAnteriorViewHolder.imgTerapy.setImageResource(R.drawable.view_therapy);
     }
 
     @Override
@@ -44,20 +46,20 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
         return terapiasAnteriores.size();
     }
 
+
+
     public static class TerapiaAnteriorViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvFechaTerapiaAnterior;
         private TextView tvTerapistaTerapiaAnterior;
-        private TextView tvComentTerapiaAnterior;
-        private TextView tvGallery;
+        private ImageView imgTerapy;
 
         public TerapiaAnteriorViewHolder(View itemView) {
             super(itemView);
 
             tvFechaTerapiaAnterior      = (TextView) itemView.findViewById(R.id.tvfechaTeraAnte);
-            tvTerapistaTerapiaAnterior  = (TextView) itemView.findViewById(R.id.tvterapistaTeraAnte);
-            tvComentTerapiaAnterior     = (TextView) itemView.findViewById(R.id.tvcomentTeraAnte);
-            tvGallery                   = (TextView) itemView.findViewById(R.id.tvgallery);
+            tvTerapistaTerapiaAnterior  = (TextView) itemView.findViewById(R.id.tvTerapistaTerapiaAnte);
+            imgTerapy                   = (ImageView) itemView.findViewById(R.id.imgvVerTerapia);
 
         }
     }

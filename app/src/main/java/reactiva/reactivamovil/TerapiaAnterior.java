@@ -1,52 +1,40 @@
 package reactiva.reactivamovil;
 
+import android.media.Image;
+import android.widget.ImageView;
+
 /**
- * Created by Nancy on 2017-07-16.
+ * Created by Erasmo Zurita on 2017-07-16.
  */
 
 public class TerapiaAnterior {
 
     String fechaTerapiaAnterior;
     String terapistaTerapiaAnterior;
-    String comentTerapiaAnterior;
-    String galleryFotos;
+    int view_terapy;
 
-    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior, String comentTerapiaAnterior, String galleryFotos) {
+    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior) {
         this.fechaTerapiaAnterior = fechaTerapiaAnterior;
         this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
-        this.comentTerapiaAnterior = comentTerapiaAnterior;
-        this.galleryFotos = galleryFotos;
     }
 
     public String getFechaTerapiaAnterior() {
         return fechaTerapiaAnterior;
     }
 
-    public String getTerapistaTerapiaAnterior() {
-        return terapistaTerapiaAnterior;
-    }
-
-    public String getComentTerapiaAnterior() {
-        return comentTerapiaAnterior;
-    }
-
-    public String getGalleryFotos() {
-        return galleryFotos;
-    }
-
     public void setFechaTerapiaAnterior(String fechaTerapiaAnterior) {
         this.fechaTerapiaAnterior = fechaTerapiaAnterior;
+    }
+
+    public String getTerapistaTerapiaAnterior() {
+        return terapistaTerapiaAnterior;
     }
 
     public void setTerapistaTerapiaAnterior(String terapistaTerapiaAnterior) {
         this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
     }
 
-    public void setComentTerapiaAnterior(String comentTerapiaAnterior) {
-        this.comentTerapiaAnterior = comentTerapiaAnterior;
-    }
-
-    public void setGalleryFotos(String galleryFotos) {
-        this.galleryFotos = galleryFotos;
+    public void setView_terapy() {
+        this.view_terapy = R.drawable.view_therapy;
     }
 }

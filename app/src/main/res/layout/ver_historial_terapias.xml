@@ -128,13 +128,13 @@
                             android:textColor="#1c3651"
                             android:text="TERAPISTA"
                             android:id="@+id/textView14"
-                            android:layout_marginStart="126dp"
-                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="106dp"
+                            android:layout_centerVertical="true"
                             android:layout_toEndOf="@+id/textView13" />
 
                     </RelativeLayout>
 
-                    <!--<FrameLayout
+                    <FrameLayout
                         android:layout_width="450dp"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
@@ -152,7 +152,7 @@
 
                         </ScrollView>
 
-                    </FrameLayout>-->
+                    </FrameLayout>
 
                 </LinearLayout>
 </FrameLayout>
