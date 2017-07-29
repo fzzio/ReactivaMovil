@@ -17,13 +17,6 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
 
     private Button btnHistorialTerapias;
 
-    //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
-    ArrayList<ObservacionMedica> observacionMedicas;
-    private FrameLayout frameObservMed;
-    private RecyclerView listaDeObservacionesMedicas;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +45,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         listaDeTerapiasAnteriores = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
 
 
-        ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
-        LinearLayoutManager llmobsmed = new LinearLayoutManager(this);
-        llmobsmed.setOrientation(LinearLayoutManager.VERTICAL);
-        listaDeObservacionesMedicas.setLayoutManager(llmobsmed);
+
 
 
         LinearLayoutManager llmterapante = new LinearLayoutManager(this);
@@ -168,35 +158,11 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-
-
-
-
 /*
     ///INICIALIZO MI ADAPTADOR CON EL ARRAYLITS DE MIS OBSERVACIONES MEDICAS
     public void inicializarAdaptadorObservacionesMedicas() {
         ObservacionMedicaAdaptador adaptador = new ObservacionMedicaAdaptador(observacionMedicas);
         listaDeObservacionesMedicas.setAdapter(adaptador);
-    }
-
-
-    public void inicializarAdaptadorTerapiasAnteriores() {
-        TerapiaAnteriorAdaptador adaptador2 = new TerapiaAnteriorAdaptador(terapiasAnterioresData);
-        listaDeTerapiasAnteriores.setAdapter(adaptador2);
-    }
-
-
-    public void incializarListaDeObservacionesMedicas() {
-
-        observacionMedicas = new ArrayList<ObservacionMedica>();
-        observacionMedicas.add(new ObservacionMedica("29 Julio 2017","Dr. Jose Morales","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("20 Julio 2017","Dr. Juan Zurita","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("18 Julio 2017","Dr. Fernando Sanchez","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("15 Julio 2017","Dr. Edgar Moreira","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("12 Julio 2017","Dr. Made Velasco","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("10 Julio 2017","Dr. Carla Garcia","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        observacionMedicas.add(new ObservacionMedica("5 Julio 2017","Dr. Jose Morales","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-
     }
 
     public void inicializarListaDeTerapiasAnteriores() {

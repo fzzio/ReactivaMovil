@@ -174,7 +174,8 @@
                 android:elevation="10dp"
                 android:text="Iniciar terapia"
                 android:textColor="#FFF"
-                android:textSize="16dp"
+                android:textSize="20dp"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
 
@@ -190,7 +191,8 @@
                 android:elevation="10dp"
                 android:text="Historial"
                 android:textColor="#FFF"
-                android:textSize="16dp"
+                android:textSize="20dp"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
 

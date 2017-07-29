@@ -2,7 +2,6 @@ package reactiva.reactivamovil;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,7 +22,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.calendar_activity);
 
 
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
@@ -38,7 +37,7 @@ public class CalendarActivity extends AppCompatActivity {
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
 
             @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
 
                 materialCalendarView.state().edit()
                         .setFirstDayOfWeek(Calendar.MONDAY)
@@ -46,7 +45,6 @@ public class CalendarActivity extends AppCompatActivity {
                         .setMaximumDate(CalendarDay.from(2100, 12, 31))
                         .setCalendarDisplayMode(CalendarMode.WEEKS)
                         .commit();
-
             }
         });
         funciones_del_menu();

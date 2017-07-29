@@ -6,37 +6,28 @@ package reactiva.reactivamovil;
 
 public class ObservacionMedica {
 
-    String fechaObservacion;
-    String doctorObservacion;
-    String detalleObservacion;
+    String horaObservacionMedica;
+    String detalleSucesoTerapia;
 
-    public ObservacionMedica(String fechaObservacion, String doctorObservacion, String detalleObservacion) {
-        this.fechaObservacion = fechaObservacion;
-        this.doctorObservacion = doctorObservacion;
-        this.detalleObservacion = detalleObservacion;
+
+    public ObservacionMedica(String horaObservacionMedica, String detalleSucesoTerapia) {
+        this.horaObservacionMedica = horaObservacionMedica;
+        this.detalleSucesoTerapia = detalleSucesoTerapia;
     }
 
-    public String getFechaObservacion() {
-        return fechaObservacion;
+    public String getHoraObservacionMedica() {
+        return horaObservacionMedica;
     }
 
-    public String getDoctorObservacion() {
-        return doctorObservacion;
+    public void setHoraObservacionMedica(String horaObservacionMedica) {
+        this.horaObservacionMedica = horaObservacionMedica;
     }
 
-    public String getDetalleObservacion() {
-        return detalleObservacion;
+    public String getDetalleSucesoTerapia() {
+        return detalleSucesoTerapia;
     }
 
-    public void setFechaObservacion(String fechaObservacion) {
-        this.fechaObservacion = fechaObservacion;
-    }
-
-    public void setDoctorObservacion(String doctorObservacion) {
-        this.doctorObservacion = doctorObservacion;
-    }
-
-    public void setDetalleObservacion(String detalleObservacion) {
-        this.detalleObservacion = detalleObservacion;
+    public void setDetalleSucesoTerapia(String detalleSucesoTerapia) {
+        this.detalleSucesoTerapia = detalleSucesoTerapia;
     }
 }

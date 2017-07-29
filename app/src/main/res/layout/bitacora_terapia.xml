@@ -111,8 +111,8 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="400dp"
-                        android:layout_marginLeft="25dp"
+                        android:layout_height="500dp"
+                        android:layout_marginLeft="35dp"
                         android:layout_marginRight="25dp"
                         android:id="@+id/frameObsMedicasBitacora">
 

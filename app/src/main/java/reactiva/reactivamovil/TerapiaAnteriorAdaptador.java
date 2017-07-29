@@ -59,7 +59,7 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
 
             tvFechaTerapiaAnterior      = (TextView) itemView.findViewById(R.id.tvfechaTeraAnte);
             tvTerapistaTerapiaAnterior  = (TextView) itemView.findViewById(R.id.tvTerapistaTerapiaAnte);
-            imgTerapy                   = (ImageView) itemView.findViewById(R.id.imgvVerTerapia);
+            imgTerapy                   = (ImageView) itemView.findViewById(R.id.imgVerTerapia);
 
         }
     }

@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="#4ab3bf"
+    android:background="#79cabe"
     android:id="@+id/layoutObsMed">
 
        <LinearLayout
