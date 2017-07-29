@@ -4,9 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,9 +51,11 @@ public class ObservacionMedicaAdaptador extends RecyclerView.Adapter<Observacion
 
         public ObservacionMedicaViewHolder(View itemView) {
             super(itemView);
+/*
+            tvFechaObsMed    = (TextView) itemView.findViewById(R.id.fechaObsMed);
+            tvMedicoObs      = (TextView) itemView.findViewById(R.id.medicoObsMed);
+            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.detalleObsMed);*/
 
-            tvHoraObsMed    = (TextView) itemView.findViewById(R.id.tvHoraObsMedica);
-            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.tvDetalleObsMedica);
         }
     }
 }
