@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class ObservacionMedicaAdaptador extends RecyclerView.Adapter<ObservacionMedicaAdaptador.ObservacionMedicaViewHolder> {
 
-    ArrayList<ObservacionMedica> observacionMedicas;
+    ArrayList<ObservacionMedica> observacionMedicasDurantelLaTerapia;
 
     public ObservacionMedicaAdaptador(ArrayList<ObservacionMedica> observacionMedicas) {
-        this.observacionMedicas = observacionMedicas;
+        this.observacionMedicasDurantelLaTerapia = observacionMedicas;
     }
 
 
@@ -37,30 +37,26 @@ public class ObservacionMedicaAdaptador extends RecyclerView.Adapter<Observacion
                                             ///MEDIANTE EL MANEJADOR ASOCIO MIS VALORES CONTENIDOS EN EL ARRAYLIST A CADA
                                             //ELEMENTO DE MI LAYAOUT ITEMT(UN VIEW)
                                             //PARA ESO CREO UN ITEM DE MI LISTA Y LE ASOCIO LOS CRORRESPONDIENTES VALORES
-        ObservacionMedica observacionMed = observacionMedicas.get(position);
-        observacionMedicaViewHolder.tvFechaObsMed.setText(observacionMed.getFechaObservacion());
-        observacionMedicaViewHolder.tvMedicoObs.setText(observacionMed.getDoctorObservacion());
-        observacionMedicaViewHolder.tvDetalleObsMed.setText(observacionMed.getDetalleObservacion());
+        ObservacionMedica observacionMed = observacionMedicasDurantelLaTerapia.get(position);
+        observacionMedicaViewHolder.tvHoraObsMed.setText(observacionMed.getHoraObservacionMedica());
+        observacionMedicaViewHolder.tvDetalleObsMed.setText(observacionMed.getDetalleSucesoTerapia());
     }
 
     @Override
     public int getItemCount() {  ///CANTIDAD DE ELEMENTOS QUE CONTIENE LA LISTA DE OBSERVACIONES MEDICAS
-        return observacionMedicas.size();
+        return observacionMedicasDurantelLaTerapia.size();
     }
 
     public static class ObservacionMedicaViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvFechaObsMed;
-        private TextView tvMedicoObs;
+        private TextView tvHoraObsMed;
         private TextView tvDetalleObsMed;
-
 
         public ObservacionMedicaViewHolder(View itemView) {
             super(itemView);
 
-            tvFechaObsMed    = (TextView) itemView.findViewById(R.id.fechaObsMed);
-            tvMedicoObs      = (TextView) itemView.findViewById(R.id.medicoObsMed);
-            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.detalleObsMed);
+            tvHoraObsMed    = (TextView) itemView.findViewById(R.id.tvHoraObsMedica);
+            tvDetalleObsMed  = (TextView) itemView.findViewById(R.id.tvDetalleObsMedica);
         }
     }
 }
