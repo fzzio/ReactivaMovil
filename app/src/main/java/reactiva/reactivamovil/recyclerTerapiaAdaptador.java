@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -65,36 +66,22 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
         if(position%4 == 0)
         {
-            //int color = R.color.colorRosado;
-            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
-            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#cb7cb3"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#cb7cb3"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#cb7cb3"));
         }else if(position%4 == 1)
         {
-            //int color = R.color.colorRosado;
-            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
-            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#B9ACC7"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#B9ACC7"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#B9ACC7"));
         }else if(position%4 == 2)
         {
-            //int color = R.color.colorRosado;
-            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
-            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#8E7CB8"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#8E7CB8"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#8E7CB8"));
         }else if(position%4 == 3)
         {
-            //int color = R.color.colorRosado;
-            //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
-            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#664C8E"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#664C8E"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#664C8E"));
         }
-        //boolean isExpanded = position==mExpandedPosition;
-        //holder.itemView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        //holder.itemView.setActivated(isExpanded);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +128,18 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 //Log.d("Title", "Value: " + Integer.toString(position));
             }
         });
+
+        //final ImageButton botonPause= (ImageButton) v.findViewById(R.id.btnIniciarTerapia);
+
+        //esto da error
+        /*holder.itemView.findViewById(R.id.btnIniciarTerapia).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+
+                //v.findViewById(R.id.btnIniciarTerapia);
+            }
+        });*/
 
         /*button = (Button) findViewById(R.id.buttonShowCustomDialog);
         // add button listener
