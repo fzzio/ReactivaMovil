@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFD740"
+    tools:context="reactiva.reactivamovil.JuegosTerapia">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button"
+        style="@android:style/Widget.Material.Button.Borderless"
+        android:background="@drawable/rounded_button"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:elevation="15dp"
+        android:textAllCaps="false"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="Obtener \n informacion inicial" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginBottom="25dp"
+        android:background="#c0c0c0"
+        ></View>
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="92dp"
+            android:text="PARAMETROS"
+            android:textColor="#1c3651"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/tvX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="X"
+            android:textColor="#1c3651"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@+id/tvZ"
+            android:layout_marginEnd="46dp" />
+
+        <TextView
+            android:id="@+id/tvY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="23dp"
+            android:text="Z"
+            android:textColor="#1c3651"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Y"
+            android:textColor="#1c3651"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/tvY"
+            android:layout_marginEnd="31dp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frameParametrosJuego"
+        android:layout_width="450dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvParametrosJuego"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+</LinearLayout>
