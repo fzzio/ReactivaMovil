@@ -30,6 +30,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     Context context;
 
     private Button button;
+    private Button btnPausa;
     private Dialog dialog;
     //final Context context = button.getContext();
 
@@ -59,28 +60,35 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
         //holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
 
+        //holder.itemView.findViewById(R.id.btnIniciarTerapia).setOnClickListener();
+
+
         if(position%4 == 0)
         {
             //int color = R.color.colorRosado;
             //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#cb7cb3"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#cb7cb3"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#cb7cb3"));
         }else if(position%4 == 1)
         {
             //int color = R.color.colorRosado;
             //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#B9ACC7"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#B9ACC7"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#B9ACC7"));
         }else if(position%4 == 2)
         {
             //int color = R.color.colorRosado;
             //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#8E7CB8"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#8E7CB8"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#8E7CB8"));
         }else if(position%4 == 3)
         {
             //int color = R.color.colorRosado;
             //holder.itemView.findViewById(R.id.header).getResources().getColor(R.color.colorRosado);
+            //holder.itemView.findViewById(R.id.terapiaPaciente).setBackgroundColor(Color.parseColor("#664C8E"));
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#664C8E"));
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#664C8E"));
         }
