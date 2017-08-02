@@ -70,6 +70,8 @@ public class VerHistorialTerapias extends AppCompatActivity {
         terapiasAnterioresData.add(new TerapiaAnterior("15 Jun. 2017","Daniel Garcia Arreaga"));
         terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Dolores Garcia Arreaga"));
     }
+
+
     private void funciones_del_menu(){
         clicks_del_menu();
         activar_menu();
