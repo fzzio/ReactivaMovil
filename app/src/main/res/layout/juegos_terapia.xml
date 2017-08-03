@@ -8,6 +8,7 @@
     android:background="#FFD740"
     tools:context="reactiva.reactivamovil.JuegosTerapia">
 
+    <include layout="@layout/top_menu"></include>
 
     <FrameLayout
         android:id="@+id/frameJuegos"

@@ -8,6 +8,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -86,6 +87,8 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         {
             //hacer visible el layout con mensaje en caso de no existir terapias
             ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
+            TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+            txt_no_terapia.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params = layout_no_terapias.getLayoutParams();
             params.height = 1500;
             params.width = 1200;
@@ -93,7 +96,6 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
             rv.setVisibility(View.GONE);
         }
         funciones_del_menu();
-
     }
     private void funciones_del_menu(){
         clicks_del_menu();
