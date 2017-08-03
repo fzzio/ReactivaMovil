@@ -47,15 +47,26 @@ public class CalendarActivity extends AppCompatActivity {
                         .commit();
             }
         });
-        funciones_del_menu();
 
+        materialCalendarView.setOnTitleClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialCalendarView.state().edit()
+                        .setCalendarDisplayMode(CalendarMode.MONTHS)
+                        .commit();
+            }
+        });
+
+        funciones_del_menu();
     }
+
     private void funciones_del_menu(){
         clicks_del_menu();
         activar_menu();
         LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
         lyt_menu.setVisibility(LinearLayout.GONE);
     }
+
     private void clicks_del_menu(){
         final ImageButton btn_calendario=(ImageButton)findViewById(R.id.btn_calendario);
         btn_calendario.setImageDrawable(getDrawable(R.drawable.agenda_activo));
@@ -102,7 +113,6 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public boolean menu_activo(){
