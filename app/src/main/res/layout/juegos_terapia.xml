@@ -26,15 +26,14 @@
         android:id="@+id/button"
         style="@android:style/Widget.Material.Button.Borderless"
         android:background="@drawable/rounded_button"
-        android:layout_width="230dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="#FFF"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:elevation="15dp"
         android:textAllCaps="false"
-        android:padding="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         android:text="Obtener \n informacion inicial" />
@@ -43,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
         android:layout_marginBottom="25dp"
-        android:background="#c0c0c0"
+        android:background="#FFF"
         ></View>
 
     <RelativeLayout
@@ -107,7 +106,6 @@
         android:layout_width="450dp"
         android:layout_height="400dp"
         android:layout_gravity="center">
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvParametrosJuego"

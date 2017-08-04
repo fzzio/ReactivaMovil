@@ -1,6 +1,8 @@
 package reactiva.reactivamovil;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ImageView;
 
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,19 @@ public class VerHistorialTerapias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_historial_terapias);
+
+
+        TextView observacionMedica = (TextView) findViewById(R.id.tvObservacionMedicaPrincipal);
+        TextView fechaObservacion = (TextView) findViewById(R.id.tvFechaUltimaObsMedica);
+        TextView doctorObservacion = (TextView) findViewById(R.id.tvDoctorUltimaObsMedica);
+
+        Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
+        Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
+        Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
+
+        fechaObservacion.setTypeface(fontBold);
+        doctorObservacion.setTypeface(fontBold);
+        observacionMedica.setTypeface(fontMedium);
 
 
         ImageView imagenOjoHumano = (ImageView) findViewById(R.id.imgVerTerapia);
@@ -52,6 +68,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
         funciones_del_menu();
 
     }
+
 
     public void inicilaizarAdaptadorRegistroTerapiasAnteriores(){
         TerapiaAnteriorAdaptador adaptadorRegistroTerapiasAnte = new TerapiaAnteriorAdaptador(terapiasAnterioresData);

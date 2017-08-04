@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#79cabe"
+    android:background="@drawable/fondo_gradiente_perfil_terapias"
     tools:context="reactiva.reactivamovil.VerHistorialTerapias">
 
     <include layout="@layout/top_menu"/>
@@ -68,6 +68,7 @@
                         android:layout_gravity="left"/>
 
                     <TextView
+                        android:id="@+id/tvDoctorUltimaObsMedica"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -79,11 +80,11 @@
                         android:text="Dr. Jose Morales"/>
 
                     <TextView
+                        android:id="@+id/tvObservacionMedicaPrincipal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
                         android:textColor="#1c3651"
                         android:textSize="17dp"
                         android:text="@string/parrafo_prueba"/>
@@ -137,7 +138,7 @@
 
                     <FrameLayout
                         android:layout_width="450dp"
-                        android:layout_height="200dp"
+                        android:layout_height="221dp"
                         android:layout_gravity="center"
                         android:id="@+id/frameTerapAnteriores">
 

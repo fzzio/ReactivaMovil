@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#79cabe"
+    android:background="@drawable/fondo_gradiente_perfil_terapias"
     tools:context="reactiva.reactivamovil.VerPerfilActivity"
     android:weightSum="1">
     <include layout="@layout/top_menu"/>
