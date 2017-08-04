@@ -7,7 +7,7 @@
 
     <style name="CustomDateText" parent="@style/TextAppearance.MaterialCalendarWidget.Date">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorBlanco</item>
+        <!--<item name="android:textColor">@color/colorBlanco</item>-->
     </style>
 
     <style name="CustomHeaderText" parent="@style/TextAppearance.MaterialCalendarWidget.Header">
