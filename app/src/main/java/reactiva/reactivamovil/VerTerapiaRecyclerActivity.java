@@ -83,17 +83,28 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
 
         TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
         contador.setText(listaTerapias.size() + " terapias activas");
+        ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
+        TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
         if(listaTerapias.size() <= 0)
         {
             //hacer visible el layout con mensaje en caso de no existir terapias
-            ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
-            TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+            //ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
+            //TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
             txt_no_terapia.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params = layout_no_terapias.getLayoutParams();
             params.height = 1500;
             params.width = 1200;
             layout_no_terapias.setLayoutParams(params);
             rv.setVisibility(View.GONE);
+            layout_no_terapias.setVisibility(View.VISIBLE);
+        }else if(listaTerapias.size() > 0)
+        {
+            layout_no_terapias.setVisibility(View.GONE);
+            ViewGroup.LayoutParams params = layout_no_terapias.getLayoutParams();
+            params.height = 0;
+            params.width = 0;
+            layout_no_terapias.setLayoutParams(params);
+            rv.setVisibility(View.VISIBLE);
         }
         funciones_del_menu();
     }
