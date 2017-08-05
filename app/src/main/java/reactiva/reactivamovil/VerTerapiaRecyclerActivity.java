@@ -8,7 +8,9 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -75,13 +77,36 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                 new ItemTerapiaView(R.drawable.profile_h,"Jaime Banchon","00:09:54", "00:09:54", "Jaime Banchon", "50 años"),
                 new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:17:13", "Susana Carrasco", "44 años"),
                 new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:19:22", "Estefania Loor", "33 años"));
+        //List<ItemTerapiaView> listaTerapias = Arrays.asList();
         recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(listaTerapias, this.getApplication());
         rv.setAdapter(Adaptador);
 
         TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
         contador.setText(listaTerapias.size() + " terapias activas");
+        ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
+        TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+        if(listaTerapias.size() <= 0)
+        {
+            //hacer visible el layout con mensaje en caso de no existir terapias
+            //ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
+            //TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+            txt_no_terapia.setGravity(Gravity.CENTER);
+            ViewGroup.LayoutParams params = layout_no_terapias.getLayoutParams();
+            params.height = 1500;
+            params.width = 1200;
+            layout_no_terapias.setLayoutParams(params);
+            rv.setVisibility(View.GONE);
+            layout_no_terapias.setVisibility(View.VISIBLE);
+        }else if(listaTerapias.size() > 0)
+        {
+            layout_no_terapias.setVisibility(View.GONE);
+            ViewGroup.LayoutParams params = layout_no_terapias.getLayoutParams();
+            params.height = 0;
+            params.width = 0;
+            layout_no_terapias.setLayoutParams(params);
+            rv.setVisibility(View.VISIBLE);
+        }
         funciones_del_menu();
-
     }
     private void funciones_del_menu(){
         clicks_del_menu();

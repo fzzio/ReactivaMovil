@@ -1,5 +1,7 @@
 package reactiva.reactivamovil;
 
+import android.widget.ImageButton;
+
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ public class ItemTerapiaView {
     private String edad_detalle;
     private int profile_pic_detalle;
     private ArrayList<Integer> extremidades_pic;
+    private ImageButton btn_pausa;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
     public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle) {
