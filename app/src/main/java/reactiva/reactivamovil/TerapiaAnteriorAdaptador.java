@@ -1,26 +1,40 @@
 package reactiva.reactivamovil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import static reactiva.reactivamovil.R.drawable.view_therapy;
 
 /**
- * Created by Nancy on 2017-07-16.
+ * Created by Erasmo on 2017-07-16.
  */
+
+/*
+* 2017-08-04
+* AGREGO LA PROPIEDAD ONCLIKCLISTENER PARA QUE CADA ELEMENTO DE MI LISTA
+ * ME DIRECCIONE A LA BITACORA CORRESPONDIENTE
+*
+* */
 
 public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteriorAdaptador.TerapiaAnteriorViewHolder>{
 
     ArrayList<TerapiaAnterior> terapiasAnteriores;
+    ///creo una activiada para utlilizarla como contexto
+    Activity activity;
 
-    public TerapiaAnteriorAdaptador(ArrayList<TerapiaAnterior> terapiasAnteriores) {
+
+    public TerapiaAnteriorAdaptador(ArrayList<TerapiaAnterior> terapiasAnteriores, Activity activity) {
         this.terapiasAnteriores = terapiasAnteriores;
+        this.activity = activity;
     }
 
 
@@ -33,12 +47,22 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
     }
 
     @Override
-    public void onBindViewHolder(TerapiaAnteriorViewHolder terapiaAnteriorViewHolder, int position) {
+    public void onBindViewHolder(TerapiaAnteriorViewHolder terapiaAnteriorViewHolder, final int position) {
 
-        TerapiaAnterior terapiaAnt = terapiasAnteriores.get(position);
+        final TerapiaAnterior terapiaAnt = terapiasAnteriores.get(position);
         terapiaAnteriorViewHolder.tvFechaTerapiaAnterior.setText(terapiaAnt.getFechaTerapiaAnterior());
         terapiaAnteriorViewHolder.tvTerapistaTerapiaAnterior.setText(terapiaAnt.getTerapistaTerapiaAnterior());
         terapiaAnteriorViewHolder.imgTerapy.setImageResource(R.drawable.view_therapy);
+
+        terapiaAnteriorViewHolder.imgTerapy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity,terapiaAnt.getTerapistaTerapiaAnterior(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity,BitacoraTerapia.class);
+                activity.startActivity(intent);
+
+            }
+        });
     }
 
     @Override

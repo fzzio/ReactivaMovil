@@ -71,7 +71,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
 
     public void inicilaizarAdaptadorRegistroTerapiasAnteriores(){
-        TerapiaAnteriorAdaptador adaptadorRegistroTerapiasAnte = new TerapiaAnteriorAdaptador(terapiasAnterioresData);
+        TerapiaAnteriorAdaptador adaptadorRegistroTerapiasAnte = new TerapiaAnteriorAdaptador(terapiasAnterioresData,this);
         registroDeTerapiasAnteriores.setAdapter(adaptadorRegistroTerapiasAnte);
 
     }
