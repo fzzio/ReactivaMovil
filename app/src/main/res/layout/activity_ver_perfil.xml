@@ -13,7 +13,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgvVPfotoPaciente"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -23,37 +23,36 @@
             android:layout_weight="0.45" />
 
         <TextView
-            android:id="@+id/tvPacienteNombres"
+            android:id="@+id/tvVPPacienteNombres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Roberto Andres"
-            android:textAlignment="center"
+            android:layout_marginBottom="-10dp"
             android:textColor="#1c3651"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvPacienteApellidos"
+            android:id="@+id/tvVPPacienteApellidos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Guerrero Aviles"
-            android:textAlignment="center"
             android:textColor="#1c3651"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvVPedadpaciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="15dp"
-            android:text="25 anios"
+            android:text="25 años"
             android:textAlignment="center"
             android:textColor="#1c3651"
-            android:textSize="20dp" />
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,46 +62,47 @@
             android:layout_marginTop="10dp">
 
             <TextView
+                android:id="@+id/tvVPproxiCita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Prox. cita: "
                 android:textAlignment="center"
                 android:textColor="#1c3651"
-                android:textSize="25dp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvVPproxCitaData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" 10 jul. 2017"
                 android:textAlignment="center"
                 android:textColor="#1c3651"
-                android:textSize="20dp" />
+                android:textSize="27sp" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvVPzonasEjercitar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:text="Zonas a ejercitar:"
             android:textAlignment="center"
             android:textColor="#1c3651"
-            android:textSize="25dp"
+            android:textSize="27sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp">
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:srcCompat="@drawable/cuerpo_mano_izq" />
@@ -110,21 +110,21 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:srcCompat="@drawable/cuerpo_mano_der" />
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:srcCompat="@drawable/cuerpo_brazo_izq" />
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:srcCompat="@drawable/cuerpo_brazo_der" />
@@ -132,27 +132,28 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp">
-
-
-        <ImageView
-            android:id="@+id/imageView7"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            app:srcCompat="@drawable/cuerpo_codo_izq" />
+            android:layout_gravity="center"
+            android:layout_marginTop="-18dp"
+            android:layout_marginBottom="5dp">
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            app:srcCompat="@drawable/cuerpo_codo_der" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:srcCompat="@drawable/cuerpo_codo_izq" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:srcCompat="@drawable/cuerpo_codo_der" />
+        </LinearLayout>
+
 
 
     <RelativeLayout
@@ -171,7 +172,7 @@
                 android:layout_marginEnd="29dp"
                 android:layout_toStartOf="@+id/btnHistorialTerapias"
                 android:background="@drawable/rounded_button"
-                android:elevation="10dp"
+                android:elevation="5dp"
                 android:text="Iniciar terapia"
                 android:textColor="#FFF"
                 android:textSize="20dp"
@@ -188,7 +189,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="108dp"
                 android:background="@drawable/rounded_button2"
-                android:elevation="10dp"
+                android:elevation="5dp"
                 android:text="Historial"
                 android:textColor="#FFF"
                 android:textSize="20dp"
@@ -199,12 +200,13 @@
         </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tvVPlinkInfoPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginBottom="20dp"
+        android:textSize="18sp"
         android:text="Ver informacion del paciente"
         android:textColor="#FFF" />
 

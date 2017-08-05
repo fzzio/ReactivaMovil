@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFD740"
-    tools:context="reactiva.reactivamovil.JuegosTerapia">
+    android:background="@drawable/draw_login"
+    tools:context="reactiva.reactivamovil.JuegosTerapias">
 
     <include layout="@layout/top_menu"></include>
 

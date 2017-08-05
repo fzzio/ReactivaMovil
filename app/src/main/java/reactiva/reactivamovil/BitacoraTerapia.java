@@ -1,11 +1,13 @@
 package reactiva.reactivamovil;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,23 @@ public class BitacoraTerapia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bitacora_terapia);
+
+        TextView nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
+        TextView fechaBitacora    = (TextView) findViewById(R.id.tvBfecha);
+       // TextView doctorObservacion   = (TextView) findViewById(R.id.tvDoctorUltimaObsMedica);
+       // TextView nombrePaciente      = (TextView) findViewById(R.id.tvHTNombreCompletoPaciente);
+        //TextView encabezadoUltimaObs = (TextView) findViewById(R.id.tvHTultimaObservacion);
+
+
+
+        Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
+        Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
+        Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
+        Typeface fontBlack = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Black.ttf");
+
+        nombrePacienteBitacora.setTypeface(fontBold);
+        fechaBitacora.setTypeface(fontMedium);
+
 
 
         frameSucesosBitacoraTerapia = (FrameLayout) findViewById(R.id.frameObsMedicasBitacora);

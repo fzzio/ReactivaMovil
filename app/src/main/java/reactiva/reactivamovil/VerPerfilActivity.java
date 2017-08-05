@@ -1,30 +1,67 @@
 package reactiva.reactivamovil;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 public class VerPerfilActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private Button btnHistorialTerapias;
+    private Button btnIniciarTerapia;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_perfil);
 
+        TextView nombresPacienteVP          = (TextView) findViewById(R.id.tvVPPacienteNombres);
+        TextView apellidosPacienteVP        = (TextView) findViewById(R.id.tvVPPacienteApellidos);
+        TextView edadPacienteVP             = (TextView) findViewById(R.id.tvVPedadpaciente);
+        TextView encabezadoProxCitaVP       = (TextView) findViewById(R.id.tvVPproxiCita);
+        TextView fechaProximaCitaVP         = (TextView) findViewById(R.id.tvVPproxCitaData);
+        TextView encabezadoZonasEjercitarVP = (TextView) findViewById(R.id.tvVPzonasEjercitar);
+        TextView encabezadoInformacionLinkInfo = (TextView) findViewById(R.id.tvVPlinkInfoPaciente);
+
+
+        Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
+        Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
+        Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
+        Typeface fontBlack = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Black.ttf");
+
+        nombresPacienteVP.setTypeface(fontBold);
+        apellidosPacienteVP.setTypeface(fontBold);
+        edadPacienteVP.setTypeface(fontMedium);
+
+        encabezadoProxCitaVP.setTypeface(fontBold);
+        fechaProximaCitaVP.setTypeface(fontMedium);
+        encabezadoZonasEjercitarVP.setTypeface(fontBold);
+
+        encabezadoInformacionLinkInfo.setTypeface(fontMedium);
+
+
+
+
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
+        btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
         btnHistorialTerapias.setOnClickListener(this);
+        btnIniciarTerapia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),JuegosTerapias.class);
+                startActivity(intent);
+            }
+        });
+
+
         funciones_del_menu();
 
 
