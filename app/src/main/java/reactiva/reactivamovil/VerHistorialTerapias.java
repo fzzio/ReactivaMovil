@@ -32,22 +32,29 @@ public class VerHistorialTerapias extends AppCompatActivity {
         setContentView(R.layout.ver_historial_terapias);
 
 
-        TextView observacionMedica = (TextView) findViewById(R.id.tvObservacionMedicaPrincipal);
-        TextView fechaObservacion = (TextView) findViewById(R.id.tvFechaUltimaObsMedica);
-        TextView doctorObservacion = (TextView) findViewById(R.id.tvDoctorUltimaObsMedica);
+        TextView observacionMedica   = (TextView) findViewById(R.id.tvObservacionMedicaPrincipal);
+        TextView fechaObservacion    = (TextView) findViewById(R.id.tvFechaUltimaObsMedica);
+        TextView doctorObservacion   = (TextView) findViewById(R.id.tvDoctorUltimaObsMedica);
+        TextView nombrePaciente      = (TextView) findViewById(R.id.tvHTNombreCompletoPaciente);
+        TextView encabezadoUltimaObs = (TextView) findViewById(R.id.tvHTultimaObservacion);
+        TextView encabezadoRegistro  = (TextView) findViewById(R.id.tvHTregistro);
+
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
         Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
         Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
+        Typeface fontBlack = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Black.ttf");
 
         fechaObservacion.setTypeface(fontBold);
         doctorObservacion.setTypeface(fontBold);
         observacionMedica.setTypeface(fontMedium);
 
+        nombrePaciente.setTypeface(fontBold);
+        encabezadoUltimaObs.setTypeface(fontMedium);
+        encabezadoRegistro.setTypeface(fontMedium);
+
 
         ImageView imagenOjoHumano = (ImageView) findViewById(R.id.imgVerTerapia);
-
-
 
 
         frameRegistroTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);

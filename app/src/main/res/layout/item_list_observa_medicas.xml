@@ -3,13 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="#79cabe"
     android:id="@+id/layoutObsMed">
 
        <LinearLayout
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
-           android:layout_marginTop="2dp"
+           android:layout_margin="5dp"
            android:orientation="horizontal"
            android:id="@+id/linearLayout">
 
@@ -28,7 +27,7 @@
                android:layout_width="41dp"
                android:layout_height="1dp"
                android:layout_gravity="center_vertical"
-               android:background="#0062a3"
+               android:background="#448AAC"
                ></View>
 
            <View
@@ -46,8 +45,8 @@
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:text="Inicio"
-            android:textColor="#1c3651"
             android:textStyle="bold"
+            android:textColor="#1c3651"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/linearLayout"
             android:layout_marginStart="20dp" />

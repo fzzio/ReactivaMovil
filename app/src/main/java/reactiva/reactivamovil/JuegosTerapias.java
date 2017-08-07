@@ -10,11 +10,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
-public class JuegosTerapia extends AppCompatActivity {
+public class JuegosTerapias extends AppCompatActivity {
 
 
 
@@ -120,7 +119,7 @@ public class JuegosTerapia extends AppCompatActivity {
         btn_terapias.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapia.this, VerTerapiaRecyclerActivity.class);
+                Intent intent = new Intent(JuegosTerapias.this, VerTerapiaRecyclerActivity.class);
                 startActivity(intent);
             }
         });
@@ -128,7 +127,7 @@ public class JuegosTerapia extends AppCompatActivity {
         btn_calendario.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapia.this, CalendarActivity.class);
+                Intent intent = new Intent(JuegosTerapias.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -136,7 +135,7 @@ public class JuegosTerapia extends AppCompatActivity {
         btn_paciente.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapia.this, VerTerapiaRecyclerActivity.class);
+                Intent intent = new Intent(JuegosTerapias.this, VerTerapiaRecyclerActivity.class);
                 startActivity(intent);
             }
         });
@@ -144,7 +143,7 @@ public class JuegosTerapia extends AppCompatActivity {
         btn_historial.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapia.this, VerHistorialTerapias.class);
+                Intent intent = new Intent(JuegosTerapias.this, VerHistorialTerapias.class);
                 startActivity(intent);
             }
         });
@@ -152,7 +151,7 @@ public class JuegosTerapia extends AppCompatActivity {
         btn_perfil.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapia.this, VerPerfilActivity.class);
+                Intent intent = new Intent(JuegosTerapias.this, VerPerfilActivity.class);
                 startActivity(intent);
             }
         });
