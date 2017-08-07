@@ -17,10 +17,15 @@ public class ItemTerapiaView {
     private String edad_detalle;
     private int profile_pic_detalle;
     private ArrayList<Integer> extremidades_pic;
-    private ImageButton btn_pausa;
+    private int btn_stop;
+    private int btn_pausa;
+    private int btn_comentario;
+    private int btn_camara;
+    private int btn_pause_detail;
+    private int ver_perfil;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
-    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle) {
+    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
@@ -28,6 +33,12 @@ public class ItemTerapiaView {
         this.nombre_detalle = nombre_detalle;
         this.edad_detalle = edad_detalle;
         this.profile_pic_detalle = profile_pic;
+        this.btn_comentario = btn_comentario;
+        this.btn_pausa = btn_pausa;
+        this.btn_stop = btn_stop;
+        this.btn_camara = btn_camara;
+        this.btn_pause_detail = btn_pausa;
+        this.ver_perfil = ver_perfil;
         this.estado = false;
     }
 
@@ -93,5 +104,62 @@ public class ItemTerapiaView {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+
+    public int getProfile_pic_detalle() {
+        return profile_pic_detalle;
+    }
+
+    public void setProfile_pic_detalle(int profile_pic_detalle) {
+        this.profile_pic_detalle = profile_pic_detalle;
+    }
+
+    public int getBtn_stop() {
+        return btn_stop;
+    }
+
+    public void setBtn_stop(int btn_stop) {
+        this.btn_stop = btn_stop;
+    }
+
+    public int getBtn_pausa() {
+        return btn_pausa;
+    }
+
+    public void setBtn_pausa(int btn_pausa) {
+        this.btn_pausa = btn_pausa;
+    }
+
+    public int getBtn_comentario() {
+        return btn_comentario;
+    }
+
+    public void setBtn_comentario(int btn_comentario) {
+        this.btn_comentario = btn_comentario;
+    }
+
+    public int getBtn_camara() {
+        return btn_camara;
+    }
+
+    public void setBtn_camara(int btn_camara) {
+        this.btn_camara = btn_camara;
+    }
+
+    public int getBtn_pause_detail() {
+        return btn_pause_detail;
+    }
+
+    public void setBtn_pause_detail(int btn_pause_detail) {
+        this.btn_pause_detail = btn_pause_detail;
+    }
+
+    public int getVer_perfil() {
+        return ver_perfil;
+    }
+
+    public void setVer_perfil(int ver_perfil) {
+        this.ver_perfil = ver_perfil;
     }
 }

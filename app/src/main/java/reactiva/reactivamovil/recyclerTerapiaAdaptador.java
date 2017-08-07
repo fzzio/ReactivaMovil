@@ -1,15 +1,19 @@
 package reactiva.reactivamovil;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.transition.TransitionManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,21 +29,19 @@ import java.util.List;
  * Created by edgardan on 18/07/2017.
  */
 
-public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerapiaAdaptador.TerapiaViewHolder> implements View.OnClickListener{
+public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerapiaAdaptador.TerapiaViewHolder> {
 
     List<ItemTerapiaView> listaTerapias;
     private int expandedPosition = -1;
     Context context;
+    Activity activity;
 
-    private Button button;
-    private Dialog dialog;
-
-    public Button boton_test;
     //final Context context = button.getContext();
 
-    public recyclerTerapiaAdaptador(List<ItemTerapiaView> listaTerapias, Context context){
+    public recyclerTerapiaAdaptador(List<ItemTerapiaView> listaTerapias, Context context, Activity activity){
         this.listaTerapias = listaTerapias;
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     //Bind Data
     public void onBindViewHolder(TerapiaViewHolder holder, final int position) {
 
-        //ImageButton botonPause= (ImageButton) holder.itemView.findViewById(R.id.btnIniciarTerapia);
+        final ItemTerapiaView terapiaView = listaTerapias.get(position);
 
         holder.profile_pic.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
@@ -63,6 +65,16 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.txtHora.setText(listaTerapias.get(position).getHora());
         holder.txtNombreDetalle.setText(listaTerapias.get(position).getNombre_detalle());
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
+
+        //holder.btnPausa.setImageResource(listaTerapias.get(position).getBtn_pausa());//poner imagen que es
+
+        holder.imgVComentario.setImageResource(listaTerapias.get(position).getBtn_comentario());
+        holder.imgVStop.setImageResource(listaTerapias.get(position).getBtn_stop());
+        holder.imgVPause.setImageResource(listaTerapias.get(position).getBtn_pause_detail());
+        holder.imgVCamara.setImageResource(listaTerapias.get(position).getBtn_camara());
+
+        holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
+
         //holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
 
         //holder.itemView.findViewById(R.id.btnIniciarTerapia).setOnClickListener();
@@ -95,31 +107,6 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 }
                 listaTerapias.get(position).setEstado(true);*/
 
-                /*button = (Button) v.findViewById(R.id.buttonShowCustomDialog);
-
-                // custom dialog
-                //Dialog dialog;
-                dialog = new Dialog(context);
-                dialog.setContentView(R.layout.terapia_comentario);
-                dialog.setTitle("Title...");
-
-                // set the custom dialog components - text, image and button
-                TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Android custom dialog example!");
-                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                //image.setImageResource(R.drawable.ic_launcher);
-
-                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();*/
-
                 boolean isExpanded = position==expandedPosition;
                 expandedPosition = isExpanded ? -1:position;
                 if (position == expandedPosition) {
@@ -129,55 +116,61 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     v.findViewById(R.id.header).setVisibility(View.GONE);//check v
                     v.findViewById(R.id.section).setVisibility(View.VISIBLE);
                 }
-
-                //v.findViewById(R.id.btnIniciarTerapia).setOnClickListener();
                 //Log.d("Title", "Value: " + Integer.toString(position));
             }
         });
 
-        //final ImageButton botonPause= (ImageButton) v.findViewById(R.id.btnIniciarTerapia);
-
-        //esto da error
-        /*holder.itemView.findViewById(R.id.btnIniciarTerapia).setOnClickListener(new View.OnClickListener(){
+        /*holder.btnPausa.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
-
-                //v.findViewById(R.id.btnIniciarTerapia);
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Pausa", Toast.LENGTH_SHORT).show();
             }
         });*/
 
-
-        /*button = (Button) findViewById(R.id.buttonShowCustomDialog);
-        // add button listener
-        button.setOnClickListener(new View.OnClickListener() {
-
+        holder.imgVComentario.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(View v) {
+                AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
+                LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View vistaComent = li.inflate(R.layout.terapia_comentario, null);
 
-                // custom dialog
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.terapia_comentario);
-                dialog.setTitle("Title...");
+                TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
+                final EditText comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
+                Button btnGuardar = (Button) vistaComent.findViewById(R.id.btnGuardar);
+                Button btnCancelar = (Button) vistaComent.findViewById(R.id.btnCancelar);
 
-                // set the custom dialog components - text, image and button
-                TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Android custom dialog example!");
-                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                //image.setImageResource(R.drawable.ic_launcher);
+                btnGuardar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!comentario.getText().toString().isEmpty()){
+                            Toast.makeText(v.getContext(), "Comentario exitos", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
-                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
+                comentBuilder.setView(vistaComent);
+                final AlertDialog dialog = comentBuilder.create();
+                dialog.show();
+
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-
-                dialog.show();
             }
-        });*/
+        });
+
+        holder.imgVVerPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity,BitacoraTerapia.class);
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -185,14 +178,14 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         return listaTerapias.size();
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         if (v.getId() == boton_test.getId()){
          //   Toast.makeText(v.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
         } else {
           //  Toast.makeText(v.getContext(), "ROW PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     public static class TerapiaViewHolder extends RecyclerView.ViewHolder{
         ImageView profile_pic;
@@ -203,6 +196,11 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         TextView txtNombreDetalle;
         TextView txtEdadDetalle;
         ImageButton btnPausa;
+        ImageButton imgVComentario;
+        ImageButton imgVStop;
+        ImageButton imgVPause;
+        ImageButton imgVCamara;
+        ImageButton imgVVerPerfil;
         //TextView txtSalaDetalle;
 
         public TerapiaViewHolder(View itemView) {
@@ -216,6 +214,11 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             txtEdadDetalle = (TextView) itemView.findViewById(R.id.txtEdadDetalle);
             //txtSalaDetalle = (TextView) itemView.findViewById(R.id.txtSalaDetalle);
             //btnPausa = (ImageButton) itemView.findViewById(R.id.btnIniciarTerapia);
+            imgVComentario = (ImageButton) itemView.findViewById(R.id.imageViewComment);
+            imgVStop = (ImageButton) itemView.findViewById(R.id.imageViewStop);
+            imgVPause = (ImageButton) itemView.findViewById(R.id.imageViewPause);
+            imgVCamara = (ImageButton) itemView.findViewById(R.id.imageViewGallery);
+            imgVVerPerfil = (ImageButton) itemView.findViewById(R.id.imageViewViewTherapy);
         }
     }
 
