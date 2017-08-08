@@ -1,6 +1,5 @@
 package reactiva.reactivamovil;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +17,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import reactiva.reactivamovil.adapters.TerapiaAnteriorAdaptador;
+import reactiva.reactivamovil.clases.TerapiaAnterior;
 
 public class VerHistorialTerapias extends AppCompatActivity {
 

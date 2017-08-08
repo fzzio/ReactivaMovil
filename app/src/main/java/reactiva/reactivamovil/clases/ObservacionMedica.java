@@ -1,4 +1,4 @@
-package reactiva.reactivamovil;
+package reactiva.reactivamovil.clases;
 
 /**
  * Created by Nancy on 2017-07-15.

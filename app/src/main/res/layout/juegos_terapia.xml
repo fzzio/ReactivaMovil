@@ -26,7 +26,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btGetParametrosJuegos"
         style="@android:style/Widget.Material.Button.Borderless"
         android:background="@drawable/rounded_button"
         android:layout_width="280dp"
@@ -48,72 +48,21 @@
         android:background="#FFF"
         ></View>
 
-    <RelativeLayout
-        android:layout_width="450dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
-        android:background="#fff">
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginStart="92dp"
-            android:text="PARAMETROS"
-            android:textColor="#1c3651"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/textView14" />
-
-        <TextView
-            android:id="@+id/tvX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="X"
-            android:textColor="#1c3651"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_alignEnd="@+id/tvZ"
-            android:layout_marginEnd="46dp" />
-
-        <TextView
-            android:id="@+id/tvY"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="23dp"
-            android:text="Z"
-            android:textColor="#1c3651"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvZ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Y"
-            android:textColor="#1c3651"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/tvY"
-            android:layout_marginEnd="31dp" />
-
-    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/frameParametrosJuego"
         android:layout_width="450dp"
         android:layout_height="400dp"
         android:layout_gravity="center">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvParametrosJuego"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </FrameLayout>
+
+
+    <!--<fragment
+        android:name="reactiva.reactivamovil.fragments.FragmentRVParametrosJuegos"
+        android:id="@+id/fragmentParametrosJuego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>-->
 
 </LinearLayout>

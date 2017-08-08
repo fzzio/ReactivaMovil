@@ -2,16 +2,27 @@ package reactiva.reactivamovil;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+
+import reactiva.reactivamovil.adapters.JuegoTerapiaAdaptador;
+import reactiva.reactivamovil.adapters.ParametrosJuegoAdaptador;
+import reactiva.reactivamovil.clases.JuegoTerapia;
+import reactiva.reactivamovil.clases.ParametrosJuego;
+import reactiva.reactivamovil.fragments.FragmentRVCitasDelDia;
+import reactiva.reactivamovil.fragments.FragmentRVParametrosJuegos;
 
 public class JuegosTerapias extends AppCompatActivity {
 
@@ -27,24 +38,42 @@ public class JuegosTerapias extends AppCompatActivity {
     ArrayList<JuegoTerapia> JuegoDataList;
     private FrameLayout frameJuegos;
     private RecyclerView recyclerViewJuegos;
+    Fragment fragment,frg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.juegos_terapia);
 
+
+
+        Button btnGetParatametrosJuegos = (Button) findViewById(R.id.btGetParametrosJuegos);
+
+        btnGetParatametrosJuegos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                fragment = new FragmentRVParametrosJuegos();
+                frg = new FragmentRVCitasDelDia();
+                getSupportFragmentManager().beginTransaction().add(R.id.frameParametrosJuego,fragment).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentParametrosJuego,frg).commit();
+            }
+        });
+
+
+
         //TABLA DE PARAMETROS
-        frameParametrosJuego = (FrameLayout) findViewById(R.id.frameParametrosJuego);
-        recyclerViewParametrosJuego    = (RecyclerView) findViewById(R.id.rvParametrosJuego);
+        //frameParametrosJuego = (FrameLayout) findViewById(R.id.frameParametrosJuego);
+        //recyclerViewParametrosJuego    = (RecyclerView) findViewById(R.id.rvParametrosJuego);
 
         //lISTA DE IMAGENES DE JUEGOS DISPONIBLES
         frameJuegos = (FrameLayout) findViewById(R.id.frameJuegos);
         recyclerViewJuegos    = (RecyclerView) findViewById(R.id.rvJuegos);
 
         //LAYOUT TABLA PARAMETROS
-        LinearLayoutManager llParametrosJuego = new LinearLayoutManager(this);
-        llParametrosJuego.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewParametrosJuego.setLayoutManager(llParametrosJuego);
+        //LinearLayoutManager llParametrosJuego = new LinearLayoutManager(this);
+        //llParametrosJuego.setOrientation(LinearLayoutManager.VERTICAL);
+        //recyclerViewParametrosJuego.setLayoutManager(llParametrosJuego);
 
         //LAYOUT LISTA DE JUEGOS
         LinearLayoutManager llJuegosDisponibles = new LinearLayoutManager(this);
@@ -52,17 +81,17 @@ public class JuegosTerapias extends AppCompatActivity {
         recyclerViewJuegos.setLayoutManager(llJuegosDisponibles);
 
         //INICIALIZAR DATOS
-        inicializadorParametrosJuegoData();
+        //inicializadorParametrosJuegoData();
         inicializadorDataJuegosDisponibles();
 
 
         //INICALIZAR ADAPTADORES
-        inicilaizarAdaptadorParametrosJuego();
+        //inicilaizarAdaptadorParametrosJuego();
         inicilaizarAdaptadorJuegosDisponibles();
 
 
-        ((FrameLayout)recyclerViewParametrosJuego.getParent()).removeView(recyclerViewParametrosJuego);
-        frameParametrosJuego.addView(recyclerViewParametrosJuego);
+       // ((FrameLayout)recyclerViewParametrosJuego.getParent()).removeView(recyclerViewParametrosJuego);
+        //frameParametrosJuego.addView(recyclerViewParametrosJuego);
 
         ((FrameLayout)recyclerViewJuegos.getParent()).removeView(recyclerViewJuegos);
         frameJuegos.addView(recyclerViewJuegos);

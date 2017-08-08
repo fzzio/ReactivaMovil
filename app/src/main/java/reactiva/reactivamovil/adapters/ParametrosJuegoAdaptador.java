@@ -1,4 +1,4 @@
-package reactiva.reactivamovil;
+package reactiva.reactivamovil.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import reactiva.reactivamovil.clases.ParametrosJuego;
+import reactiva.reactivamovil.R;
 
 /**
  * Created by Nancy on 2017-08-02.

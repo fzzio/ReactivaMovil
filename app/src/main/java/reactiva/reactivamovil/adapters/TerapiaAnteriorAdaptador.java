@@ -1,4 +1,4 @@
-package reactiva.reactivamovil;
+package reactiva.reactivamovil.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static reactiva.reactivamovil.R.drawable.view_therapy;
+import reactiva.reactivamovil.BitacoraTerapia;
+import reactiva.reactivamovil.R;
+import reactiva.reactivamovil.clases.TerapiaAnterior;
 
 /**
  * Created by Erasmo on 2017-07-16.
