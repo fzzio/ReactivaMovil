@@ -3,6 +3,7 @@ package reactiva.reactivamovil;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -35,50 +36,29 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver_terapia_recycler);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+
+        TextView txtnombre = (TextView) rv.findViewById(R.id.txtName);
+
+        Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
+        Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
+        Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
+
+        //txtnombre.setTypeface(fontMedium);
+
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        /*button = (Button) findViewById(R.id.buttonShowCustomDialog);
-        // add button listener
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                // custom dialog
-                final Dialog dialog = new Dialog(VerTerapiaRecyclerActivity.this);
-                dialog.setContentView(R.layout.terapia_comentario);
-                dialog.setTitle("Title...");
-
-                // set the custom dialog components - text, image and button
-                TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Android custom dialog example!");
-                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                //image.setImageResource(R.drawable.ic_launcher);
-
-                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-            }
-        });*/
-
-        List<ItemTerapiaView> listaTerapias = Arrays.asList(new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años"),
-                new ItemTerapiaView(R.drawable.profile_h,"Pedro Lainez","00:24:05", "00:24:05", "Pedro Lainez", "33 años"),
-                new ItemTerapiaView(R.drawable.profile_h,"Edgar Moreira","00:10:13", "00:10:13", "Edgar Moreira", "24 años"),
-                new ItemTerapiaView(R.drawable.profile_f,"Maria Chavez","00:17:09", "00:17:09", "Maria Chavez", "22 años"),
-                new ItemTerapiaView(R.drawable.profile_f,"Karen Mera","00:06:25", "00:06:25", "Karen Mera", "16 años"),
-                new ItemTerapiaView(R.drawable.profile_h,"Jaime Banchon","00:09:54", "00:09:54", "Jaime Banchon", "50 años"),
-                new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:17:13", "Susana Carrasco", "44 años"),
-                new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:19:22", "Estefania Loor", "33 años"));
+        List<ItemTerapiaView> listaTerapias = Arrays.asList(new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_h,"Pedro Lainez","00:24:05", "00:24:05", "Pedro Lainez", "33 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_h,"Edgar Moreira","00:10:13", "00:10:13", "Edgar Moreira", "24 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_f,"Maria Chavez","00:17:09", "00:17:09", "Maria Chavez", "22 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_f,"Karen Mera","00:06:25", "00:06:25", "Karen Mera", "16 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_h,"Jaime Banchon","00:09:54", "00:09:54", "Jaime Banchon", "50 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:17:13", "Susana Carrasco", "44 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy),
+                new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:19:22", "Estefania Loor", "33 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.gallery, R.drawable.view_therapy));
         //List<ItemTerapiaView> listaTerapias = Arrays.asList();
-        recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(listaTerapias, this.getApplication());
+        recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(listaTerapias, this.getApplication(), this);
         rv.setAdapter(Adaptador);
 
         TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
