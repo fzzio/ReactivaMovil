@@ -37,6 +37,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +77,7 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
-        final Boolean[] login = {false};
+        //final Boolean[] login = {false};
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -102,6 +104,24 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
                 mProgressView = findViewById(R.id.login_progress);
 
     }
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     public void verificarLogin(){
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         String url ="http://192.168.0.10/ws/login.php";
@@ -112,12 +132,12 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         Log.d("Response: ",response);
-                        if(response.equals("ok")){
+                        if(response.equals("1")){
                             //respuesta = true;
                             Intent i = new Intent(LoginActivity.this,VerPerfilActivity.class);
                             startActivity(i);
                         }
-                        Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -131,7 +151,10 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("nombre",mEmailView.getText().toString().trim());
-                params.put("pass",mPasswordView.getText().toString().trim());
+                String aConvertir=md5(mPasswordView.getText().toString().trim());
+                if (!aConvertir.isEmpty()){
+                    params.put("pass",aConvertir);
+                }
                 return params;
             }
         };
