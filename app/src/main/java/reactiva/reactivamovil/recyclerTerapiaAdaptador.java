@@ -3,12 +3,15 @@ package reactiva.reactivamovil;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.transition.TransitionManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,11 +78,6 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
         holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
 
-        //holder.txtSalaDetalle.setText(listaTerapias.get(position).getSala_detalle());
-
-        //holder.itemView.findViewById(R.id.btnIniciarTerapia).setOnClickListener();
-
-        //holder.btnPausa.
         if(position%4 == 0)
         {
             holder.itemView.findViewById(R.id.header).setBackgroundColor(Color.parseColor("#cb7cb3"));
@@ -134,32 +132,77 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View vistaComent = li.inflate(R.layout.terapia_comentario, null);
 
-                TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
+                //TextView titulo = (TextView) vistaComent.findViewById(R.id.txt_descripcion_coment);
                 final EditText comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
-                Button btnGuardar = (Button) vistaComent.findViewById(R.id.btnGuardar);
-                Button btnCancelar = (Button) vistaComent.findViewById(R.id.btnCancelar);
+                //Button btnGuardar = (Button) vistaComent.findViewById(R.id.btnGuardar);
+                //Button btnCancelar = (Button) vistaComent.findViewById(R.id.btnCancelar);
 
-                btnGuardar.setOnClickListener(new View.OnClickListener() {
+                /*btnGuardar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(!comentario.getText().toString().isEmpty()){
-                            Toast.makeText(v.getContext(), "Comentario exitos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
 
+
+                TextView titulo = new TextView(context);
+                titulo.setText(R.string.terapia_comentario_title);
+                titulo.setGravity(Gravity.TOP);
+                titulo.setPadding(50, 70, 30, 30);
+                titulo.setTextSize(30);
+                //titulo.setBackgroundColor(Color.WHITE);
+                titulo.setTextColor(Color.parseColor("#163550"));
+
+                comentBuilder.setCustomTitle(titulo);
+                comentBuilder.setMessage(R.string.terapia_comentario_descripcion);
+                comentBuilder.setNegativeButton("Cancelar",null);
+                comentBuilder.setPositiveButton("Guardar", null);
                 comentBuilder.setView(vistaComent);
                 final AlertDialog dialog = comentBuilder.create();
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(final DialogInterface dialog) {
+                        Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                        boton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(!comentario.getText().toString().isEmpty()){
+                                    Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }else{
+                                    Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
+
+
                 dialog.show();
 
-                btnCancelar.setOnClickListener(new View.OnClickListener() {
+                TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
+                Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+
+                btnOk.setPadding(20,0,20,50);
+                btnCancel.setPadding(20,0,20,50);
+
+                msmTxt.setTextSize(24);
+                btnOk.setTextSize(28);
+                btnCancel.setTextSize(28);
+
+                /*btnCancelar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
-                });
+                });*/
             }
         });
 
@@ -168,6 +211,97 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             public void onClick(View v) {
                 Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
+                activity.startActivity(intent);
+            }
+        });
+
+        holder.imgVStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ContextThemeWrapper ctw = new ContextThemeWrapper(v.getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+                final AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
+
+                LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View vistaEvaluacion = li.inflate(R.layout.terapia_evaluacion, null);
+
+                //TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
+                final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
+                //TextView btnGuardar = (TextView) vistaEvaluacion.findViewById(R.id.txt_guardar);
+                //TextView btnCancelar = (TextView) vistaEvaluacion.findViewById(R.id.txt_cancelar);
+
+                /*btnGuardar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!comentario.getText().toString().isEmpty()){
+                            Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });*/
+
+                //comentBuilder.setTitle(R.string.terapia_evaluacion_title);
+                TextView titulo = new TextView(context);
+                titulo.setText(R.string.terapia_evaluacion_title);
+                titulo.setGravity(Gravity.TOP);
+                titulo.setPadding(50, 70, 30, 30);
+                titulo.setTextSize(30);
+                //titulo.setBackgroundColor(Color.WHITE);
+                titulo.setTextColor(Color.parseColor("#163550"));
+
+                comentBuilder.setCustomTitle(titulo);
+                comentBuilder.setMessage(R.string.terapia_evaluacion_descripcion);
+                comentBuilder.setNegativeButton("Cancelar",null);
+                comentBuilder.setPositiveButton("Guardar", null);//no se setea el listener aqui para poder cerrar el dialogo unicamente cuando ya se hayan validado todos los campos
+                comentBuilder.setView(vistaEvaluacion);
+
+
+                final AlertDialog dialog = comentBuilder.create();
+                //TextView titulo = (TextView) dialog.findViewById(android.R.id.title);
+                //titulo.setTextSize(40);
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(final DialogInterface dialog) {
+                        Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                        boton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(!comentario.getText().toString().isEmpty()){
+                                    Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }else{
+                                    Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
+                dialog.show();
+
+                TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
+                Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+                btnOk.setPadding(20,0,20,50);
+                btnCancel.setPadding(20,0,20,50);
+
+                btnOk.setTextSize(28);
+                btnCancel.setTextSize(28);
+                msmTxt.setTextSize(24);
+
+                /*btnCancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });*/
+            }
+        });
+
+        holder.imgVCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 activity.startActivity(intent);
             }
         });

@@ -3,26 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--<TextView
+        android:id="@+id/txt_comentario_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comentarios" />
+
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/txt_descripcion_coment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:text="Ingresa tu comentario sobre la sesión de terapia"
-        android:textAlignment="center"/>
+        android:textAlignment="center"/>-->
 
     <EditText
         android:id="@+id/editTxtComentario"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textSize="24sp"
+        android:hint="Escribe algo"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="42dp">
 
-        <Button
+        <!--<Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +52,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="63dp"
             android:layout_marginRight="63dp"
-            android:text="Cancelar" />
+            android:text="Cancelar" />-->
     </RelativeLayout>
 </LinearLayout>
