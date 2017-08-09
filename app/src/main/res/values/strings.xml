@@ -28,6 +28,10 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="terapia_evaluacion_title">Evaluación</string>
+    <string name="terapia_evaluacion_descripcion">Califica el estado general del paciente, para saber si necesita acompañamiento en la siguiente sesión de terapia.</string>
+    <string name="terapia_comentario_title">Comentarios</string>
+    <string name="terapia_comentario_descripcion">Ingrese sus comentarios acerca de la sesión de terapia:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
