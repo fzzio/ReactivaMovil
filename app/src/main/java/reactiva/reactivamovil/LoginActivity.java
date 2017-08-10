@@ -114,7 +114,7 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
             for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+                hexString.append(Integer.toHexString((messageDigest[i] & 0xFF) | 0x100).substring(1, 3));
             return hexString.toString();
 
         } catch (NoSuchAlgorithmException e) {
@@ -124,7 +124,7 @@ public class LoginActivity extends Activity  implements LoaderManager.LoaderCall
     }
     public void verificarLogin(){
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        String url ="http://192.168.0.10/ws/login.php";
+        String url ="http://192.168.0.8/ws/login.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
