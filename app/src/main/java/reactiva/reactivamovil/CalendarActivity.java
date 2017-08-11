@@ -26,8 +26,8 @@ import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
 public class CalendarActivity extends AppCompatActivity {
     FragmentTransaction ft, fte;
-    CalendarAppointmentFragment calendarAppointmentFragment = new CalendarAppointmentFragment();
-    CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = new CalendarEmptyAppointmentFragment();
+    //CalendarAppointmentFragment calendarAppointmentFragment = CalendarAppointmentFragment.newInstance("ss");
+    //CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = new CalendarEmptyAppointmentFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +78,11 @@ public class CalendarActivity extends AppCompatActivity {
                 CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 if (isAppointment(selected_date)) {
                     //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarAppointmentFragment();
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date));
                     removeCalendarEmptyAppointmentFragment();
                 } else {
                    // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarEmptyAppointmentFragment();
+                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date));
                     removeCalendarAppointmentFragment();
                 }
             }
@@ -109,7 +109,7 @@ public class CalendarActivity extends AppCompatActivity {
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     if (isAppointment(selected_date)) {
                         //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                        displayCalendarAppointmentFragment();
+                        displayCalendarAppointmentFragment(dateFormatter(selected_date));
                         removeCalendarEmptyAppointmentFragment();
                     }
                 }
@@ -142,6 +142,27 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     /**
+     * Use this method to convert date with format
+     * @return String
+     */
+    public String dateFormatter(CalendarDay selected_date) {
+        Calendar week_date = selected_date.getCalendar();
+
+        int day = selected_date.getDay();
+        int month = selected_date.getMonth();
+        int year = selected_date.getYear();
+        int week = week_date.get(Calendar.DAY_OF_WEEK);
+
+        String output_day = Integer.toString(day);
+        String output_month = get_month(month);
+        String output_year = Integer.toString(year);
+        String output_week = get_week(week);
+
+        String output = output_week + ", " + output_day + " " + output_month + " " + output_year;
+        return output;
+    }
+
+    /**
      * Use this method to know if selected_date is null
      * @return true if selected_date is null
      *         false if selected_date isn't null
@@ -156,7 +177,9 @@ public class CalendarActivity extends AppCompatActivity {
      * Use this method to display the CalendarAppointmentFragment
      * @return void
      */
-    public void displayCalendarAppointmentFragment() {
+    public void displayCalendarAppointmentFragment(String selected_date) {
+        //Fragment Instance
+        CalendarAppointmentFragment calendarAppointmentFragment = CalendarAppointmentFragment.newInstance(selected_date);
         //Begin of the transaction
         ft = getSupportFragmentManager().beginTransaction();
         //Replace the contents of the container with the new fragment
@@ -170,6 +193,8 @@ public class CalendarActivity extends AppCompatActivity {
      * @return void
      */
     public void removeCalendarAppointmentFragment() {
+        //Fragment Instance
+        CalendarAppointmentFragment calendarAppointmentFragment = new CalendarAppointmentFragment();
         //Begin of the transaction
         ft = getSupportFragmentManager().beginTransaction();
         //Replace the contents of the container with the new fragment
@@ -182,7 +207,9 @@ public class CalendarActivity extends AppCompatActivity {
      * Use this method to display the CalendarEmptyAppointmentFragment
      * @return void
      */
-    public void displayCalendarEmptyAppointmentFragment() {
+    public void displayCalendarEmptyAppointmentFragment(String selected_date) {
+        //Fragment Instance
+        CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = CalendarEmptyAppointmentFragment.newInstance(selected_date);
         //Begin of the transaction
         fte = getSupportFragmentManager().beginTransaction();
         //Replace the contents of the container with the new fragment
@@ -196,6 +223,8 @@ public class CalendarActivity extends AppCompatActivity {
      * @return void
      */
     public void removeCalendarEmptyAppointmentFragment() {
+        //Fragment Instance
+        CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = new CalendarEmptyAppointmentFragment();
         //Begin of the transaction
         fte = getSupportFragmentManager().beginTransaction();
         //Replace the contents of the container with the new fragment
@@ -229,6 +258,32 @@ public class CalendarActivity extends AppCompatActivity {
                                 "SEPTIEMBRE", "OCTUBRE",
                                 "NOVIEMBRE", "DICIEMBRE"};
         return month_array[month];
+    }
+
+    /** Use this method to get month
+     *  @param  month the numeric value
+     *  @return name of a month
+     */
+    public String get_month(int month) {
+        String[] month_array = {"ene.", "feb.",
+                "mar.", "abr.",
+                "may.", "jun.",
+                "jul.", "ago.",
+                "sep.", "oct.",
+                "nov.", "dic."};
+        return month_array[month];
+    }
+
+    /** Use this method to get week
+     *  @param  week the numeric value
+     *  @return name of a week
+     */
+    public String get_week(int week) {
+        String[] week_array = {"Domingo", "Lunes",
+                "Martes", "Miércoles",
+                "Jueves", "Viernes",
+                "Sábado"};
+        return week_array[week-1];
     }
 
     /** Use this set of methods for menu management

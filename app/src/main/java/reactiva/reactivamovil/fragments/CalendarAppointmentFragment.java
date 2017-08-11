@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,30 +26,39 @@ public class CalendarAppointmentFragment extends Fragment{
     List<Appointment> appointmentList = new ArrayList<>();
     private RecyclerView appointmentRecyclerView;
 
+    public static CalendarAppointmentFragment newInstance(String selected_date) {
+        CalendarAppointmentFragment fr = new CalendarAppointmentFragment();
+        Bundle args = new Bundle();
+        args.putString("selected_date", selected_date);
+        fr.setArguments(args);
+        return fr;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Se define el XML para CalendarAppointmentFragment
+        //Se define el XML para CalendarAppointmentFragment
         View v = inflater.inflate(R.layout.calendar_fragment, container, false);
-
+        //Se define el RecyclerView
         appointmentRecyclerView = (RecyclerView) v.findViewById(R.id.calendar_recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         appointmentRecyclerView.setLayoutManager(llm);
         appointmentListBuilder();
         appointmentAdapterBuilder();
-
+        //Se define el TextView
+        TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
+        String selected_date = getArguments().getString("selected_date", "");
+        selected_date_txv.setText(selected_date);
+        //Se define el ImageView
         ImageView calendar_close = (ImageView) v.findViewById(R.id.calendar_close_imv);
-
         calendar_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CalendarActivity calendarActivity = (CalendarActivity) getActivity();
                 calendarActivity.removeCalendarEmptyAppointmentFragment();
                 calendarActivity.removeCalendarAppointmentFragment();
             }
         });
-
         return v;
     }
 
@@ -57,6 +67,7 @@ public class CalendarAppointmentFragment extends Fragment{
      * @return void
      */
     public void appointmentListBuilder() {
+        appointmentList.removeAll(appointmentList);
         appointmentList.add(new Appointment("Nadia", "Pezantes Hermenjildo", "7:00 AM"));
         appointmentList.add(new Appointment("Ángel", "Peña García", "8:15 AM"));
         appointmentList.add(new Appointment("Pablo", "Peñafiel Guerrero", "8:30 AM"));
