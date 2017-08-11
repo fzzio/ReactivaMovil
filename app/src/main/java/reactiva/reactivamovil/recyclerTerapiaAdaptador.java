@@ -6,15 +6,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.transition.TransitionManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +40,10 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     List<ItemTerapiaView> listaTerapias;
     private int expandedPosition = -1;
+
+    Handler customHandler = new Handler();
+    long startTime = 0L, timeInMilliseconds = 0L, timeSwapBuff = 0L, updateTime = 0L;
+
     Context context;
     Activity activity;
 
@@ -57,7 +65,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     @Override
     //aqui se establecen los valores de la vista
     //Bind Data
-    public void onBindViewHolder(TerapiaViewHolder holder, final int position) {
+    public void onBindViewHolder(final TerapiaViewHolder holder, final int position) {
 
         final ItemTerapiaView terapiaView = listaTerapias.get(position);
 
@@ -96,6 +104,20 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             holder.itemView.findViewById(R.id.section).setBackgroundColor(Color.parseColor("#3C2C5E"));
         }
 
+        final Runnable updateTimerThread = new Runnable() {
+            @Override
+            public void run() {
+                timeInMilliseconds = SystemClock.uptimeMillis()-startTime;
+                updateTime = timeSwapBuff+timeInMilliseconds;
+                int secs= (int) (updateTime/1000);
+                int mins= secs/60;
+                secs%=60;
+                int milliseconds= (int) (updateTime%1000);
+                holder.txtHora.setText(""+mins+":"+String.format("%2d",secs)+":"+String.format("%3d",milliseconds));
+                customHandler.postDelayed(this,0);
+            }
+        };
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +126,18 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     item.setEstado(false);
                 }
                 listaTerapias.get(position).setEstado(true);*/
+
+                //obtengo todos los registros de terapias para poder cerrar todos menos el que se ha clickeado
+                ViewGroup recyclerv = (ViewGroup) v.getParent();
+
+                for(int i=0; i<recyclerv.getChildCount();i++){
+                    if(i!=position){
+                        recyclerv.getChildAt(i).findViewById(R.id.section).setVisibility(View.GONE);
+                        recyclerv.getChildAt(i).findViewById(R.id.header).setVisibility(View.VISIBLE);
+                        timeSwapBuff+=timeInMilliseconds;
+                        customHandler.removeCallbacks(updateTimerThread);
+                    }
+                }
 
                 boolean isExpanded = position==expandedPosition;
                 expandedPosition = isExpanded ? -1:position;
@@ -305,6 +339,19 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 activity.startActivity(intent);
             }
         });
+
+        holder.imgVPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTime = SystemClock.uptimeMillis();
+
+                customHandler.postDelayed(updateTimerThread, 0);
+
+                holder.imgVPause.setImageResource(R.drawable.pause_active);
+            }
+        });
+
+
     }
 
     @Override
@@ -335,6 +382,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         ImageButton imgVPause;
         ImageButton imgVCamara;
         ImageButton imgVVerPerfil;
+
         //TextView txtSalaDetalle;
 
         public TerapiaViewHolder(View itemView) {
