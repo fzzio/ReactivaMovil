@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import reactiva.reactivamovil.BitacoraTerapia;
 import reactiva.reactivamovil.R;
-import reactiva.reactivamovil.clases.TerapiaAnterior;
+import reactiva.reactivamovil.classes.TerapiaAnterior;
 
 /**
  * Created by Erasmo on 2017-07-16.

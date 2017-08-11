@@ -1,7 +1,4 @@
-package reactiva.reactivamovil.clases;
-
-import android.media.Image;
-import android.widget.ImageView;
+package reactiva.reactivamovil.classes;
 
 import reactiva.reactivamovil.R;
 

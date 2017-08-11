@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import reactiva.reactivamovil.clases.ParametrosJuego;
+import reactiva.reactivamovil.classes.ParametrosJuego;
 import reactiva.reactivamovil.R;
 
 /**

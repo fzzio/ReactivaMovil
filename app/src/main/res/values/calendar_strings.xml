@@ -14,4 +14,13 @@
         <item>NOVIEMBRE</item>
         <item>DICIEMBRE</item>
     </string-array>
+    <string-array name="CustomWeekDayLabels">
+        <item>dom.</item>
+        <item>lun.</item>
+        <item>mar.</item>
+        <item>mie.</item>
+        <item>jue.</item>
+        <item>vie.</item>
+        <item>sab.</item>
+    </string-array>
 </resources>

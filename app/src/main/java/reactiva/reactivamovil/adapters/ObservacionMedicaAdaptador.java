@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import reactiva.reactivamovil.clases.ObservacionMedica;
+import reactiva.reactivamovil.classes.ObservacionMedica;
 import reactiva.reactivamovil.R;
 
 /**

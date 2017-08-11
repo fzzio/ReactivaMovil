@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/calendar_empty_fragment"
+    tools:context="reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="550dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@color/colorBlanco">
+
+            <TextView
+                android:id="@+id/selected_date_txv"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:textAlignment="center"
+                android:text="Viernes, 1 jul. 2017"
+                android:textColor="@color/colorMoradoMedio"
+                android:textStyle="normal"
+                android:textSize="14dp"
+                android:layout_alignParentBottom="true" />
+
+            <ImageView
+                android:id="@+id/calendar_empty_close_imv"
+                android:gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/calendar_close_button" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="550dp"
+            android:layout_height="530dp"
+            android:layout_gravity="center"
+            android:text=" NO HAY CITAS\nPROGRAMADAS"
+            android:textColor="@color/colorMoradoOscuro"
+            android:background="@color/colorMoradoOpaco"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:id="@+id/empty_appointment" />
+
+
+
+        <!--<android.support.v7.widget.RecyclerView
+            android:id="@+id/calendar_recycler_view"
+            android:layout_width="550dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"/>-->
+
+        <!--<TextView
+            android:layout_width="525dp"
+            android:layout_height="455dp"
+            android:text=" NO HAY CITAS\nPROGRAMADAS"
+            android:gravity="center"
+            android:background="#6f608b"
+            android:textColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="24sp"
+            android:id="@+id/cita"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="400dp" />-->
+
+    </LinearLayout>
+</FrameLayout>

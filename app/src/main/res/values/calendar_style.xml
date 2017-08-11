@@ -2,12 +2,12 @@
 <resources>
     <style name="CustomWeekDay" parent="@style/TextAppearance.MaterialCalendarWidget.WeekDay">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorMoradoSuave</item>
+        <item name="android:textColor">@color/colorMoradoWeek</item>
     </style>
 
     <style name="CustomDateText" parent="@style/TextAppearance.MaterialCalendarWidget.Date">
         <item name="android:textSize">20sp</item>
-        <!--<item name="android:textColor">@color/colorBlanco</item>-->
+        <item name="android:textColor">@color/mcv_text_date_light</item>
     </style>
 
     <style name="CustomHeaderText" parent="@style/TextAppearance.MaterialCalendarWidget.Header">

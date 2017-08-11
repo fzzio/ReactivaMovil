@@ -3,8 +3,6 @@ package reactiva.reactivamovil;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,8 +17,8 @@ import java.util.ArrayList;
 
 import reactiva.reactivamovil.adapters.JuegoTerapiaAdaptador;
 import reactiva.reactivamovil.adapters.ParametrosJuegoAdaptador;
-import reactiva.reactivamovil.clases.JuegoTerapia;
-import reactiva.reactivamovil.clases.ParametrosJuego;
+import reactiva.reactivamovil.classes.JuegoTerapia;
+import reactiva.reactivamovil.classes.ParametrosJuego;
 import reactiva.reactivamovil.fragments.FragmentRVCitasDelDia;
 import reactiva.reactivamovil.fragments.FragmentRVParametrosJuegos;
 

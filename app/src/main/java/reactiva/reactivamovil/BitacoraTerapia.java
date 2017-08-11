@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.adapters.ObservacionMedicaAdaptador;
-import reactiva.reactivamovil.clases.ObservacionMedica;
+import reactiva.reactivamovil.classes.ObservacionMedica;
 
 public class BitacoraTerapia extends AppCompatActivity {
 

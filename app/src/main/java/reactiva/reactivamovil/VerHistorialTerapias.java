@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.adapters.TerapiaAnteriorAdaptador;
-import reactiva.reactivamovil.clases.TerapiaAnterior;
+import reactiva.reactivamovil.classes.TerapiaAnterior;
 
 public class VerHistorialTerapias extends AppCompatActivity {
 

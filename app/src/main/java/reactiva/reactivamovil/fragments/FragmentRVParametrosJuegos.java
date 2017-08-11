@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import reactiva.reactivamovil.R;
 import reactiva.reactivamovil.adapters.ParametrosJuegoAdaptador;
-import reactiva.reactivamovil.clases.ParametrosJuego;
+import reactiva.reactivamovil.classes.ParametrosJuego;
 
 /**
  * A simple {@link Fragment} subclass.

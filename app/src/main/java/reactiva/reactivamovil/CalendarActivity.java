@@ -2,133 +2,238 @@ package reactiva.reactivamovil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
-
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
+
+import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
+import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
 /**
  * Created by Fernando on 09/07/2017.
  */
 
 public class CalendarActivity extends AppCompatActivity {
+    FragmentTransaction ft, fte;
+    CalendarAppointmentFragment calendarAppointmentFragment = new CalendarAppointmentFragment();
+    CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = new CalendarEmptyAppointmentFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
 
-        //Declarando variables finales
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
         final CalendarDecorator calendarDecorator = new CalendarDecorator();
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
-        final TextView empty = (TextView) findViewById(R.id.empty_cita_txv);
 
-        //Recycler View
-        /*setContentView(R.layout.calendar_activity);
-        RecyclerView rv = (RecyclerView) findViewById(R.id.calendar_recycler_view);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
-        List<ItemCalendarView> listaCitas = Arrays.asList(new ItemCalendarView("María", " Velasco Ibarra", "7:00 AM     "),
-                new ItemCalendarView("Antonio", " Zambrano Villalba", "8:00 AM     "),
-                new ItemCalendarView("Kevin", " Sanchez Arreaga", "9:00 AM     "),
-                new ItemCalendarView("Rafael", " Martinez Mata", "10:00 AM   "),
-                new ItemCalendarView("Keyla", " Pacheco Tovar", "11:00 AM   "));
-        CalendarAdapter Adaptador = new CalendarAdapter(listaCitas);
-        rv.setAdapter(Adaptador);*/
-
-        //Inicializando calendario
+        //Initialize Calendar DisplayMode in MONTHS
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
                 .setMinimumDate(CalendarDay.from(1900, 1, 1))
                 .setMaximumDate(CalendarDay.from(2100, 12, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        //Inicializando calendario
+
+        //initialize CalendarDecorator
         materialCalendarView.addDecorator(calendarDecorator);
         materialCalendarView.setTopbarVisible(false);
-        materialCalendarView.setSelectedDate(CalendarDay.today());
-        //Se cambia el txt view por el mes actual
-        CalendarDay day = materialCalendarView.getSelectedDate();
+        //Initialize Dynamic Month Label
+        CalendarDay day = materialCalendarView.getCurrentDate();
         int month_label = day.getMonth();
         calendar_month.setText(current_month(month_label));
 
-        //Se cambia el selector de fecha y se modifica el mes
+        //Every time when OnDateChangedListener hear something DisplayMode is changed to WEEKS
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
-                //Se cambia los paramtetros del calendario
+                if (isAppointment(materialCalendarView.getSelectedDate())){
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                } else {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                }
+                //Update Calendar DisplayMode to MONTHS
                 materialCalendarView.state().edit()
-                        .setFirstDayOfWeek(Calendar.MONDAY)
-                        .setMinimumDate(CalendarDay.from(1900, 1, 1))
-                        .setMaximumDate(CalendarDay.from(2100, 12, 31))
                         .setCalendarDisplayMode(CalendarMode.WEEKS)
                         .commit();
-                //Se cambia el txt view por el mes actual
+                //Update Dynamic Month Label
                 CalendarDay day = materialCalendarView.getSelectedDate();
                 int month_label = day.getMonth();
                 calendar_month.setText(current_month(month_label));
-                //Se muestra la lista de citas
-                empty.setVisibility(View.VISIBLE);
+                //Appointments Verify
+                CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                if (isAppointment(selected_date)) {
+                    //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarAppointmentFragment();
+                    removeCalendarEmptyAppointmentFragment();
+                } else {
+                   // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarEmptyAppointmentFragment();
+                    removeCalendarAppointmentFragment();
+                }
             }
         });
 
-        //Se cambia el selector a la fecha actual
+        //Every time when OnClickListener hear something DisplayMode is changed to WEEKS
         calendar_today.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                materialCalendarView.setSelectedDate(CalendarDay.today());
-                materialCalendarView.state().edit()
-                        .setFirstDayOfWeek(Calendar.MONDAY)
-                        .setCalendarDisplayMode(CalendarMode.WEEKS)
-                        .commit();
-                //Se cambia el txt view por el mes actual
-                CalendarDay day = materialCalendarView.getSelectedDate();
-                int month_label = day.getMonth();
-                calendar_month.setText(current_month(month_label));
-                //Se muestra la lista de citas
-                empty.setVisibility(View.VISIBLE);
+                if(!isSelectedDateNull(materialCalendarView.getSelectedDate()) && !isAppointment(materialCalendarView.getSelectedDate())) {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                    //SetSelectedDate to CurrentDate
+                    materialCalendarView.setSelectedDate(CalendarDay.today());
+                    //Update Calendar DisplayMode to WEEKS
+                    materialCalendarView.state().edit()
+                            .setCalendarDisplayMode(CalendarMode.WEEKS)
+                            .commit();
+                    //Update Dynamic Month Label
+                    CalendarDay day = materialCalendarView.getSelectedDate();
+                    int month_label = day.getMonth();
+                    calendar_month.setText(current_month(month_label));
+                    //Appointments Verify
+                    CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                    if (isAppointment(selected_date)) {
+                        //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                        displayCalendarAppointmentFragment();
+                        removeCalendarEmptyAppointmentFragment();
+                    }
+                }
+
             }
         });
 
-        //Se cambia el display mode a MONTHS
+        /**Every time when OnClickListener hear something DisplayMode is changed to MONTHS
+         * and the SelectedDate is changed to null
+         */
         calendar_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Update Today's Style
+                calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                //Update Calendar DisplayMode to WEEKS
                 materialCalendarView.state().edit()
                         .setCalendarDisplayMode(CalendarMode.MONTHS)
                         .commit();
-                //Se muestra la lista de citas
-                empty.setVisibility(View.INVISIBLE);
+                //SelectedDate is changed to null
+                CalendarDay empty_date = null;
+                materialCalendarView.setSelectedDate(empty_date);
+                //Remove fragments
+                removeCalendarEmptyAppointmentFragment();
+                removeCalendarAppointmentFragment();
             }
         });
 
         funciones_del_menu();
     }
 
-    private String current_month(int mes) {
+    /**
+     * Use this method to know if selected_date is null
+     * @return true if selected_date is null
+     *         false if selected_date isn't null
+     */
+    public boolean isSelectedDateNull(CalendarDay selected_date) {
+        if (selected_date == null)
+            return true;
+        return false;
+    }
+
+    /**
+     * Use this method to display the CalendarAppointmentFragment
+     * @return void
+     */
+    public void displayCalendarAppointmentFragment() {
+        //Begin of the transaction
+        ft = getSupportFragmentManager().beginTransaction();
+        //Replace the contents of the container with the new fragment
+        ft.replace(R.id.appointmentContainer, calendarAppointmentFragment);
+        //Complete the changes added above
+        ft.commit();
+    }
+
+    /**
+     * Use this method to remove the CalendarAppointmentFragment
+     * @return void
+     */
+    public void removeCalendarAppointmentFragment() {
+        //Begin of the transaction
+        ft = getSupportFragmentManager().beginTransaction();
+        //Replace the contents of the container with the new fragment
+        ft.replace(R.id.appointmentContainer, calendarAppointmentFragment);
+        //Complete the changes added above
+        ft.remove(calendarAppointmentFragment).commit();
+    }
+
+    /**
+     * Use this method to display the CalendarEmptyAppointmentFragment
+     * @return void
+     */
+    public void displayCalendarEmptyAppointmentFragment() {
+        //Begin of the transaction
+        fte = getSupportFragmentManager().beginTransaction();
+        //Replace the contents of the container with the new fragment
+        fte.replace(R.id.appointmentEmptyContainer, calendarEmptyAppointmentFragment);
+        //Complete the changes added above
+        fte.commit();
+    }
+
+    /**
+     * Use this method to remove the CalendarEmptyAppointmentFragment
+     * @return void
+     */
+    public void removeCalendarEmptyAppointmentFragment() {
+        //Begin of the transaction
+        fte = getSupportFragmentManager().beginTransaction();
+        //Replace the contents of the container with the new fragment
+        fte.replace(R.id.appointmentEmptyContainer, calendarEmptyAppointmentFragment);
+        //Complete the changes added above
+        fte.remove(calendarEmptyAppointmentFragment).commit();
+    }
+
+    /**
+     * Use this method to verify is there is an existing appointments
+     * @param  selected_date to be checked
+     * @return true if there is an existing appointment
+     *         false if there isn't an existing appointment
+     */
+    public boolean isAppointment(CalendarDay selected_date) {
+        CalendarDay current_date = CalendarDay.today();
+        if (current_date.equals(selected_date))
+            return true;
+        return false;
+    }
+
+    /** Use this method to get current month
+     *  @param  month the numeric value
+     *  @return name of a month
+     */
+    public String current_month(int month) {
         String[] month_array = {"ENERO", "FEBRERO",
                                 "MARZO", "ABRIL",
                                 "MAYO", "JUNIO",
                                 "JULIO", "AGOSTO",
                                 "SEPTIEMBRE", "OCTUBRE",
                                 "NOVIEMBRE", "DICIEMBRE"};
-        return month_array[mes];
+        return month_array[month];
     }
 
+    /** Use this set of methods for menu management
+     *  @return void
+     */
     private void funciones_del_menu(){
         clicks_del_menu();
         activar_menu();
@@ -136,6 +241,9 @@ public class CalendarActivity extends AppCompatActivity {
         lyt_menu.setVisibility(LinearLayout.GONE);
     }
 
+    /** Use this set of methods for menu management
+     *  @return void
+     */
     private void clicks_del_menu(){
         final ImageButton btn_calendario=(ImageButton)findViewById(R.id.btn_calendario);
         btn_calendario.setImageDrawable(getDrawable(R.drawable.agenda_activo));
@@ -148,7 +256,6 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         btn_calendario.setOnClickListener(new  View.OnClickListener(){
             @Override
@@ -184,6 +291,9 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
+    /** Use this set of methods for menu management
+     *  @return void
+     */
     public boolean menu_activo(){
         LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
         int dato= lyt_menu.getVisibility();
@@ -194,6 +304,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
+    /** Use this set of methods for menu management
+     *  @return void
+     */
     private void activar_menu() {
         final ImageButton btn_oc=(ImageButton)findViewById(R.id.btn_oc);
         btn_oc.setOnClickListener(new View.OnClickListener() {
@@ -210,5 +323,4 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.R;
-import reactiva.reactivamovil.clases.JuegoTerapia;
+import reactiva.reactivamovil.classes.JuegoTerapia;
 
 /**
  * Created by Erasmo Zurita on 2/8/2017.
