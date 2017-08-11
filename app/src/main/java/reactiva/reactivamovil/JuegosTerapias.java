@@ -13,6 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.azoft.carousellayoutmanager.CarouselLayoutManager;
+import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
+import com.azoft.carousellayoutmanager.CenterScrollListener;
+
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.adapters.JuegoTerapiaAdaptador;
@@ -60,13 +64,14 @@ public class JuegosTerapias extends AppCompatActivity {
 
 
 
+
         //TABLA DE PARAMETROS
         //frameParametrosJuego = (FrameLayout) findViewById(R.id.frameParametrosJuego);
         //recyclerViewParametrosJuego    = (RecyclerView) findViewById(R.id.rvParametrosJuego);
 
         //lISTA DE IMAGENES DE JUEGOS DISPONIBLES
         frameJuegos = (FrameLayout) findViewById(R.id.frameJuegos);
-        recyclerViewJuegos    = (RecyclerView) findViewById(R.id.rvJuegos);
+        //recyclerViewJuegos    = (RecyclerView) findViewById(R.id.rvJuegos);
 
         //LAYOUT TABLA PARAMETROS
         //LinearLayoutManager llParametrosJuego = new LinearLayoutManager(this);
@@ -74,18 +79,30 @@ public class JuegosTerapias extends AppCompatActivity {
         //recyclerViewParametrosJuego.setLayoutManager(llParametrosJuego);
 
         //LAYOUT LISTA DE JUEGOS
-        LinearLayoutManager llJuegosDisponibles = new LinearLayoutManager(this);
-        llJuegosDisponibles.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerViewJuegos.setLayoutManager(llJuegosDisponibles);
+        //LinearLayoutManager llJuegosDisponibles = new LinearLayoutManager(this);
+        //llJuegosDisponibles.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //recyclerViewJuegos.setLayoutManager(llJuegosDisponibles);
 
         //INICIALIZAR DATOS
         //inicializadorParametrosJuegoData();
-        inicializadorDataJuegosDisponibles();
+        //inicializadorDataJuegosDisponibles();
 
 
         //INICALIZAR ADAPTADORES
         //inicilaizarAdaptadorParametrosJuego();
-        inicilaizarAdaptadorJuegosDisponibles();
+        //inicilaizarAdaptadorJuegosDisponibles();
+
+
+        final CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL);
+        layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
+
+        final RecyclerView recyclerViewJuegos = (RecyclerView) findViewById(R.id.rvJuegos);
+        recyclerViewJuegos.setLayoutManager(layoutManager);
+
+        inicializadorDataJuegosDisponibles();
+        recyclerViewJuegos.setHasFixedSize(true);
+        recyclerViewJuegos.setAdapter(new JuegoTerapiaAdaptador(JuegoDataList));
+        recyclerViewJuegos.addOnScrollListener(new CenterScrollListener());
 
 
        // ((FrameLayout)recyclerViewParametrosJuego.getParent()).removeView(recyclerViewParametrosJuego);
@@ -124,12 +141,15 @@ public class JuegosTerapias extends AppCompatActivity {
 
     public void inicializadorDataJuegosDisponibles() {
         JuegoDataList = new ArrayList<JuegoTerapia>();
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego1));
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego3));
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego1));
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego3));
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego1));
-        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego3));
+        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego2));
+        JuegoDataList.add(new JuegoTerapia("NADAR",R.drawable.juego3));
+        JuegoDataList.add(new JuegoTerapia("VOLAR",R.drawable.juego1));
+        JuegoDataList.add(new JuegoTerapia("TROTAR",R.drawable.juego2));
+        JuegoDataList.add(new JuegoTerapia("ATERRIZAR",R.drawable.juego3));
+        JuegoDataList.add(new JuegoTerapia("COMER",R.drawable.juego1));
+        JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego2));
+        JuegoDataList.add(new JuegoTerapia("NADAR",R.drawable.juego3));
+        JuegoDataList.add(new JuegoTerapia("VOLAR",R.drawable.juego1));
     }
 
     private void funciones_del_menu(){

@@ -36,7 +36,8 @@ public class JuegoTerapiaAdaptador extends RecyclerView.Adapter<JuegoTerapiaAdap
 
         JuegoTerapia juegosTerapias = juegosDisponibles.get(position);
         juegoTerapiaViewHolder.tvNombreGame.setText(juegosTerapias.getNameGame());
-        juegoTerapiaViewHolder.imgvGame.setImageResource(R.drawable.juego1);
+        //juegoTerapiaViewHolder.imgvGame.setImageResource(R.drawable.juego1);
+        juegoTerapiaViewHolder.imgvGame.setImageResource(juegosTerapias.getView_game());
     }
 
     @Override
