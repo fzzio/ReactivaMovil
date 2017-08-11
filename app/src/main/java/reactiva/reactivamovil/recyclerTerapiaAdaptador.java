@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.transition.TransitionManager;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -46,6 +48,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     Context context;
     Activity activity;
+
+    //Typeface type = Typeface.createFromAsset(activity.getAssets(),"fonts/Montserrat-Regular.ttf");
 
     //final Context context = button.getContext();
 
@@ -85,6 +89,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.imgVCamara.setImageResource(listaTerapias.get(position).getBtn_camara());
 
         holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
+
+        //holder.txtNombre.setTypeface(type);
 
         if(position%4 == 0)
         {
@@ -128,115 +134,102 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 listaTerapias.get(position).setEstado(true);*/
 
                 //obtengo todos los registros de terapias para poder cerrar todos menos el que se ha clickeado
-                ViewGroup recyclerv = (ViewGroup) v.getParent();
+                //ViewGroup recyclerv = (ViewGroup) v.getParent();
+                RecyclerView recyclerv = (RecyclerView) v.getParent();
+                //Log.d("hijos", "Value: " + Integer.toString(recyclerv.getChildCount()));
 
                 for(int i=0; i<recyclerv.getChildCount();i++){
-                    if(i!=position){
+                    //if(i!=position){
                         recyclerv.getChildAt(i).findViewById(R.id.section).setVisibility(View.GONE);
                         recyclerv.getChildAt(i).findViewById(R.id.header).setVisibility(View.VISIBLE);
+                        //Log.d("Title", "Value: " + Integer.toString(i));
                         timeSwapBuff+=timeInMilliseconds;
                         customHandler.removeCallbacks(updateTimerThread);
-                    }
+                    //}
                 }
 
                 boolean isExpanded = position==expandedPosition;
                 expandedPosition = isExpanded ? -1:position;
                 if (position == expandedPosition) {
-                    v.findViewById(R.id.header).setVisibility(View.VISIBLE);
-                    v.findViewById(R.id.section).setVisibility(View.GONE);
-                } else {
-                    v.findViewById(R.id.header).setVisibility(View.GONE);//check v
+                    v.findViewById(R.id.header).setVisibility(View.GONE);
                     v.findViewById(R.id.section).setVisibility(View.VISIBLE);
+                } else {
+                    v.findViewById(R.id.header).setVisibility(View.VISIBLE);//check v
+                    v.findViewById(R.id.section).setVisibility(View.GONE);
                 }
-                //Log.d("Title", "Value: " + Integer.toString(position));
+                //Log.d("Posicion row", "Value: " + Integer.toString(position));
+                //Log.d("posicion expandida", "Value: " + Integer.toString(expandedPosition));
             }
         });
 
-        /*holder.btnPausa.setOnClickListener(new View.OnClickListener() {
+
+        holder.imgVComentario.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Pausa", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+            public boolean onTouch(View v, MotionEvent event) {
 
-        holder.imgVComentario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
-                LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View vistaComent = li.inflate(R.layout.terapia_comentario, null);
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.imgVComentario.setImageResource(R.drawable.comment_active);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVComentario.setImageResource(R.drawable.comment);
 
-                //TextView titulo = (TextView) vistaComent.findViewById(R.id.txt_descripcion_coment);
-                final EditText comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
-                //Button btnGuardar = (Button) vistaComent.findViewById(R.id.btnGuardar);
-                //Button btnCancelar = (Button) vistaComent.findViewById(R.id.btnCancelar);
+                    AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
+                    LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View vistaComent = li.inflate(R.layout.terapia_comentario, null);
 
-                /*btnGuardar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(!comentario.getText().toString().isEmpty()){
-                            Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
+                    final EditText comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
 
+                    TextView titulo = new TextView(context);
+                    titulo.setText(R.string.terapia_comentario_title);
+                    titulo.setGravity(Gravity.TOP);
+                    titulo.setPadding(50, 70, 30, 30);
+                    titulo.setTextSize(30);
+                    titulo.setTextColor(Color.parseColor("#163550"));
 
-                TextView titulo = new TextView(context);
-                titulo.setText(R.string.terapia_comentario_title);
-                titulo.setGravity(Gravity.TOP);
-                titulo.setPadding(50, 70, 30, 30);
-                titulo.setTextSize(30);
-                //titulo.setBackgroundColor(Color.WHITE);
-                titulo.setTextColor(Color.parseColor("#163550"));
+                    comentBuilder.setCustomTitle(titulo);
+                    comentBuilder.setMessage(R.string.terapia_comentario_descripcion);
+                    comentBuilder.setNegativeButton("Cancelar",null);
+                    comentBuilder.setPositiveButton("Guardar", null);
+                    comentBuilder.setView(vistaComent);
+                    final AlertDialog dialog = comentBuilder.create();
 
-                comentBuilder.setCustomTitle(titulo);
-                comentBuilder.setMessage(R.string.terapia_comentario_descripcion);
-                comentBuilder.setNegativeButton("Cancelar",null);
-                comentBuilder.setPositiveButton("Guardar", null);
-                comentBuilder.setView(vistaComent);
-                final AlertDialog dialog = comentBuilder.create();
-
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(final DialogInterface dialog) {
-                        Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                        boton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(!comentario.getText().toString().isEmpty()){
-                                    Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }else{
-                                    Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(final DialogInterface dialog) {
+                            holder.imgVComentario.setImageResource(R.drawable.comment_active);
+                            holder.imgVComentario.setImageResource(R.drawable.comment);
+                            Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                            boton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(!comentario.getText().toString().isEmpty()){
+                                        Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }else{
+                                        Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
 
 
-                dialog.show();
+                    dialog.show();
 
-                TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
-                Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                    TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
+                    Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
 
 
-                btnOk.setPadding(20,0,20,50);
-                btnCancel.setPadding(20,0,20,50);
+                    btnOk.setPadding(20,0,20,50);
+                    btnCancel.setPadding(20,0,20,50);
 
-                msmTxt.setTextSize(24);
-                btnOk.setTextSize(28);
-                btnCancel.setTextSize(28);
+                    msmTxt.setTextSize(24);
+                    btnOk.setTextSize(28);
+                    btnCancel.setTextSize(28);
 
-                /*btnCancelar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });*/
+                }
+
+                return true;
             }
         });
 
@@ -249,86 +242,81 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             }
         });
 
-        holder.imgVStop.setOnClickListener(new View.OnClickListener() {
+
+        holder.imgVStop.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                //ContextThemeWrapper ctw = new ContextThemeWrapper(v.getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
-                final AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
+            public boolean onTouch(View v, MotionEvent event) {
 
-                LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View vistaEvaluacion = li.inflate(R.layout.terapia_evaluacion, null);
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.imgVStop.setImageResource(R.drawable.finish_active);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVStop.setImageResource(R.drawable.finish);
 
-                //TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
-                final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
-                //TextView btnGuardar = (TextView) vistaEvaluacion.findViewById(R.id.txt_guardar);
-                //TextView btnCancelar = (TextView) vistaEvaluacion.findViewById(R.id.txt_cancelar);
+                    //ContextThemeWrapper ctw = new ContextThemeWrapper(v.getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+                    timeSwapBuff+=timeInMilliseconds;
+                    customHandler.removeCallbacks(updateTimerThread);
 
-                /*btnGuardar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(!comentario.getText().toString().isEmpty()){
-                            Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
+                    final AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
 
-                //comentBuilder.setTitle(R.string.terapia_evaluacion_title);
-                TextView titulo = new TextView(context);
-                titulo.setText(R.string.terapia_evaluacion_title);
-                titulo.setGravity(Gravity.TOP);
-                titulo.setPadding(50, 70, 30, 30);
-                titulo.setTextSize(30);
-                //titulo.setBackgroundColor(Color.WHITE);
-                titulo.setTextColor(Color.parseColor("#163550"));
+                    LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View vistaEvaluacion = li.inflate(R.layout.terapia_evaluacion, null);
 
-                comentBuilder.setCustomTitle(titulo);
-                comentBuilder.setMessage(R.string.terapia_evaluacion_descripcion);
-                comentBuilder.setNegativeButton("Cancelar",null);
-                comentBuilder.setPositiveButton("Guardar", null);//no se setea el listener aqui para poder cerrar el dialogo unicamente cuando ya se hayan validado todos los campos
-                comentBuilder.setView(vistaEvaluacion);
+                    //TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
+                    final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
+                    //TextView btnGuardar = (TextView) vistaEvaluacion.findViewById(R.id.txt_guardar);
+                    //TextView btnCancelar = (TextView) vistaEvaluacion.findViewById(R.id.txt_cancelar);
+
+                    //comentBuilder.setTitle(R.string.terapia_evaluacion_title);
+                    TextView titulo = new TextView(context);
+                    titulo.setText(R.string.terapia_evaluacion_title);
+                    titulo.setGravity(Gravity.TOP);
+                    titulo.setPadding(50, 70, 30, 30);
+                    titulo.setTextSize(30);
+                    //titulo.setBackgroundColor(Color.WHITE);
+                    titulo.setTextColor(Color.parseColor("#163550"));
+
+                    comentBuilder.setCustomTitle(titulo);
+                    comentBuilder.setMessage(R.string.terapia_evaluacion_descripcion);
+                    comentBuilder.setNegativeButton("Cancelar",null);
+                    comentBuilder.setPositiveButton("Guardar", null);//no se setea el listener aqui para poder cerrar el dialogo unicamente cuando ya se hayan validado todos los campos
+                    comentBuilder.setView(vistaEvaluacion);
 
 
-                final AlertDialog dialog = comentBuilder.create();
-                //TextView titulo = (TextView) dialog.findViewById(android.R.id.title);
-                //titulo.setTextSize(40);
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(final DialogInterface dialog) {
-                        Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                        boton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(!comentario.getText().toString().isEmpty()){
-                                    Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }else{
-                                    Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                    final AlertDialog dialog = comentBuilder.create();
+                    //TextView titulo = (TextView) dialog.findViewById(android.R.id.title);
+                    //titulo.setTextSize(40);
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(final DialogInterface dialog) {
+                            Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                            boton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(!comentario.getText().toString().isEmpty()){
+                                        Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }else{
+                                        Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-                    }
-                });
-                dialog.show();
+                            });
+                        }
+                    });
+                    dialog.show();
 
-                TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
-                Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                    TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
+                    Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
 
-                btnOk.setPadding(20,0,20,50);
-                btnCancel.setPadding(20,0,20,50);
+                    btnOk.setPadding(20,0,20,50);
+                    btnCancel.setPadding(20,0,20,50);
 
-                btnOk.setTextSize(28);
-                btnCancel.setTextSize(28);
-                msmTxt.setTextSize(24);
+                    btnOk.setTextSize(28);
+                    btnCancel.setTextSize(28);
+                    msmTxt.setTextSize(24);
+                }
 
-                /*btnCancelar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });*/
+                return true;
             }
         });
 
@@ -340,14 +328,21 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             }
         });
 
-        holder.imgVPause.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.imgVPause.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                startTime = SystemClock.uptimeMillis();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.imgVPause.setImageResource(R.drawable.pause_active);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVPause.setImageResource(R.drawable.pause);
 
-                customHandler.postDelayed(updateTimerThread, 0);
+                    startTime = SystemClock.uptimeMillis();
 
-                holder.imgVPause.setImageResource(R.drawable.pause_active);
+                    customHandler.postDelayed(updateTimerThread, 0);
+                }
+                return true;
             }
         });
 
