@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.transition.TransitionManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
@@ -48,6 +50,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     Context context;
     Activity activity;
+
+    private static final int CAMERA_PIC_REQUEST = 1337;
 
     //Typeface type = Typeface.createFromAsset(activity.getAssets(),"fonts/Montserrat-Regular.ttf");
 
@@ -238,7 +242,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             public void onClick(View v) {
                 Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 0);
             }
         });
 
@@ -320,11 +324,25 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             }
         });
 
-        holder.imgVCamara.setOnClickListener(new View.OnClickListener() {
+        /*holder.imgVCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                activity.startActivity(intent);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                activity.startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+            }
+        });*/
+
+        holder.imgVCamara.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.imgVCamara.setImageResource(R.drawable.picture_active);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVCamara.setImageResource(R.drawable.picture);
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activity.startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+                }
+                return true;
             }
         });
 
@@ -348,6 +366,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
 
     }
+
 
     @Override
     public int getItemCount() {
