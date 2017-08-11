@@ -1,5 +1,6 @@
 package reactiva.reactivamovil.fragments;
 
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,6 +50,9 @@ public class CalendarAppointmentFragment extends Fragment{
         TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
         String selected_date = getArguments().getString("selected_date", "");
         selected_date_txv.setText(selected_date);
+        //Se define la fuente
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
+        selected_date_txv.setTypeface(type);
         //Se define el ImageView
         ImageView calendar_close = (ImageView) v.findViewById(R.id.calendar_close_imv);
         calendar_close.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package reactiva.reactivamovil.adapters;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,10 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
             super(itemView);
             text_view_hour = (TextView) itemView.findViewById(R.id.calendar_hour_txv);
             text_view_patient = (TextView) itemView.findViewById(R.id.calendar_patient_txv);
+            //Se define la fuentes
+            Typeface type = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Montserrat-Regular.ttf");
+            text_view_patient.setTypeface(type);
+            text_view_hour.setTypeface(type);
         }
     }
 }

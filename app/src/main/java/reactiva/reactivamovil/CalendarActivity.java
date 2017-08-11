@@ -1,6 +1,7 @@
 package reactiva.reactivamovil;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,7 @@ import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
 public class CalendarActivity extends AppCompatActivity {
     FragmentTransaction ft, fte;
-    //CalendarAppointmentFragment calendarAppointmentFragment = CalendarAppointmentFragment.newInstance("ss");
-    //CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = new CalendarEmptyAppointmentFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,10 @@ public class CalendarActivity extends AppCompatActivity {
         final CalendarDecorator calendarDecorator = new CalendarDecorator();
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
+
+        final Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
+        calendar_month.setTypeface(type);
+        calendar_today.setTypeface(type);
 
         //Initialize Calendar DisplayMode in MONTHS
         materialCalendarView.state().edit()
