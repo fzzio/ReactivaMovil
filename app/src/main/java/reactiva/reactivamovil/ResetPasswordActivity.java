@@ -23,17 +23,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    final Typeface montR=Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
     Button btn_verificar_correo, btn_verificar_codigo,btn_restablecer_pass;
     LinearLayout layout_codigo,layout_new_password,layout_restablecer;
     String nombre;
     TextView txt_email,txt_nuevo_pass,txt_confirmar_pass,txt_digitos;
+    //String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
+    String url ="http://192.168.0.5:8081/ws/restablecer.php";
+    String url_login ="http://192.168.0.5:8081/ws/login.php";
     public String md5(String s) {
         try {
             // Create MD5 Hash
@@ -54,7 +59,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     public void verificarCorreo(){
-        String url ="http://192.168.0.5:8081/ws/restablecer.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -63,6 +67,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         if(!response.equals("")){
                             nombre=response;
                             layout_codigo.setVisibility(View.VISIBLE);
+                            btn_verificar_correo.setEnabled(false);
                         }else{
                             Toast.makeText(ResetPasswordActivity.this,"El correo proporcionado no esta en nuestro sistema",Toast.LENGTH_LONG).show();
                         }
@@ -90,7 +95,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         findViewById(R.id.layout_new_password).setVisibility(LinearLayout.VISIBLE);
     }
     public void verificarCodigo(){
-        String url ="http://192.168.0.5:8081/ws/restablecer.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -99,7 +103,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         if(response.equals("1")){
                             restablecerPass();
                         }else{
-                            Toast.makeText(ResetPasswordActivity.this,"El correo proporcionado no esta en nuestro sistema",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ResetPasswordActivity.this,"El código es incorrecto",Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -122,7 +126,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void nuevoPass(){
-        String url ="http://192.168.0.5/ws/restablecer.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -131,8 +134,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         if(response.equals("1")){
                             Intent i = new Intent(ResetPasswordActivity.this,VerPerfilActivity.class);
                             startActivity(i);
+                        }else{
+                            Toast.makeText(ResetPasswordActivity.this,"Error FATAL",Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(ResetPasswordActivity.this,"El correo proporcionado no esta en nuestro sistema",Toast.LENGTH_LONG).show();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -156,17 +161,24 @@ public class ResetPasswordActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void loginNuevoPass(){
-        String url ="http://192.168.0.5:8081/ws/login.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_login,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d("Response: ",response);
-                        if(response.equals("1")){
-                            Intent i = new Intent(ResetPasswordActivity.this,VerPerfilActivity.class);
-                            startActivity(i);
+                        try {
+                            JSONObject g = new JSONObject(response);
+                            if(g.get("event").toString().equals("1")){
+                                Intent i = new Intent(ResetPasswordActivity.this,VerPerfilActivity.class);
+                                startActivity(i);
+                            }else if(g.get("data").toString().equals("0")) {
+                                Toast.makeText(ResetPasswordActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(ResetPasswordActivity.this,"Error FATAL",Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        Toast.makeText(ResetPasswordActivity.this,"El correo proporcionado no esta en nuestro sistema",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -179,7 +191,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("nombre",nombre);
+                params.put("user",nombre);
                 String aConvertir=md5(txt_confirmar_pass.getText().toString().trim());
                 if (!aConvertir.isEmpty()){
                     params.put("pass",aConvertir);
@@ -192,6 +204,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Typeface montR=Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
