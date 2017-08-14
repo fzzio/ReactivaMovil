@@ -415,6 +415,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             imgVPause = (ImageButton) itemView.findViewById(R.id.imageViewPause);
             imgVCamara = (ImageButton) itemView.findViewById(R.id.imageViewGallery);
             imgVVerPerfil = (ImageButton) itemView.findViewById(R.id.imageViewViewTherapy);
+
+            Typeface type = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Montserrat-Regular.ttf");
+            txtNombre.setTypeface(type);
+            txtHora.setTypeface(type);
+            txtNombreDetalle.setTypeface(type);
+            txtEdadDetalle.setTypeface(type);
         }
     }
 
