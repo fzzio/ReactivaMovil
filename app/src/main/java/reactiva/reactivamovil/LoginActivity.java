@@ -2,6 +2,7 @@ package reactiva.reactivamovil;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,9 +19,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +32,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
 public class LoginActivity extends AppCompatActivity {
     EditText txt_email;
@@ -85,6 +90,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
+    ///METODOS
+
     public String md5(String s) {
         try {
             // Create MD5 Hash
@@ -103,14 +112,47 @@ public class LoginActivity extends AppCompatActivity {
         }
         return "";
     }
-    public void verificarLogin(){
+    public void verificarLogin() {
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        String url ="http://192.168.0.5:8081/ws/login.php";
-        //String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+        //String url ="http://192.168.0.5:8081/ws/login.php";
+        //final String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
+        final String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin?user=izurita&pass=21232f297a57a5a743894a0e4a801fc3";
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
+                new Response.Listener<JSONObject>() {
+
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
+                        //int event = parseJson(response);
+                        Log.d("Response", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.getMessage());
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("user", txt_email.getText().toString().trim());
+                        String aConvertir = md5(txt_password.getText().toString().trim());
+                        Log.d("password",aConvertir);
+                        if (!aConvertir.isEmpty()) {
+                            params.put("pass", aConvertir);
+                        }
+                        Log.d("antes de enviar",params.toString());
+                        return params;
+                    }
+        };
+
+        queue.add(postRequest);
+
+    }
+
+
+
+              /*      public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         Log.d("Response: ",response);
                         try {
@@ -147,6 +189,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
+        requestQueue.add(stringRequest);*/
+   // }
 }
