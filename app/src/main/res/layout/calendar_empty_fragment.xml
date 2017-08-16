@@ -50,33 +50,6 @@
             android:textColor="@color/colorMoradoOscuro"
             android:background="@color/colorMoradoOpaco"
             android:gravity="center|center_horizontal|center_vertical"
-            android:textSize="40sp"
-            />
-
-
-
-        <!--<android.support.v7.widget.RecyclerView
-            android:id="@+id/calendar_recycler_view"
-            android:layout_width="550dp"
-            android:layout_height="400dp"
-            android:layout_gravity="center"/>-->
-
-        <!--<TextView
-            android:layout_width="525dp"
-            android:layout_height="455dp"
-            android:text=" NO HAY CITAS\nPROGRAMADAS"
-            android:gravity="center"
-            android:background="#6f608b"
-            android:textColor="#ffffff"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:textSize="24sp"
-            android:id="@+id/cita"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="400dp" />-->
-
+            android:textSize="40sp" />
     </LinearLayout>
 </FrameLayout>

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
 import reactiva.reactivamovil.CalendarActivity;
 import reactiva.reactivamovil.R;
 
@@ -40,16 +42,6 @@ public class CalendarEmptyAppointmentFragment extends Fragment{
         Typeface type_bold = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Bold.ttf");
         empty_selected_date_txv.setTypeface(type);
         empty_appointment_txv.setTypeface(type_bold);
-        //Se define el ImageView
-        ImageView calendar_empty_close = (ImageView) v.findViewById(R.id.calendar_empty_close_imv);
-        calendar_empty_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalendarActivity calendarActivity = (CalendarActivity) getActivity();
-                calendarActivity.removeCalendarEmptyAppointmentFragment();
-                calendarActivity.removeCalendarAppointmentFragment();
-            }
-        });
         return v;
     }
 }

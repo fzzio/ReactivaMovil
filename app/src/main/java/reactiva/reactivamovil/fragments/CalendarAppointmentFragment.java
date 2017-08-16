@@ -53,16 +53,6 @@ public class CalendarAppointmentFragment extends Fragment{
         //Se define la fuente
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
         selected_date_txv.setTypeface(type);
-        //Se define el ImageView
-        ImageView calendar_close = (ImageView) v.findViewById(R.id.calendar_close_imv);
-        calendar_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalendarActivity calendarActivity = (CalendarActivity) getActivity();
-                calendarActivity.removeCalendarEmptyAppointmentFragment();
-                calendarActivity.removeCalendarAppointmentFragment();
-            }
-        });
         return v;
     }
 

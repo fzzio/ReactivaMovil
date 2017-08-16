@@ -3,12 +3,17 @@ package reactiva.reactivamovil;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +21,11 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+
 import java.util.Calendar;
 
+import reactiva.reactivamovil.classes.OnSwipeTouchListener;
 import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
 import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
@@ -27,7 +35,7 @@ import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
 public class CalendarActivity extends AppCompatActivity {
     FragmentTransaction ft, fte;
-
+    private boolean closed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,8 @@ public class CalendarActivity extends AppCompatActivity {
         final CalendarDecorator calendarDecorator = new CalendarDecorator();
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
+        final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
+        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.appointmentContainer);
 
         final Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
         calendar_month.setTypeface(type);
@@ -48,16 +58,110 @@ public class CalendarActivity extends AppCompatActivity {
                 .setFirstDayOfWeek(Calendar.MONDAY)
                 .setMinimumDate(CalendarDay.from(1900, 1, 1))
                 .setMaximumDate(CalendarDay.from(2100, 12, 31))
-                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .setCalendarDisplayMode(CalendarMode.WEEKS)
                 .commit();
 
-        //initialize CalendarDecorator
+        //Initialize CalendarDecorator
         materialCalendarView.addDecorator(calendarDecorator);
         materialCalendarView.setTopbarVisible(false);
         //Initialize Dynamic Month Label
         CalendarDay day = materialCalendarView.getCurrentDate();
         int month_label = day.getMonth();
         calendar_month.setText(current_month(month_label));
+
+        //Initialize MaterialCalendarView
+        initializeMaterialCalendarView(materialCalendarView, calendar_today, calendar_month, calendar_closed);
+
+        //Every time that the materialCalendarView isSwipe do the following peace of code
+        materialCalendarView.setOnTouchListener(new OnSwipeTouchListener(CalendarActivity.this) {
+            public void onSwipeRight() {
+                //Toast.makeText(CalendarActivity.this, "right", Toast.LENGTH_SHORT).show();
+                Calendar this_date = materialCalendarView.getSelectedDate().getCalendar();
+                this_date.add(Calendar.DATE, -1);
+                materialCalendarView.setSelectedDate(this_date);
+                if (isAppointment(materialCalendarView.getSelectedDate())){
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                } else {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                }
+                //Update Calendar DisplayMode to MONTHS
+                materialCalendarView.state().edit()
+                        .setCalendarDisplayMode(CalendarMode.WEEKS)
+                        .commit();
+                //Update Dynamic Month Label
+                CalendarDay day = materialCalendarView.getSelectedDate();
+                int month_label = day.getMonth();
+                calendar_month.setText(current_month(month_label));
+                //Appointments Verify
+                CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                if (isAppointment(selected_date)) {
+                    //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                    removeCalendarEmptyAppointmentFragment();
+                } else {
+                    // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                    removeCalendarAppointmentFragment();
+                }
+            }
+
+            public void onSwipeLeft() {
+                //Toast.makeText(CalendarActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Calendar this_date = materialCalendarView.getSelectedDate().getCalendar();
+                this_date.add(Calendar.DATE, 1);
+                materialCalendarView.setSelectedDate(this_date);
+                if (isAppointment(materialCalendarView.getSelectedDate())){
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                } else {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                }
+                //Update Calendar DisplayMode to MONTHS
+                materialCalendarView.state().edit()
+                        .setCalendarDisplayMode(CalendarMode.WEEKS)
+                        .commit();
+                //Update Dynamic Month Label
+                CalendarDay day = materialCalendarView.getSelectedDate();
+                int month_label = day.getMonth();
+                calendar_month.setText(current_month(month_label));
+                //Appointments Verify
+                CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                if (isAppointment(selected_date)) {
+                    //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                    removeCalendarEmptyAppointmentFragment();
+                } else {
+                    // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                    removeCalendarAppointmentFragment();
+                }
+            }
+        });
+
+        //Every time when OnClickListener hear something on ImageView
+        calendar_closed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Update Today's Style
+                calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                //Update Calendar DisplayMode to WEEKS
+                materialCalendarView.state().edit()
+                        .setCalendarDisplayMode(CalendarMode.MONTHS)
+                        .commit();
+                //SelectedDate is changed to null
+                CalendarDay empty_date = null;
+                materialCalendarView.setSelectedDate(empty_date);
+                //Remove fragments
+                removeCalendarEmptyAppointmentFragment();
+                removeCalendarAppointmentFragment();
+                //Change visibility
+                calendar_closed.setVisibility(View.GONE);
+            }
+        });
+
 
         //Every time when OnDateChangedListener hear something DisplayMode is changed to WEEKS
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -82,11 +186,11 @@ public class CalendarActivity extends AppCompatActivity {
                 CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 if (isAppointment(selected_date)) {
                     //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarAppointmentFragment(dateFormatter(selected_date));
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                     removeCalendarEmptyAppointmentFragment();
                 } else {
                    // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date));
+                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                     removeCalendarAppointmentFragment();
                 }
             }
@@ -113,7 +217,7 @@ public class CalendarActivity extends AppCompatActivity {
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     if (isAppointment(selected_date)) {
                         //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                        displayCalendarAppointmentFragment(dateFormatter(selected_date));
+                        displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                         removeCalendarEmptyAppointmentFragment();
                     }
                 }
@@ -139,6 +243,8 @@ public class CalendarActivity extends AppCompatActivity {
                 //Remove fragments
                 removeCalendarEmptyAppointmentFragment();
                 removeCalendarAppointmentFragment();
+                //Change visibility
+                calendar_closed.setVisibility(View.GONE);
             }
         });
 
@@ -178,10 +284,40 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     /**
+     * Use this method to initialize MaterialCalendarView
+     * @return void
+     */
+    public void initializeMaterialCalendarView(MaterialCalendarView materialCalendarView, TextView calendar_today, TextView calendar_month, ImageView calendar_closed){
+        if(isSelectedDateNull(materialCalendarView.getSelectedDate()) && !isAppointment(materialCalendarView.getSelectedDate())) {
+            //Update Today's Style
+            calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+            //SetSelectedDate to CurrentDate
+            materialCalendarView.setSelectedDate(CalendarDay.today());
+            //Update Calendar DisplayMode to WEEKS
+            materialCalendarView.state().edit()
+                    .setCalendarDisplayMode(CalendarMode.WEEKS)
+                    .commit();
+            //Update Dynamic Month Label
+            CalendarDay day = materialCalendarView.getSelectedDate();
+            int month_label = day.getMonth();
+            calendar_month.setText(current_month(month_label));
+            //Appointments Verify
+            CalendarDay selected_date = materialCalendarView.getSelectedDate();
+            if (isAppointment(selected_date)) {
+                //Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                removeCalendarEmptyAppointmentFragment();
+            }
+        }
+    }
+
+    /**
      * Use this method to display the CalendarAppointmentFragment
      * @return void
      */
-    public void displayCalendarAppointmentFragment(String selected_date) {
+    public void displayCalendarAppointmentFragment(String selected_date, ImageView calendar_closed) {
+        //Change Visibility
+        calendar_closed.setVisibility(View.VISIBLE);
         //Fragment Instance
         CalendarAppointmentFragment calendarAppointmentFragment = CalendarAppointmentFragment.newInstance(selected_date);
         //Begin of the transaction
@@ -211,7 +347,9 @@ public class CalendarActivity extends AppCompatActivity {
      * Use this method to display the CalendarEmptyAppointmentFragment
      * @return void
      */
-    public void displayCalendarEmptyAppointmentFragment(String selected_date) {
+    public void displayCalendarEmptyAppointmentFragment(String selected_date, ImageView calendar_closed) {
+        //Change Visibility
+        calendar_closed.setVisibility(View.VISIBLE);
         //Fragment Instance
         CalendarEmptyAppointmentFragment calendarEmptyAppointmentFragment = CalendarEmptyAppointmentFragment.newInstance(selected_date);
         //Begin of the transaction
@@ -288,6 +426,21 @@ public class CalendarActivity extends AppCompatActivity {
                 "Jueves", "Viernes",
                 "Sábado"};
         return week_array[week-1];
+    }
+
+    /** Use this method to get closed value
+     *  @return true if closed have been clicked
+     *          false otherwise
+     */
+    public boolean isClosed() {
+        return closed;
+    }
+
+    /** Use this method to set closed value
+     *  @param  closed the boolean value
+     */
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 
     /** Use this set of methods for menu management
