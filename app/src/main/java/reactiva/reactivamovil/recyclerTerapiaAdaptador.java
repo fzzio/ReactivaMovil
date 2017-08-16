@@ -241,8 +241,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(activity,BitacoraTerapia.class);
-                activity.startActivityForResult(intent, 0);
+                Intent intent = new Intent(activity,CalendarActivity.class);
+                activity.startActivityForResult(intent, 10);
+
             }
         });
 
@@ -352,9 +353,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVPause.setImageResource(R.drawable.pause_active);
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
                     holder.imgVPause.setImageResource(R.drawable.pause);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVPause.setImageResource(R.drawable.pause_active);
 
                     startTime = SystemClock.uptimeMillis();
 
