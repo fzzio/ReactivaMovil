@@ -1,14 +1,19 @@
 package reactiva.reactivamovil.adapters;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import reactiva.reactivamovil.BitacoraTerapia;
 import reactiva.reactivamovil.R;
 import reactiva.reactivamovil.classes.Appointment;
 
@@ -39,6 +44,15 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
 
         holder.text_view_hour.setText(hour);
         holder.text_view_patient.setText(patient);
+
+        holder.text_view_patient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Activity activity = (Activity) v.getContext();
+                Intent intent = new Intent(activity,BitacoraTerapia.class);
+                activity.startActivityForResult(intent, 0);
+            }
+        });
     }
 
     @Override
