@@ -26,7 +26,7 @@
                 android:text="Viernes, 1 jul. 2017"
                 android:textColor="@color/colorMoradoMedio"
                 android:textStyle="normal"
-                android:textSize="14dp"
+                android:textSize="18dp"
                 android:layout_alignParentBottom="true" />
 
             <ImageView
@@ -49,7 +49,7 @@
             android:text=" NO HAY CITAS\nPROGRAMADAS"
             android:textColor="@color/colorMoradoOscuro"
             android:background="@color/colorMoradoOpaco"
-            android:gravity="center|center_horizontal|center_vertical"
+            android:gravity="center"
             android:textSize="40sp" />
     </LinearLayout>
 </FrameLayout>
