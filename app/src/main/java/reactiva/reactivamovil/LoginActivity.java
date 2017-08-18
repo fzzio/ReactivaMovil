@@ -116,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         //String url ="http://192.168.0.5:8081/ws/login.php";
         //final String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
+
+
         final String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin?user=izurita&pass=21232f297a57a5a743894a0e4a801fc3";
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
