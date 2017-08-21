@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void verificarLogin(){
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        String url ="http://192.168.0.5:8081/ws/login.php";
-        //String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
+        //String url ="http://192.168.0.5:8081/ws/login.php";
+        String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
