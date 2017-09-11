@@ -25,7 +25,7 @@ public class ItemTerapiaView {
     private int ver_perfil;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
-    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil) {
+    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<Integer> extremidades_pic) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
@@ -39,6 +39,7 @@ public class ItemTerapiaView {
         this.btn_camara = btn_camara;
         this.btn_pause_detail = btn_pausa;
         this.ver_perfil = ver_perfil;
+        this.extremidades_pic = extremidades_pic;
         this.estado = false;
     }
 

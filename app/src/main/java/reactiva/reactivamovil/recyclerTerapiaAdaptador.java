@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 /**
@@ -91,6 +92,10 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.imgVStop.setImageResource(listaTerapias.get(position).getBtn_stop());
         holder.imgVPause.setImageResource(listaTerapias.get(position).getBtn_pause_detail());
         holder.imgVCamara.setImageResource(listaTerapias.get(position).getBtn_camara());
+
+        //holder.imgExtremidad1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
+        //holder.imgExtremidadDetalle1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
+        cargarExtremidades(listaTerapias.get(position).getExtremidades_pic(), holder);
 
         holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
 
@@ -364,7 +369,390 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             }
         });
 
+        holder.imgExtremidadDetalle1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Extremidad 1", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+    }
+
+    public void cargarExtremidades(ArrayList<Integer> lstExtremidades, TerapiaViewHolder holder){
+
+        for(int i=0;i<lstExtremidades.size();i++){
+            if(lstExtremidades.get(i)==0){
+                //cargar brazo der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_brazo_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_brazo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_brazo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_brazo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_brazo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_der);
+                }
+            }else if(lstExtremidades.get(i)==1){
+                //brazo izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_brazo_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_izq);
+
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_brazo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_brazo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_brazo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_brazo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_brazo_izq);
+                }
+            }else if(lstExtremidades.get(i)==2){
+                //cadera
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_cadera);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cadera);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_cadera);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cadera);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_cadera);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cadera);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_cadera);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cadera);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_cadera);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cadera);
+                }
+            }else if(lstExtremidades.get(i)==3){
+                //codo der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_codo_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_codo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_codo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_codo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_codo_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_der);
+                }
+            }else if(lstExtremidades.get(i)==4){
+                //codo izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_codo_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_izq);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_codo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_codo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_codo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_codo_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_codo_izq);
+                }
+            }else if(lstExtremidades.get(i)==5){
+                //columna
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_columna);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_columna);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_columna);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_columna);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_columna);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_columna);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_columna);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_columna);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_columna);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_columna);
+                }
+            }else if(lstExtremidades.get(i)==6){
+                //cuello
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_cuello_cabeza);
+                }
+            }else if(lstExtremidades.get(i)==7){
+                //espalda
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_espalda);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_espalda);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_espalda);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_espalda);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_espalda);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_espalda);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_espalda);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_espalda);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_espalda);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_espalda);
+                }
+            }else if(lstExtremidades.get(i)==8){
+                //mano der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_mano_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_mano_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_mano_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_mano_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_mano_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_der);
+                }
+            }else if(lstExtremidades.get(i)==9){
+                //mano izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_mano_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_izq);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_mano_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_mano_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_mano_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_mano_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_mano_izq);
+                }
+            }else if(lstExtremidades.get(i)==10){
+                //pie der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_pie_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_pie_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_pie_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_pie_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_pie_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_der);
+                }
+            }else if(lstExtremidades.get(i)==11){
+                //pie izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_pie_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_izq);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_pie_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_pie_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_pie_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_pie_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pie_izq);
+                }
+            }else if(lstExtremidades.get(i)==12){
+                //pierna der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_pierna_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_pierna_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_pierna_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_pierna_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_pierna_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_der);
+                }
+            }else if(lstExtremidades.get(i)==13){
+                //pierna izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_pierna_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_pierna_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_pierna_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_pierna_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_pierna_izq);
+                }
+            }else if(lstExtremidades.get(i)==14){
+                //talon der
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_talon_der);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_der);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_talon_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_der);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_talon_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_der);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_talon_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_der);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_talon_der);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_der);
+                }
+            }else if(lstExtremidades.get(i)==15) {
+                //talon izq
+                if(i==0){
+                    holder.imgExtremidad1.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad1.setImageResource(R.drawable.cuerpo_talon_izq);
+                    holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_izq);
+                }else if(i==1){
+                    holder.imgExtremidad2.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad2.setImageResource(R.drawable.cuerpo_talon_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_izq);
+                }else if(i==2){
+                    holder.imgExtremidad3.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad3.setImageResource(R.drawable.cuerpo_talon_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_izq);
+                }else if(i==3){
+                    holder.imgExtremidad4.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad4.setImageResource(R.drawable.cuerpo_talon_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_izq);
+                }else if(i==4){
+                    holder.imgExtremidad5.setVisibility(View.VISIBLE);
+                    holder.imgExtremidad5.setImageResource(R.drawable.cuerpo_talon_izq);
+                    //holder.imgExtremidadDetalle1.setImageResource(R.drawable.cuerpo_talon_izq);
+                }
+            }
+        }
     }
 
 
@@ -383,6 +771,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     }*/
 
     public static class TerapiaViewHolder extends RecyclerView.ViewHolder{
+        //TextView txt_terapias_activas;
+        //TextView txt_titulo_terapias;
+
         ImageView profile_pic;
         ImageView profile_pic_detalle;
         TextView txtNombre;
@@ -397,10 +788,20 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         ImageButton imgVCamara;
         ImageButton imgVVerPerfil;
 
+        ImageView imgExtremidad1;
+        ImageView imgExtremidad2;
+        ImageView imgExtremidad3;
+        ImageView imgExtremidad4;
+        ImageView imgExtremidad5;
+        ImageView imgExtremidadDetalle1;
+
         //TextView txtSalaDetalle;
 
         public TerapiaViewHolder(View itemView) {
             super(itemView);
+
+            //txt_terapias_activas = (TextView) itemView.findViewById(R.id.txt_terapias_activas_count);
+            //txt_titulo_terapias = (TextView) itemView.findViewById(R.id.txt_titulo_terapias);
             profile_pic = (ImageView) itemView.findViewById(R.id.image_profile_pic);
             txtNombre = (TextView) itemView.findViewById(R.id.txtName);
             //txtTemporizador = (TextView) itemView.findViewById(R.id.txt_temporizador);
@@ -416,11 +817,22 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             imgVCamara = (ImageButton) itemView.findViewById(R.id.imageViewGallery);
             imgVVerPerfil = (ImageButton) itemView.findViewById(R.id.imageViewViewTherapy);
 
+            imgExtremidad1 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad1);
+            imgExtremidad2 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad2);
+            imgExtremidad3 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad3);
+            imgExtremidad4 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad4);
+            imgExtremidad5 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad5);
+
+            imgExtremidadDetalle1 = (ImageView) itemView.findViewById(R.id.imgViewExtDetalle1);
+
             Typeface type = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Montserrat-Regular.ttf");
             txtNombre.setTypeface(type);
             txtHora.setTypeface(type);
             txtNombreDetalle.setTypeface(type);
             txtEdadDetalle.setTypeface(type);
+
+            //txt_titulo_terapias.setTypeface(type);
+            //txt_terapias_activas.setTypeface(type);
         }
     }
 

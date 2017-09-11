@@ -48,6 +48,8 @@
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
             android:textSize="32sp"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.552"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -75,93 +77,68 @@
 
         <ImageView
             android:id="@+id/imageViewExtremidad1"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/cuerpo_brazo_der"
-            android:layout_marginLeft="150dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintVertical_bias="0.627"
             app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad2"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.967"
-            android:layout_marginStart="150dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintHorizontal_bias="0.967" />
 
         <ImageView
             android:id="@+id/imageViewExtremidad2"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/cuerpo_brazo_der"
-            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintVertical_bias="0.627"
             app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad3"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintHorizontal_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageViewExtremidad3"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/cuerpo_brazo_der"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintVertical_bias="0.627"
-            app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad4"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad4" />
 
         <ImageView
             android:id="@+id/imageViewExtremidad4"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/cuerpo_brazo_der"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintVertical_bias="0.627"
-            app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad5"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintRight_toLeftOf="@+id/imageViewExtremidad5" />
 
         <ImageView
             android:id="@+id/imageViewExtremidad5"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/cuerpo_brazo_der"
-            android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="0.759"
-            app:layout_constraintVertical_bias="0.627"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintVertical_bias="0.627" />
 
         <!--<TextView
             android:id="@+id/txtName"
@@ -216,7 +193,7 @@
 
         <TextView
             android:id="@+id/txt_hora"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintVertical_bias="0.05"
@@ -231,8 +208,8 @@
 
         <ImageView
             android:id="@+id/imageViewProfile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="85dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="parent"
@@ -323,7 +300,7 @@
 
         <TextView
             android:id="@+id/txtNameDetalle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
             android:textAlignment="center"
@@ -338,7 +315,7 @@
 
         <TextView
             android:id="@+id/txtEdadDetalle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="260dp"
             android:textAlignment="center"
@@ -368,8 +345,8 @@
 
         <ImageView
             android:id="@+id/imgViewExtDetalle1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="313dp"
             android:layout_marginLeft="130dp"
             android:layout_marginBottom="20dp"
@@ -384,8 +361,8 @@
 
         <ImageView
             android:id="@+id/imgViewExtDetalle2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="313dp"
             android:layout_marginLeft="200dp"
             android:layout_marginBottom="20dp"
@@ -400,8 +377,8 @@
 
         <ImageView
             android:id="@+id/imgViewExtDetalle3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="313dp"
             android:layout_marginLeft="270dp"
             android:layout_marginBottom="20dp"
@@ -416,8 +393,8 @@
 
         <ImageView
             android:id="@+id/imgViewExtDetalle4"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="313dp"
             android:layout_marginLeft="340dp"
             android:layout_marginBottom="20dp"
@@ -432,8 +409,8 @@
 
         <ImageView
             android:id="@+id/imgViewExtDetalle5"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginTop="313dp"
             android:layout_marginLeft="410dp"
             android:layout_marginBottom="20dp"

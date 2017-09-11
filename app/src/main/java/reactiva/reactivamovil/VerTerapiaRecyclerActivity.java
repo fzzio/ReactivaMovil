@@ -83,7 +83,11 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                 new ItemTerapiaView(R.drawable.profile_f,"Susana Carrasco","00:17:13", "00:17:13", "Susana Carrasco", "44 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy),
                 new ItemTerapiaView(R.drawable.profile_f,"Estefania Loor","00:19:22", "00:19:22", "Estefania Loor", "33 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy));*/
         List<ItemTerapiaView> listaTerapias = Arrays.asList();
-        ItemTerapiaView terapia = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy);
+        ArrayList<Integer> listaExtremidades= new ArrayList<Integer>();
+        listaExtremidades.add(12);
+        listaExtremidades.add(0);
+        listaExtremidades.add(2);
+        ItemTerapiaView terapia = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy, listaExtremidades);
         final List<ItemTerapiaView> list = new ArrayList<ItemTerapiaView>(Arrays.asList(terapia));
         //list.add(terapia);
         //listaTerapias.add(terapia);
@@ -97,16 +101,30 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                     try {
                         JSONObject paciente = response.getJSONObject(i).getJSONObject("info");
                         //JSONObject pacienteExtremidades = response.getJSONObject(i).getJSONObject("limbs");
+                        JSONArray pacienteExtremidades = response.getJSONObject(i).getJSONArray("limbs");
                         String nombre = paciente.getString("fullname");
                         String edad = paciente.getString("age");
                         String genero = paciente.getString("gender");
+
+                        ArrayList<Integer> lstExtremidades = new ArrayList<Integer>();
+
+                        for(int j =0;j<pacienteExtremidades.length();j++){
+                            Log.d("Extremidad detalle: ",pacienteExtremidades.getJSONObject(j).get("id_limb").toString());
+                            int extre = pacienteExtremidades.getJSONObject(j).getInt("id_limb");
+                            System.out.print(extre);
+                            lstExtremidades.add(extre);
+                        }
                         //String info = paciente.getString("info");
 
                         Log.d("NombrePaciente: ",nombre);
                         Log.d("edadPaciente: ",edad);
                         Log.d("generoPaciente: ",genero);
+                        Log.d("Extremidades: ",pacienteExtremidades.toString());
 
-                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy);
+
+
+
+                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy, lstExtremidades);
 
                         //listaTerapias.add(i, pctTerap);
                         list.add(pctTerap);
@@ -121,7 +139,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                 rv.setAdapter(Adaptador);*/
 
                 TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
-                contador.setText(list.size() + " terapias activas");
+                contador.setText(list.size() + " activas");
                 ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
                 TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
                 if(list.size() <= 0)
@@ -271,7 +289,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         });
     }
 
-    public void loadTerapiaJson(final List<ItemTerapiaView> listaTerapias){
+    /*public void loadTerapiaJson(final List<ItemTerapiaView> listaTerapias){
         RequestQueue queue = Volley.newRequestQueue(VerTerapiaRecyclerActivity.this);
         String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyGet";
         //final List<ItemTerapiaView> listaTerapias = Arrays.asList();
@@ -303,7 +321,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                         Log.d("NombrePaciente: ",nombre);
                         Log.d("edadPaciente: ",edad);
 
-                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "", "", nombre, edad, R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy);
+                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "", "", nombre, edad, R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy, new ArrayList<Integer>());
 
                         //listaTerapias.add(i, pctTerap);
                         listaTerapias.add(pctTerap);
@@ -328,6 +346,6 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
 
         //return listaTerapias;
-    }
+    }*/
 
 }
