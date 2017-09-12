@@ -62,16 +62,16 @@ public class CalendarAppointmentFragment extends Fragment{
      */
     public void appointmentListBuilder() {
         appointmentList.removeAll(appointmentList);
-        appointmentList.add(new Appointment("Nadia", "Pezantes Hermenjildo", "7:00 AM"));
-        appointmentList.add(new Appointment("Ángel", "Peña García", "8:15 AM"));
-        appointmentList.add(new Appointment("Pablo", "Peñafiel Guerrero", "8:30 AM"));
-        appointmentList.add(new Appointment("Erasmo", "Pesantes De Los Monteros", "9:45 AM"));
-        appointmentList.add(new Appointment("Fabricio", "Perero Aguirre", "10:00 AM"));
-        appointmentList.add(new Appointment("María", "Pesantes Maduro", "11:15 AM"));
-        appointmentList.add(new Appointment("Luz", "Piedrahita Reyes", "12:00 PM"));
-        appointmentList.add(new Appointment("Mario", "Peréz Contreras", "12:50 PM"));
-        appointmentList.add(new Appointment("Michelle", "Espinoza Martinez", "1:00 PM"));
-        appointmentList.add(new Appointment("Henry", "Ascensio Lomas", "2:00 PM"));
+        appointmentList.add(new Appointment("Nadia", " Pezantes Hermenjildo", "7:00 AM"));
+        appointmentList.add(new Appointment("Ángel", " Peña García", "8:15 AM"));
+        appointmentList.add(new Appointment("Pablo", " Peñafiel Guerrero", "8:30 AM"));
+        appointmentList.add(new Appointment("Erasmo", " Pesantes De Los Monteros", "9:45 AM"));
+        appointmentList.add(new Appointment("Fabricio", " Perero Aguirre", "10:00 AM"));
+        appointmentList.add(new Appointment("María", " Pesantes Maduro", "11:15 AM"));
+        appointmentList.add(new Appointment("Luz", " Piedrahita Reyes", "12:00 PM"));
+        appointmentList.add(new Appointment("Mario", " Peréz Contreras", "12:50 PM"));
+        appointmentList.add(new Appointment("Michelle", " Espinoza Martinez", "1:00 PM"));
+        appointmentList.add(new Appointment("Henry", " Ascensio Lomas", "2:00 PM"));
     }
 
     public void appointmentAdapterBuilder(){
