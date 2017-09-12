@@ -19,11 +19,11 @@ import java.util.Date;
  * Decorate a day by making the text big and bold
  */
 
-public class OneDayDecorator implements DayViewDecorator {
+public class TodayDecorator implements DayViewDecorator {
 
     private CalendarDay date;
 
-    public OneDayDecorator() {
+    public TodayDecorator() {
         date = CalendarDay.today();
     }
 

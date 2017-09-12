@@ -1,32 +1,24 @@
 package reactiva.reactivamovil;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.util.Calendar;
 
 import reactiva.reactivamovil.classes.OnSwipeTouchListener;
-import reactiva.reactivamovil.decorators.OneDayDecorator;
+import reactiva.reactivamovil.decorators.MonserratDecorator;
+import reactiva.reactivamovil.decorators.TodayDecorator;
 import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
 import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
@@ -45,8 +37,8 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.calendar_activity);
 
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        //final CalendarDecorator calendarDecorator = new CalendarDecorator();
-        final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+        final TodayDecorator todayDecorator = new TodayDecorator();
+        final MonserratDecorator monserratDecorator = new MonserratDecorator(this);
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
@@ -65,8 +57,8 @@ public class CalendarActivity extends AppCompatActivity {
                 .commit();
 
         //Initialize CalendarDecorator
-        //materialCalendarView.addDecorator(calendarDecorator);
-        materialCalendarView.addDecorator(oneDayDecorator);
+        materialCalendarView.addDecorators(todayDecorator, monserratDecorator);
+        //Initialize Top barVisible
         materialCalendarView.setTopbarVisible(false);
         //Initialize Dynamic Month Label
         CalendarDay day = materialCalendarView.getCurrentDate();
