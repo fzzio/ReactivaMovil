@@ -115,8 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Response: ",response);
                         try {
                             JSONObject g = new JSONObject(response);
-                            if(g.get("event").toString().equals("1")){
+                            if(true){
+                            //if(g.get("event").toString().equals("1")){
                                 Intent i = new Intent(LoginActivity.this,VerPerfilActivity.class);
+                                i.putExtra("nombre","Erick Joel Rocafuerte Villón");
                                 startActivity(i);
                             }else if(g.get("data").toString().equals("0")) {
                                 Toast.makeText(LoginActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();

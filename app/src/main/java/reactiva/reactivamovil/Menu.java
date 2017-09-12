@@ -1,5 +1,7 @@
 package reactiva.reactivamovil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.zip.Inflater;
 
@@ -25,10 +28,98 @@ public class Menu extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.top_menu);
-        funcionalidades();
+
     }
-    public boolean menu_activo(){
-        LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
+    public static void funciones_del_menu(Activity act, String nombre, String clase){
+        TextView lbl_welcome=(TextView)act.findViewById(R.id.lbl_welcome);
+        lbl_welcome.setText("¡Hola, "+nombre+"!");
+        Menu.clicks_del_menu(act,nombre,clase);
+        activar_menu(act);
+        LinearLayout lyt_menu=(LinearLayout)act.findViewById(R.id.lyt_menu);
+        lyt_menu.setVisibility(LinearLayout.GONE);
+    }
+
+    /** Use this set of methods for menu management
+     *  @return void
+     */
+    private static void clicks_del_menu(final Activity act,final String nombre,String clase){
+        final ImageButton btn_calendario=(ImageButton)act.findViewById(R.id.btn_calendario);
+        final ImageButton btn_terapias = (ImageButton)act.findViewById(R.id.btn_terapias);
+        final ImageButton btn_paciente=(ImageButton)act.findViewById(R.id.btn_paciente);
+        final ImageButton btn_historial=(ImageButton)act.findViewById(R.id.btn_historial);
+        final ImageButton btn_perfil=(ImageButton)act.findViewById(R.id.btn_perfil);
+        //verPerfil, verCalendario,verTerapia,verHistorial
+        if(clase == "verCalendario"){
+            btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda_activo));
+            btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
+            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
+            btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
+            btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
+        }else if(clase == "verTerapias"){
+            btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
+            btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia_activo));
+            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
+            btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
+            btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
+        }else if(clase == "verPerfil"){
+            btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
+            btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
+            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente_activo));
+            btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
+            btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
+        }else if(clase == "verHistorial"){
+            btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
+            btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
+            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
+            btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial_activo));
+            btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
+        }
+        btn_terapias.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(act, VerTerapiaRecyclerActivity.class);
+                intent.putExtra("nombre",nombre);
+                act.startActivity(intent);
+            }
+        });
+        btn_calendario.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(act, CalendarActivity.class);
+                intent.putExtra("nombre",nombre);
+                act.startActivity(intent);
+            }
+        });
+        btn_paciente.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(act, VerTerapiaRecyclerActivity.class);
+                intent.putExtra("nombre",nombre);
+                act.startActivity(intent);
+            }
+        });
+        btn_historial.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(act, VerHistorialTerapias.class);
+                intent.putExtra("nombre",nombre);
+                act.startActivity(intent);
+            }
+        });
+        btn_perfil.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(act, LoginActivity.class);
+                act.startActivity(intent);
+            }
+        });
+    }
+
+    /** Use this set of methods for menu management
+     *  @return void
+     */
+    public static boolean menu_activo(Activity act){
+        LinearLayout lyt_menu=(LinearLayout)act.findViewById(R.id.lyt_menu);
         int dato= lyt_menu.getVisibility();
         if(dato==LinearLayout.VISIBLE){
             return true;
@@ -36,18 +127,22 @@ public class Menu extends AppCompatActivity{
             return false;
         }
     }
-    public void funcionalidades(){
-        final ImageButton btn_oc=(ImageButton)findViewById(R.id.btn_oc);
+
+    /** Use this set of methods for menu management
+     *  @return void
+     */
+    private static void activar_menu(final Activity act) {
+        final ImageButton btn_oc=(ImageButton)act.findViewById(R.id.btn_oc);
         btn_oc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-                if(menu_activo()){
+                LinearLayout lyt_menu=(LinearLayout)act.findViewById(R.id.lyt_menu);
+                if(menu_activo(act)){
                     lyt_menu.setVisibility(LinearLayout.GONE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu));
+                    btn_oc.setImageDrawable(act.getDrawable(R.drawable.menu));
                 }else {
                     lyt_menu.setVisibility(LinearLayout.VISIBLE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu_close));
+                    btn_oc.setImageDrawable(act.getDrawable(R.drawable.menu_close));
                 }
             }
         });
