@@ -26,6 +26,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import java.util.Calendar;
 
 import reactiva.reactivamovil.classes.OnSwipeTouchListener;
+import reactiva.reactivamovil.decorators.OneDayDecorator;
 import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
 import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
@@ -43,7 +44,8 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.calendar_activity);
 
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        final CalendarDecorator calendarDecorator = new CalendarDecorator();
+        //final CalendarDecorator calendarDecorator = new CalendarDecorator();
+        final OneDayDecorator oneDayDecorator = new OneDayDecorator();
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
@@ -62,7 +64,8 @@ public class CalendarActivity extends AppCompatActivity {
                 .commit();
 
         //Initialize CalendarDecorator
-        materialCalendarView.addDecorator(calendarDecorator);
+        //materialCalendarView.addDecorator(calendarDecorator);
+        materialCalendarView.addDecorator(oneDayDecorator);
         materialCalendarView.setTopbarVisible(false);
         //Initialize Dynamic Month Label
         CalendarDay day = materialCalendarView.getCurrentDate();
@@ -72,7 +75,7 @@ public class CalendarActivity extends AppCompatActivity {
         //Initialize MaterialCalendarView
         initializeMaterialCalendarView(materialCalendarView, calendar_today, calendar_month, calendar_closed);
 
-        //Every time that the materialCalendarView isSwipe do the following peace of code
+        //Every time that the materialCalendarView isSwipe do the following piece of code
         materialCalendarView.setOnTouchListener(new OnSwipeTouchListener(CalendarActivity.this) {
             public void onSwipeRight() {
                 //Toast.makeText(CalendarActivity.this, "right", Toast.LENGTH_SHORT).show();
