@@ -74,7 +74,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
         ((ScrollView)registroDeTerapiasAnteriores.getParent()).removeView(registroDeTerapiasAnteriores);
         frameRegistroTerapiasAnteriores.addView(registroDeTerapiasAnteriores);
-        Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"verHistorial");
+        Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"Historial");
 
     }
 

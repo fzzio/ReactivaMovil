@@ -244,7 +244,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        Menu.funciones_del_menu(CalendarActivity.this,nombre,"verCalendario");
+        Menu.funciones_del_menu(CalendarActivity.this,nombre,"Agenda");
     }
 
     /**

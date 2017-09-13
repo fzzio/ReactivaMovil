@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="#18374e"
         android:orientation="horizontal">
 
@@ -39,12 +39,12 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.76"
                 android:gravity="center"
                 android:text="REACTIVA"
                 android:textColor="@android:color/white"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_weight="0.76" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,6 +131,32 @@
             android:background="@null"
             app:srcCompat="@drawable/cerrar_sesion" />
     </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_ubicacion"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#18374e"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/lbl_ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.76"
+                android:gravity="center"
+                android:text="AQUI UBICACION"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

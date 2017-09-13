@@ -204,7 +204,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
             layout_no_terapias.setLayoutParams(params);
             rv.setVisibility(View.VISIBLE);
         }*/
-        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"verTerapias");
+        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"Terapias Activas");
     }
 
     /*public void loadTerapiaJson(final List<ItemTerapiaView> listaTerapias){
