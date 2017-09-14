@@ -1,31 +1,24 @@
 package reactiva.reactivamovil;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.util.Calendar;
 
 import reactiva.reactivamovil.classes.OnSwipeTouchListener;
+import reactiva.reactivamovil.decorators.MonserratDecorator;
+import reactiva.reactivamovil.decorators.TodayDecorator;
 import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
 import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
@@ -39,11 +32,13 @@ public class CalendarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String nombre = getIntent().getExtras().getString("nombre");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
 
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        final CalendarDecorator calendarDecorator = new CalendarDecorator();
+        final TodayDecorator todayDecorator = new TodayDecorator();
+        final MonserratDecorator monserratDecorator = new MonserratDecorator(this);
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
@@ -62,7 +57,8 @@ public class CalendarActivity extends AppCompatActivity {
                 .commit();
 
         //Initialize CalendarDecorator
-        materialCalendarView.addDecorator(calendarDecorator);
+        materialCalendarView.addDecorators(todayDecorator, monserratDecorator);
+        //Initialize Top barVisible
         materialCalendarView.setTopbarVisible(false);
         //Initialize Dynamic Month Label
         CalendarDay day = materialCalendarView.getCurrentDate();
@@ -72,7 +68,7 @@ public class CalendarActivity extends AppCompatActivity {
         //Initialize MaterialCalendarView
         initializeMaterialCalendarView(materialCalendarView, calendar_today, calendar_month, calendar_closed);
 
-        //Every time that the materialCalendarView isSwipe do the following peace of code
+        //Every time that the materialCalendarView isSwipe do the following piece of code
         materialCalendarView.setOnTouchListener(new OnSwipeTouchListener(CalendarActivity.this) {
             public void onSwipeRight() {
                 //Toast.makeText(CalendarActivity.this, "right", Toast.LENGTH_SHORT).show();
@@ -248,7 +244,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        funciones_del_menu();
+        Menu.funciones_del_menu(CalendarActivity.this,nombre,"Agenda");
     }
 
     /**
@@ -446,93 +442,4 @@ public class CalendarActivity extends AppCompatActivity {
     /** Use this set of methods for menu management
      *  @return void
      */
-    private void funciones_del_menu(){
-        clicks_del_menu();
-        activar_menu();
-        LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-        lyt_menu.setVisibility(LinearLayout.GONE);
-    }
-
-    /** Use this set of methods for menu management
-     *  @return void
-     */
-    private void clicks_del_menu(){
-        final ImageButton btn_calendario=(ImageButton)findViewById(R.id.btn_calendario);
-        btn_calendario.setImageDrawable(getDrawable(R.drawable.agenda_activo));
-
-        final ImageButton btn_terapias=(ImageButton)findViewById(R.id.btn_terapias);
-        btn_terapias.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(CalendarActivity.this, VerTerapiaRecyclerActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_calendario.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(CalendarActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_paciente=(ImageButton)findViewById(R.id.btn_paciente);
-        btn_paciente.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(CalendarActivity.this, VerTerapiaRecyclerActivity.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_historial=(ImageButton)findViewById(R.id.btn_historial);
-        btn_historial.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(CalendarActivity.this, VerHistorialTerapias.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_perfil=(ImageButton)findViewById(R.id.btn_perfil);
-
-        btn_perfil.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(CalendarActivity.this, VerPerfilActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    /** Use this set of methods for menu management
-     *  @return void
-     */
-    public boolean menu_activo(){
-        LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-        int dato= lyt_menu.getVisibility();
-        if(dato==LinearLayout.VISIBLE){
-            return true;
-        }else {
-            return false;
-        }
-    }
-
-    /** Use this set of methods for menu management
-     *  @return void
-     */
-    private void activar_menu() {
-        final ImageButton btn_oc=(ImageButton)findViewById(R.id.btn_oc);
-        btn_oc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-                if(menu_activo()){
-                    lyt_menu.setVisibility(LinearLayout.GONE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu));
-                }else {
-                    lyt_menu.setVisibility(LinearLayout.VISIBLE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu_close));
-                }
-            }
-        });
-    }
 }

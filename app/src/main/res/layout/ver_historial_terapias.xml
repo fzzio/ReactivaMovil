@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,153 +10,152 @@
 
     <include layout="@layout/top_menu"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHTNombreCompletoPaciente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Roberto Andres Guerrero Aviles"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="25sp" />
+
+        <View
+            android:layout_width="530dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"></View>
+
+        <TextView
+            android:id="@+id/tvHTultimaObservacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:text="ULTIMA OBSERVACION MEDICA"
+            android:textColor="#FFF"
+            android:textSize="17sp" />
+
+
+        <LinearLayout
+            android:layout_width="530dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvFechaUltimaObsMedica"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
-                android:orientation="vertical">
+                android:layout_gravity="left"
+                android:text="10 JUL. 2017 "
+                android:textAlignment="center"
+                android:textColor="#1c3651"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvHTNombreCompletoPaciente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textColor="#FFF"
-                    android:textSize="25sp"
-                    android:layout_marginTop="5dp"
-                    android:text="Roberto Andres Guerrero Aviles"/>
+            <TextView
+                android:id="@+id/tvDoctorUltimaObsMedica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="6dp"
+                android:text="DR. JOSE MORALES"
+                android:textAlignment="center"
+                android:textColor="#1c3651"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <View
-                    android:layout_width="530dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="25dp"
-                    android:background="#FFFFFF"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/tvHTultimaObservacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ULTIMA OBSERVACION MEDICA"
-                    android:textColor="#FFF"
-                    android:textSize="17sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tvObservacionMedicaPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="5dp"
+                android:text="@string/parrafo_prueba"
+                android:textColor="#1c3651"
+                android:textSize="18sp" />
 
 
-                <LinearLayout
-                    android:layout_width="530dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="30dp"
-                    android:layout_gravity="center">
-
-                    <TextView
-                        android:id="@+id/tvFechaUltimaObsMedica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 JUL. 2017 "
-                        android:textStyle="bold"
-                        android:textColor="#1c3651"
-                        android:textSize="17sp"
-                        android:textAlignment="center"
-                        android:layout_gravity="left"/>
-
-                    <TextView
-                        android:id="@+id/tvDoctorUltimaObsMedica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:layout_gravity="left"
-                        android:layout_marginBottom="6dp"
-                        android:textStyle="bold"
-                        android:textColor="#1c3651"
-                        android:textSize="18sp"
-                        android:text="DR. JOSE MORALES"/>
-
-                    <TextView
-                        android:id="@+id/tvObservacionMedicaPrincipal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="#1c3651"
-                        android:textSize="18sp"
-                        android:text="@string/parrafo_prueba"/>
+        </LinearLayout>
 
 
-                </LinearLayout>
+        <TextView
+            android:id="@+id/tvHTregistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="REGISTRO"
+            android:textColor="#FFF"
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
 
-                    <TextView
-                        android:id="@+id/tvHTregistro"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="15dp"
-                        android:textSize="17dp"
-                        android:textColor="#FFF"
-                        android:text="REGISTRO" />
+        <RelativeLayout
+            android:layout_width="450dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="#fff">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="left"
+                android:layout_marginStart="22dp"
+                android:text="FECHA"
+                android:textColor="#1c3651"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="106dp"
+                android:layout_toEndOf="@+id/textView13"
+                android:text="TERAPISTA"
+                android:textColor="#1c3651"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/frameTerapAnteriores"
+            android:layout_width="450dp"
+            android:layout_height="227dp"
+            android:layout_gravity="center">
+
+            -->
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-                    <RelativeLayout
-                        android:layout_width="450dp"
-                        android:layout_height="20dp"
-                        android:background="#fff"
-                        android:layout_gravity="center">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvTerapiasAnteriores"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:textStyle="bold"
-                            android:text="FECHA"
-                            android:textColor="#1c3651"
-                            android:id="@+id/textView13"
-                            android:layout_marginStart="22dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="#1c3651"
-                            android:text="TERAPISTA"
-                            android:id="@+id/textView14"
-                            android:layout_marginStart="106dp"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/textView13" />
-
-                    </RelativeLayout>
-
-                    <FrameLayout
-                        android:layout_width="450dp"
-                        android:layout_height="227dp"
-                        android:layout_gravity="center"
-                        android:id="@+id/frameTerapAnteriores">
-
--->
-                        <ScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+            </ScrollView>
 
 
-                            <android.support.v7.widget.RecyclerView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rvTerapiasAnteriores" />
+        </FrameLayout>
 
-                        </ScrollView>
-
-
-                    </FrameLayout>
-
-                </LinearLayout>
-</FrameLayout>
+    </LinearLayout>
+</LinearLayout>

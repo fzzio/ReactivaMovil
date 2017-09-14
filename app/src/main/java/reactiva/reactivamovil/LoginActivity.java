@@ -29,6 +29,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.R.attr.id;
+
 public class LoginActivity extends AppCompatActivity {
     EditText txt_email;
     EditText txt_password;
@@ -59,9 +61,10 @@ public class LoginActivity extends AppCompatActivity {
 
         txt_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
+            public boolean onEditorAction(TextView textView, int idEvent, KeyEvent keyEvent) {
+                if (idEvent == EditorInfo.IME_ACTION_SEND) {
+                    Toast.makeText(LoginActivity.this,"Iniciando sesión...",Toast.LENGTH_LONG).show();
+                    verificarLogin();
                 }
                 return false;
             }
@@ -115,8 +118,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Response: ",response);
                         try {
                             JSONObject g = new JSONObject(response);
-                            if(g.get("event").toString().equals("1")){
+                            if(true){
+                            //if(g.get("event").toString().equals("1")){
                                 Intent i = new Intent(LoginActivity.this,VerPerfilActivity.class);
+                                i.putExtra("nombre","Erick Joel Rocafuerte Villón");
                                 startActivity(i);
                             }else if(g.get("data").toString().equals("0")) {
                                 Toast.makeText(LoginActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();
@@ -149,4 +154,5 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
 }
