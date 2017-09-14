@@ -87,7 +87,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         listaExtremidades.add(12);
         listaExtremidades.add(0);
         listaExtremidades.add(2);
-        ItemTerapiaView terapia = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy, listaExtremidades);
+        ItemTerapiaView terapia = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, listaExtremidades);
         final List<ItemTerapiaView> list = new ArrayList<ItemTerapiaView>(Arrays.asList(terapia));
         //list.add(terapia);
         //listaTerapias.add(terapia);
@@ -124,7 +124,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
 
 
 
-                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.picture, R.drawable.view_therapy, lstExtremidades);
+                        ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, lstExtremidades);
 
                         //listaTerapias.add(i, pctTerap);
                         list.add(pctTerap);

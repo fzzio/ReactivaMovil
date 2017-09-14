@@ -341,9 +341,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVCamara.setImageResource(R.drawable.picture_active);
+                    holder.imgVCamara.setImageResource(R.drawable.camera_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVCamara.setImageResource(R.drawable.picture);
+                    holder.imgVCamara.setImageResource(R.drawable.camera);
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activity.startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
                 }
