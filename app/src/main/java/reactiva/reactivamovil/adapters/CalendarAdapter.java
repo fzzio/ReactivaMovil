@@ -15,6 +15,7 @@ import java.util.List;
 
 import reactiva.reactivamovil.BitacoraTerapia;
 import reactiva.reactivamovil.R;
+import reactiva.reactivamovil.VerPerfilActivity;
 import reactiva.reactivamovil.classes.Appointment;
 
 /**
@@ -49,7 +50,8 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
             @Override
             public void onClick(View v) {
                 final Activity activity = (Activity) v.getContext();
-                Intent intent = new Intent(activity,BitacoraTerapia.class);
+                Intent intent = new Intent(activity,VerPerfilActivity.class);
+                intent.putExtra("nombre","Erick Joel Rocafuerte Villón");
                 activity.startActivityForResult(intent, 0);
             }
         });
