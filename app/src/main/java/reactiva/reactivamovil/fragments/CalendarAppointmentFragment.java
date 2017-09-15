@@ -56,7 +56,7 @@ public class CalendarAppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Se define el XML para CalendarAppointmentFragment
         View v = inflater.inflate(R.layout.calendar_fragment, container, false);
-        //Se definen las variables necesarias para procesar el JSONResponse
+        //Se define las variables para JSONResponse
         String selected_date = getArguments().getString("selected_date", "");
         String words [] = selected_date.split(" ");
         String mes = words[2];
@@ -65,7 +65,7 @@ public class CalendarAppointmentFragment extends Fragment {
         final String dia_mcv = words[1];
         //Create the Volley request Queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        //Remover todos los elementos de la lista
+        //Remove all elements from list
         appointmentList.clear();
         //Se define el RecyclerView
         appointmentRecyclerView = (RecyclerView) v.findViewById(R.id.calendar_recycler_view);
