@@ -1,21 +1,36 @@
 package reactiva.reactivamovil.fragments;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import reactiva.reactivamovil.CalendarActivity;
 import reactiva.reactivamovil.R;
+import reactiva.reactivamovil.VerTerapiaRecyclerActivity;
 import reactiva.reactivamovil.adapters.CalendarAdapter;
 import reactiva.reactivamovil.classes.Appointment;
 
@@ -23,9 +38,11 @@ import reactiva.reactivamovil.classes.Appointment;
  * Created by Fernando on 10/08/2017.
  */
 
-public class CalendarAppointmentFragment extends Fragment{
-    List<Appointment> appointmentList = new ArrayList<>();
+public class CalendarAppointmentFragment extends Fragment {
+    private List<Appointment> appointmentList = new ArrayList<>();
     private RecyclerView appointmentRecyclerView;
+    private CalendarAdapter calendarAdapter = null;
+    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/getCalendar";
 
     public static CalendarAppointmentFragment newInstance(String selected_date) {
         CalendarAppointmentFragment fr = new CalendarAppointmentFragment();
@@ -39,44 +56,109 @@ public class CalendarAppointmentFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Se define el XML para CalendarAppointmentFragment
         View v = inflater.inflate(R.layout.calendar_fragment, container, false);
+        //Se definen las variables necesarias para procesar el JSONResponse
+        String selected_date = getArguments().getString("selected_date", "");
+        String words [] = selected_date.split(" ");
+        String mes = words[2];
+        String mes_mcv = monthFormatter(mes);
+        String año_mcv = words[3];
+        final String dia_mcv = words[1];
+        //Create the Volley request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        //Remover todos los elementos de la lista
+        appointmentList.clear();
         //Se define el RecyclerView
         appointmentRecyclerView = (RecyclerView) v.findViewById(R.id.calendar_recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         appointmentRecyclerView.setLayoutManager(llm);
-        appointmentListBuilder();
-        appointmentAdapterBuilder();
+        //Add parameters to URL from arguments
+        url = url + "?month=" + mes_mcv + "&year=" + año_mcv;
+        System.out.println(url);
+        //JSON Thread START
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("Response: ",response.toString());
+                for(int i=0;i<response.length();i++) {
+                    try {
+                        JSONObject day = response.getJSONObject(i).getJSONObject("day");
+                        String dia_ws = day.getString("day");
+                        //Verify selected_date
+                        if (dia_mcv.equals(dia_ws)){
+                            JSONArray therapies = response.getJSONObject(i).getJSONArray("therapies");
+                            //Iterate JSONArray
+                            for(int j =0;j<therapies.length();j++) {
+                                Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
+                                //Add to list elements with the adapter class
+                                String fullname = therapies.getJSONObject(j).get("fullname").toString();
+                                String words_fullname [] = fullname.split(" ");
+                                String name = words_fullname[0] + " " + words_fullname[1] ;
+                                String last_names = " " + words_fullname[2] + " " + words_fullname[3];
+                                String hour = "12:50 PM";
+                                appointmentList.add(new Appointment(name, last_names, hour));
+                            }
+                            appointmentAdapterBuilder();
+                        }
+                    } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d("Error.Super", e.toString());
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response: ",error.toString());
+                error.printStackTrace();
+            }
+        });
+        //JSON Thread ENDS
+        requestQueue.add(jsonArrayRequest);
         //Se define el TextView
         TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
-        String selected_date = getArguments().getString("selected_date", "");
+        //String selected_date = getArguments().getString("selected_date", "");
         selected_date_txv.setText(selected_date);
-        //Se define la fuente
+        //Se define fonts
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
         selected_date_txv.setTypeface(type);
         return v;
     }
 
-    /**
-     * Usa este método para inicializar appointmentList.
-     * @return void
-     */
-    public void appointmentListBuilder() {
-        appointmentList.removeAll(appointmentList);
-        appointmentList.add(new Appointment("Nadia", " Pezantes Hermenjildo", "7:00 AM"));
-        appointmentList.add(new Appointment("Ángel", " Peña García", "8:15 AM"));
-        appointmentList.add(new Appointment("Pablo", " Peñafiel Guerrero", "8:30 AM"));
-        appointmentList.add(new Appointment("Erasmo", " Pesantes De Los Monteros", "9:45 AM"));
-        appointmentList.add(new Appointment("Fabricio", " Perero Aguirre", "10:00 AM"));
-        appointmentList.add(new Appointment("María", " Pesantes Maduro", "11:15 AM"));
-        appointmentList.add(new Appointment("Luz", " Piedrahita Reyes", "12:00 PM"));
-        appointmentList.add(new Appointment("Mario", " Peréz Contreras", "12:50 PM"));
-        appointmentList.add(new Appointment("Michelle", " Espinoza Martinez", "1:00 PM"));
-        appointmentList.add(new Appointment("Henry", " Ascensio Lomas", "2:00 PM"));
+    public void appointmentAdapterBuilder(){
+        this.calendarAdapter = new CalendarAdapter(this.appointmentList);
+        this.appointmentRecyclerView.setAdapter(calendarAdapter);
+        calendarAdapter.notifyDataSetChanged();
     }
 
-    public void appointmentAdapterBuilder(){
-        CalendarAdapter calendarAdapter = new CalendarAdapter(appointmentList);
-        appointmentRecyclerView.setAdapter(calendarAdapter);
+    public String monthFormatter(String mes) {
+        switch(mes) {
+            case "ene.":    mes="01";
+                            break;
+            case "feb.":    mes="02";
+                            break;
+            case "mar.":    mes="03";
+                            break;
+            case "abr.":    mes="04";
+                            break;
+            case "may.":    mes="05";
+                            break;
+            case "jun.":    mes="06";
+                            break;
+            case "jul.":    mes="07";
+                            break;
+            case "ago.":    mes="08";
+                            break;
+            case "sep.":    mes="09";
+                            break;
+            case "oct.":    mes="10";
+                            break;
+            case "nov.":    mes="11";
+                            break;
+            case "dic.":    mes="12";
+                            break;
+        }
+        return mes;
     }
 
 }

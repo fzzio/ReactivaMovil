@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import reactiva.reactivamovil.BitacoraTerapia;
 import reactiva.reactivamovil.R;
 import reactiva.reactivamovil.VerPerfilActivity;
 import reactiva.reactivamovil.classes.Appointment;
