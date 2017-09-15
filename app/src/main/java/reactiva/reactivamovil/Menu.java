@@ -36,7 +36,6 @@ public class Menu extends AppCompatActivity{
         final Typeface montR= Typeface.createFromAsset(act.getAssets(),"fonts/Montserrat-Regular.ttf");
         ((TextView)act.findViewById(R.id.lbl_welcome)).setTypeface(montR);
         ((TextView)act.findViewById(R.id.lbl_ubicacion)).setTypeface(montR);
-        ((TextView)act.findViewById(R.id.textView)).setTypeface(montR);
         TextView lbl_welcome=(TextView)act.findViewById(R.id.lbl_welcome);
         lbl_welcome.setText("¡Hola, "+nombre+"!");
         Menu.clicks_del_menu(act,nombre,clase);

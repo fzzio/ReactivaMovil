@@ -63,14 +63,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarRecycler">
+        <activity android:name=".Historial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Historial" />
         <activity android:name=".ResetPasswordActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>

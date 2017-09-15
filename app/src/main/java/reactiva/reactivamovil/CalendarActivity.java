@@ -185,7 +185,7 @@ public class CalendarActivity extends AppCompatActivity {
                     displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                     removeCalendarEmptyAppointmentFragment();
                 } else {
-                   // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
                     displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                     removeCalendarAppointmentFragment();
                 }
@@ -390,11 +390,11 @@ public class CalendarActivity extends AppCompatActivity {
      */
     public String current_month(int month) {
         String[] month_array = {"ENERO", "FEBRERO",
-                                "MARZO", "ABRIL",
-                                "MAYO", "JUNIO",
-                                "JULIO", "AGOSTO",
-                                "SEPTIEMBRE", "OCTUBRE",
-                                "NOVIEMBRE", "DICIEMBRE"};
+                "MARZO", "ABRIL",
+                "MAYO", "JUNIO",
+                "JULIO", "AGOSTO",
+                "SEPTIEMBRE", "OCTUBRE",
+                "NOVIEMBRE", "DICIEMBRE"};
         return month_array[month];
     }
 

@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject g = new JSONObject(response);
                             if(true){
-                            //if(g.get("event").toString().equals("1")){
+                                //if(g.get("event").toString().equals("1")){
                                 Intent i = new Intent(LoginActivity.this,VerPerfilActivity.class);
                                 i.putExtra("nombre","Erick Joel Rocafuerte Villón");
                                 startActivity(i);

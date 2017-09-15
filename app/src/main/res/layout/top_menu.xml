@@ -36,8 +36,7 @@
             android:weightSum="1">
 
             <ImageView
-                android:id="@+id/textView"
-<<<<<<< HEAD
+                android:id="@+id/imageView"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -50,34 +49,20 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintVertical_bias="0.529" />
         </android.support.constraint.ConstraintLayout>
-=======
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.76"
-                android:gravity="center"
-                android:text="REACTIVA"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-        </LinearLayout>
->>>>>>> 36216eb172429635a4eab8d335fb65ae97d3fcd0
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="49dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
         </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lyt_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#9dc6be"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,54 +83,54 @@
 
 
         <LinearLayout
-        android:id="@+id/lyt_icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#9dc6be"
-        android:orientation="horizontal"
+            android:id="@+id/lyt_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#9dc6be"
+            android:orientation="horizontal"
             android:paddingBottom="20dp"
             android:paddingTop="10dp">
 
-        <ImageButton
-            android:id="@+id/btn_terapias"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            app:srcCompat="@drawable/terapia" />
+            <ImageButton
+                android:id="@+id/btn_terapias"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/terapia" />
 
-        <ImageButton
-            android:id="@+id/btn_calendario"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            app:srcCompat="@drawable/agenda" />
+            <ImageButton
+                android:id="@+id/btn_calendario"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/agenda" />
 
-        <ImageButton
-            android:id="@+id/btn_paciente"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            app:srcCompat="@drawable/paciente" />
+            <ImageButton
+                android:id="@+id/btn_paciente"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/paciente" />
 
-        <ImageButton
-            android:id="@+id/btn_historial"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            app:srcCompat="@drawable/historial" />
+            <ImageButton
+                android:id="@+id/btn_historial"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/historial" />
 
-        <ImageButton
-            android:id="@+id/btn_perfil"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            app:srcCompat="@drawable/cerrar_sesion" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/btn_perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/cerrar_sesion" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
