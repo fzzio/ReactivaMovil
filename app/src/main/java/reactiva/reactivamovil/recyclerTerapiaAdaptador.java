@@ -32,11 +32,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 /**
  * Created by edgardan on 18/07/2017.
  */
@@ -45,6 +55,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     List<ItemTerapiaView> listaTerapias;
     private int expandedPosition = -1;
+    public String response;
+    public EditText comentario;
+    int estadoPaciente = -1;
 
     Handler customHandler = new Handler();
     long startTime = 0L, timeInMilliseconds = 0L, timeSwapBuff = 0L, updateTime = 0L;
@@ -149,11 +162,11 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
                 for(int i=0; i<recyclerv.getChildCount();i++){
                     //if(i!=position){
-                        recyclerv.getChildAt(i).findViewById(R.id.section).setVisibility(View.GONE);
-                        recyclerv.getChildAt(i).findViewById(R.id.header).setVisibility(View.VISIBLE);
-                        //Log.d("Title", "Value: " + Integer.toString(i));
-                        timeSwapBuff+=timeInMilliseconds;
-                        customHandler.removeCallbacks(updateTimerThread);
+                    recyclerv.getChildAt(i).findViewById(R.id.section).setVisibility(View.GONE);
+                    recyclerv.getChildAt(i).findViewById(R.id.header).setVisibility(View.VISIBLE);
+                    //Log.d("Title", "Value: " + Integer.toString(i));
+                    timeSwapBuff+=timeInMilliseconds;
+                    customHandler.removeCallbacks(updateTimerThread);
                     //}
                 }
 
@@ -212,6 +225,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                                 public void onClick(View v) {
                                     if(!comentario.getText().toString().isEmpty()){
                                         Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                        //enviar_comentario();
                                         dialog.dismiss();
                                     }else{
                                         Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
@@ -271,7 +285,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     View vistaEvaluacion = li.inflate(R.layout.terapia_evaluacion, null);
 
                     //TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
-                    final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
+
+                    //*****************************************************************************************//
+                    //final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
+                    comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
+                    //****************************************************************************************//
+
                     //TextView btnGuardar = (TextView) vistaEvaluacion.findViewById(R.id.txt_guardar);
                     //TextView btnCancelar = (TextView) vistaEvaluacion.findViewById(R.id.txt_cancelar);
 
@@ -298,11 +317,54 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                         @Override
                         public void onShow(final DialogInterface dialog) {
                             Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+
+                            ((AlertDialog) dialog).findViewById(R.id.imgv_alto).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ImageView reaccion_osa_triste = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_alto);
+                                    ImageView reaccion_osa_normal = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_medio);
+                                    ImageView reaccion_osa_feliz = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_bajo);
+                                    reaccion_osa_triste.setImageResource(R.drawable.reaccion3_activa);
+                                    reaccion_osa_normal.setImageResource(R.drawable.reaccion2_inactiva);
+                                    reaccion_osa_feliz.setImageResource(R.drawable.reaccion1_inactiva);
+
+                                    estadoPaciente = 0;
+                                }
+                            });
+
+                            ((AlertDialog) dialog).findViewById(R.id.imgv_medio).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ImageView reaccion_osa_triste = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_alto);
+                                    ImageView reaccion_osa_normal = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_medio);
+                                    ImageView reaccion_osa_feliz = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_bajo);
+                                    reaccion_osa_triste.setImageResource(R.drawable.reaccion3_inactiva);
+                                    reaccion_osa_normal.setImageResource(R.drawable.reaccion2_activa);
+                                    reaccion_osa_feliz.setImageResource(R.drawable.reaccion1_inactiva);
+
+                                    estadoPaciente = 1;
+                                }
+                            });
+
+                            ((AlertDialog) dialog).findViewById(R.id.imgv_bajo).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ImageView reaccion_osa_triste = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_alto);
+                                    ImageView reaccion_osa_normal = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_medio);
+                                    ImageView reaccion_osa_feliz = (ImageView) ((AlertDialog) dialog).findViewById(R.id.imgv_bajo);
+                                    reaccion_osa_triste.setImageResource(R.drawable.reaccion3_inactiva);
+                                    reaccion_osa_normal.setImageResource(R.drawable.reaccion2_inactiva);
+                                    reaccion_osa_feliz.setImageResource(R.drawable.reaccion1_activa);
+
+                                    estadoPaciente = 2;
+                                }
+                            });
                             boton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     if(!comentario.getText().toString().isEmpty()){
                                         Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
+                                        enviar_comentario(listaTerapias.get(position).getId_therapy(), estadoPaciente);
                                         dialog.dismiss();
                                     }else{
                                         Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
@@ -376,6 +438,46 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             }
         });
 
+
+    }
+
+    public void enviar_comentario(final String id_therapy, int estadoPaciente){
+        Log.d("Entrea ", id_therapy);
+        Log.d("comentariotext ", comentario.getText().toString().trim());
+        Log.d("tiempolog ", ""+timeInMilliseconds);
+        Log.d("estadoPacLog", ""+estadoPaciente);
+        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+        /*String url = "";//falta url
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", response);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_therapy", id_therapy);
+                params.put("comentario", comentario.getText().toString().trim());
+                params.put("tiempo", (""+timeInMilliseconds));
+                params.put("estado_paciente", (""+estadoPaciente));
+                //falta enviar eleccion de estado del paciente
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);*/
+    }
+
+    public void enviar_foto(){
 
     }
 
