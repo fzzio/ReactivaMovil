@@ -28,6 +28,10 @@ public class ConstructorObservacionTerapia {
         return db.obtenerTodasLasObservacionesDeLaTerapia();
     }
 
+    public ArrayList<ObservacionTerapia> obtenerObservacionesTerapiasXID(int idTerapia){
+        BaseDeDatosPT db = new BaseDeDatosPT(context);
+        return db.obtenerTodasLasObservacionesDeUnaTerapiaPorIDTerapia(idTerapia);
+    }
 
     public void insertaPacientesPruebas(BaseDeDatosPT db){
         ContentValues contentValues = new ContentValues();

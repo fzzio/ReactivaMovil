@@ -12,15 +12,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.adapters.ObservacionMedicaAdaptador;
+import reactiva.reactivamovil.adapters.ObservacionTerapiaAdaptador;
 import reactiva.reactivamovil.classes.ObservacionMedica;
+import reactiva.reactivamovil.classes.ObservacionTerapia;
+import reactiva.reactivamovil.db.ConstructorObservacionTerapia;
+import reactiva.reactivamovil.presentadores.IRecyclerBitacora;
 
-public class BitacoraTerapia extends AppCompatActivity {
+public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitacora{
 
 
     //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
-    ArrayList<ObservacionMedica> observacionMedicasData;
+    ArrayList<ObservacionTerapia> observacionMedicasData;
     private FrameLayout frameSucesosBitacoraTerapia;
     private RecyclerView listaDeObservacionesMedicas;
+
+    ConstructorObservacionTerapia constructorObservacionTerapia;
+
+    int idprueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +58,25 @@ public class BitacoraTerapia extends AppCompatActivity {
         listaDeObservacionesMedicas = (RecyclerView) findViewById(R.id.rvObsMedicasBitacora);
 
 
-        ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
+       /* ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
         LinearLayoutManager llBitacora = new LinearLayoutManager(this);
         llBitacora.setOrientation(LinearLayoutManager.VERTICAL);
         listaDeObservacionesMedicas.setLayoutManager(llBitacora);
+*/
+        //inicializarListaDeObservacionesMedicas();
 
-        inicializarListaDeObservacionesMedicas();
+        //inicializarAdaptadorObservacionesMedicas();
 
-        inicializarAdaptadorObservacionesMedicas();
+
+        generarLinearLayoutVertical();
+        //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
+
+        idprueba = 7;
+        obtenerObservacionesByIdTerapia(idprueba);
+
+        mostrarDatosEnRVobsernacionesTerapia();
+
+
 
         ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
         frameSucesosBitacoraTerapia.addView(listaDeObservacionesMedicas);
@@ -65,13 +84,13 @@ public class BitacoraTerapia extends AppCompatActivity {
 
     }
 
-    public void inicializarAdaptadorObservacionesMedicas() {
+   /* public void inicializarAdaptadorObservacionesMedicas() {
         ObservacionMedicaAdaptador adaptadorObservacionesBitacora = new ObservacionMedicaAdaptador(observacionMedicasData);
         listaDeObservacionesMedicas.setAdapter(adaptadorObservacionesBitacora);
 
-    }
+    }*/
 
-    public void inicializarListaDeObservacionesMedicas() {
+   /* public void inicializarListaDeObservacionesMedicas() {
         observacionMedicasData = new ArrayList<ObservacionMedica>();
         observacionMedicasData.add(new ObservacionMedica("9:00","Inicio"));
         observacionMedicasData.add(new ObservacionMedica("9:08","INICIO juego -Subir Escaleras-"));
@@ -89,6 +108,38 @@ public class BitacoraTerapia extends AppCompatActivity {
         observacionMedicasData.add(new ObservacionMedica("10:25","El paciente otra vez se fue de oreja"));
         observacionMedicasData.add(new ObservacionMedica("10:35","REANUDA juego -Nombre de Juego-"));
 
+    }*/
+
+    @Override
+    public void generarLinearLayoutVertical() {
+        ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
+        LinearLayoutManager llBitacora = new LinearLayoutManager(this);
+        llBitacora.setOrientation(LinearLayoutManager.VERTICAL);
+        listaDeObservacionesMedicas.setLayoutManager(llBitacora);
     }
 
+    @Override
+    public ObservacionTerapiaAdaptador crearAdaptadorObservacionTerapia(ArrayList<ObservacionTerapia> observacionTerapias) {
+        ObservacionTerapiaAdaptador adaptadorObservacionesBitacora = new ObservacionTerapiaAdaptador(observacionMedicasData);
+        return adaptadorObservacionesBitacora;
+    }
+
+    @Override
+    public void inicializarAdaptadorRV(ObservacionTerapiaAdaptador observacionTerapiaAdaptador) {
+        listaDeObservacionesMedicas.setAdapter(observacionTerapiaAdaptador);
+    }
+
+    /**
+     * Obtengo todas las observaciones por el ID de la terpaia
+     * @param idTerapia
+     */
+    public void  obtenerObservacionesByIdTerapia(int idTerapia){
+        constructorObservacionTerapia = new ConstructorObservacionTerapia(getApplicationContext());
+        observacionMedicasData = constructorObservacionTerapia.obtenerObservacionesTerapiasXID(idTerapia);
+    }
+
+    public void mostrarDatosEnRVobsernacionesTerapia(){
+        ObservacionTerapiaAdaptador adaptadorObservacionesBitacora = new ObservacionTerapiaAdaptador(observacionMedicasData);
+        listaDeObservacionesMedicas.setAdapter(adaptadorObservacionesBitacora);
+    }
 }

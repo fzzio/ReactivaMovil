@@ -42,6 +42,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import reactiva.reactivamovil.db.BaseDeDatosPT;
+import reactiva.reactivamovil.db.ConstructorObservacionTerapia;
+
 /**
  * Created by edgardan on 18/07/2017.
  */
@@ -51,6 +54,8 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
     private Button button;
     Context context = this.getApplication();
     Activity activity = this;
+
+    ConstructorObservacionTerapia constructorObservacionTerapia;
 
     String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyGet";
 
@@ -69,6 +74,14 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
 
         //txtnombre.setTypeface(fontMedium);
+
+
+        ///////////////////////////////////////////////////////////////////
+        // inicializo la base de datos inserto datos de prueba
+        BaseDeDatosPT db = new BaseDeDatosPT(getApplicationContext());
+        constructorObservacionTerapia = new ConstructorObservacionTerapia(getApplicationContext());
+        constructorObservacionTerapia.insertaPacientesPruebas(db);
+        constructorObservacionTerapia.insertarObservacionTerapiaspruebas(db);
 
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
