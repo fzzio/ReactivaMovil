@@ -70,7 +70,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         });
 
 
-        Menu.funciones_del_menu(VerPerfilActivity.this,getIntent().getExtras().getString("nombre"),"Iniciar Terapia");
+        Menu.funciones_del_menu(VerPerfilActivity.this,getIntent().getExtras().getString("nombre"),"INICIAR TERAPIA");
 
 
        /* LinearLayoutManager llm = new LinearLayoutManager(this);

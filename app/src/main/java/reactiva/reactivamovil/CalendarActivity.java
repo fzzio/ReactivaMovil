@@ -231,7 +231,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        Menu.funciones_del_menu(CalendarActivity.this,nombre,"Agenda");
+        Menu.funciones_del_menu(CalendarActivity.this,nombre,"AGENDA");
     }
 
     /**
