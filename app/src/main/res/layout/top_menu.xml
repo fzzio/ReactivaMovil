@@ -51,12 +51,6 @@
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="49dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        </LinearLayout>
-
     <LinearLayout
         android:id="@+id/lyt_menu"
         android:layout_width="match_parent"
@@ -85,18 +79,19 @@
         <LinearLayout
             android:id="@+id/lyt_icon"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#9dc6be"
-            android:orientation="horizontal"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btn_terapias"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:scaleX=".8"
+                android:scaleY=".8"
                 app:srcCompat="@drawable/terapia" />
 
             <ImageButton
@@ -105,6 +100,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:scaleX=".8"
+                android:scaleY=".8"
                 app:srcCompat="@drawable/agenda" />
 
             <ImageButton
@@ -113,6 +111,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:scaleX=".8"
+                android:scaleY=".8"
                 app:srcCompat="@drawable/paciente" />
 
             <ImageButton
@@ -121,14 +122,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:scaleX=".8"
+                android:scaleY=".8"
                 app:srcCompat="@drawable/historial" />
 
             <ImageButton
                 android:id="@+id/btn_perfil"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:scaleX=".8"
+                android:scaleY=".8"
                 app:srcCompat="@drawable/cerrar_sesion" />
         </LinearLayout>
     </LinearLayout>
@@ -142,18 +149,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="1">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/lyt_back"
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_icon"
+                    android:scaleX="1"
+                    android:scaleY="1" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/lbl_ubicacion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.76"
-                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginRight="49dp"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="AQUI UBICACION"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
