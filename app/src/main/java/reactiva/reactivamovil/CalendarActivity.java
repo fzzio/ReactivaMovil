@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,10 +45,10 @@ public class CalendarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         String nombre = getIntent().getExtras().getString("nombre");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
-
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
         final TodayDecorator todayDecorator = new TodayDecorator();
         final MonserratDecorator monserratDecorator = new MonserratDecorator(this);

@@ -46,8 +46,15 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
 
         encabezadoInformacionLinkInfo.setTypeface(fontMedium);
 
-
-
+        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CalendarActivity.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                startActivityForResult(intent,0);
+            }
+        });
 
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
@@ -57,6 +64,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),JuegosTerapias.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
                 startActivity(intent);
             }
         });
