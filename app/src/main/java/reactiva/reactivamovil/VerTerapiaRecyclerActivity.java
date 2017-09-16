@@ -73,12 +73,12 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         rv = (RecyclerView) findViewById(R.id.recycler_view);
 
         ///////////////////////////////////////////////////////////////////
-        // inicializo la base de datos inserto datos de prueba
+        // inicializo la base de datos, grabo datos de prueba
         BaseDeDatosPT db = new BaseDeDatosPT(getApplicationContext());
         constructorObservacionTerapia = new ConstructorObservacionTerapia(getApplicationContext());
         constructorObservacionTerapia.insertaPacientesPruebas(db);
         constructorObservacionTerapia.insertarObservacionTerapiaspruebas(db);
-
+        ////////////////////////////////////////////////////////////////////
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);

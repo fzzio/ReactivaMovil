@@ -83,4 +83,16 @@ public class ConstructorObservacionTerapia {
         //contentValues.put(); // la data del comentario
         db.insertarComentario(contentValues);
     }
+
+    public void insertarNuevoComentarioByIdTerapia(int idTerapia,String horaComent, String comentario){
+        BaseDeDatosPT db = new BaseDeDatosPT(context);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstantesDataBasePT.TABLE_OBS_TERAPIA_ID_TERAPIA, idTerapia);
+        contentValues.put(ConstantesDataBasePT.TABLE_OBS_TERAPIA_COMENTARIO,comentario);
+        contentValues.put(ConstantesDataBasePT.TABLE_OBS_TERAPIA_HORA_COMENTARIO,horaComent);
+
+        db.insertarComentario(contentValues);
+    }
+
+
 }
