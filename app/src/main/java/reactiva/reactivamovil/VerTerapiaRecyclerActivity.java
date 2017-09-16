@@ -186,7 +186,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         Adaptador.notifyDataSetChanged();
         rv.setAdapter(Adaptador);
 
-        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"Terapias Activas");
+        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
     }
 
     private boolean esperar_respuesta(){

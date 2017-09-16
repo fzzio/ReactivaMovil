@@ -52,7 +52,7 @@ public class JuegosTerapias extends AppCompatActivity {
 
         Button btnGetParatametrosJuegos = (Button) findViewById(R.id.btGetParametrosJuegos);
         ((TextView)findViewById(R.id.lbl_welcome)).setText(getIntent().getExtras().getString("nombre"));
-        ((TextView)findViewById(R.id.lbl_ubicacion)).setText("Historial de Terapias");
+        ((TextView)findViewById(R.id.lbl_ubicacion)).setText("HISTORIAL DE TERAPIAS");
 
         btnGetParatametrosJuegos.setOnClickListener(new View.OnClickListener() {
 
