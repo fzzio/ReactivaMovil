@@ -114,7 +114,7 @@ public class JuegosTerapias extends AppCompatActivity {
         ((FrameLayout)recyclerViewJuegos.getParent()).removeView(recyclerViewJuegos);
         frameJuegos.addView(recyclerViewJuegos);
 
-        Menu.funciones_del_menu(JuegosTerapias.this,getIntent().getExtras().getString("nombre"),"Historial de Terapias");
+        Menu.funciones_del_menu(JuegosTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
 
         ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
