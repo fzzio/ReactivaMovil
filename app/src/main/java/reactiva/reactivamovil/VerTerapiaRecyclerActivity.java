@@ -67,7 +67,6 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_terapia_recycler);
-        findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
         //terapias = cargaTerapias();
 
         rv = (RecyclerView) findViewById(R.id.recycler_view);

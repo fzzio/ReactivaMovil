@@ -86,7 +86,6 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
         frameSucesosBitacoraTerapia.addView(listaDeObservacionesMedicas);
 
-        /*findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
         ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,9 +94,8 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
                 intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
                 startActivityForResult(intent,0);
             }
-        });*/
-
-
+        });
+        Menu.funciones_del_menu(BitacoraTerapia.this,getIntent().getExtras().getString("nombre"),"Historial");
     }
 
    /* public void inicializarAdaptadorObservacionesMedicas() {

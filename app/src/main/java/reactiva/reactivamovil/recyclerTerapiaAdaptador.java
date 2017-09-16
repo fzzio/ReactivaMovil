@@ -261,6 +261,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             public void onClick(View v) {
                 Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
+                intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivityForResult(intent, 0);
             }
         });

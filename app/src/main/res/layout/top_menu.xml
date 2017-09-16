@@ -47,7 +47,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="150dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintVertical_bias="0.529" />
+                app:layout_constraintVertical_bias="0.529"
+                android:layout_marginStart="150dp" />
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
@@ -147,38 +148,69 @@
         android:background="#18374e"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/layout_count_terapias"
+            android:background="@color/colorAzulMenu">
 
-            <LinearLayout
-                android:id="@+id/lyt_back"
+            <ImageButton
+                android:id="@+id/btn_back"
                 android:layout_width="49dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/btn_back"
-                    android:layout_width="49dp"
-                    android:layout_height="49dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/back_icon"
-                    android:scaleX="1"
-                    android:scaleY="1" />
-            </LinearLayout>
+                android:layout_height="49dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="98dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/back_icon"
+                android:scaleX="1"
+                android:scaleY="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lbl_ubicacion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginRight="49dp"
-                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="AQUI UBICACION"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textStyle="bold"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="@+id/txt_terapias_activas_count"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="@+id/btn_back"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/txt_terapias_activas_count"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="N terapias activas"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
 

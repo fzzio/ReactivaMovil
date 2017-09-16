@@ -59,7 +59,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
-        btnHistorialTerapias.setOnClickListener(this);
+        //btnHistorialTerapias.setOnClickListener(this);
         btnIniciarTerapia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
