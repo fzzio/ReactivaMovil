@@ -41,11 +41,15 @@ import com.android.volley.toolbox.Volley;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import reactiva.reactivamovil.db.ConstructorObservacionTerapia;
 
 /**
  * Created by edgardan on 18/07/2017.
@@ -64,6 +68,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     Context context;
     Activity activity;
+
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String Date;
+
+    ConstructorObservacionTerapia constructorObservacionTerapia;
 
     private static final int CAMERA_PIC_REQUEST = 1337;
 
@@ -198,7 +208,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View vistaComent = li.inflate(R.layout.terapia_comentario, null);
 
-                    final EditText comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
+                    comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
 
                     TextView titulo = new TextView(context);
                     titulo.setText(R.string.terapia_comentario_title);
@@ -225,7 +235,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                                 public void onClick(View v) {
                                     if(!comentario.getText().toString().isEmpty()){
                                         Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                                        //enviar_comentario();
+                                        enviar_comentario(listaTerapias.get(position).getId_therapy());
                                         dialog.dismiss();
                                     }else{
                                         Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
@@ -362,9 +372,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                             boton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if(!comentario.getText().toString().isEmpty()){
+                                    if(!comentario.getText().toString().isEmpty() && estadoPaciente!=-1){
                                         Toast.makeText(v.getContext(), "Comentario exitoso", Toast.LENGTH_SHORT).show();
-                                        enviar_comentario(listaTerapias.get(position).getId_therapy(), estadoPaciente);
+                                        finalizar_terapia(listaTerapias.get(position).getId_therapy(), estadoPaciente);
                                         dialog.dismiss();
                                     }else{
                                         Toast.makeText(v.getContext(), "Por Favor llene el campo de comentario", Toast.LENGTH_SHORT).show();
@@ -441,13 +451,23 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     }
 
-    public void enviar_comentario(final String id_therapy, int estadoPaciente){
+    public void enviar_comentario(final String id_therapy){
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date = simpleDateFormat.format(calendar.getTime());
+
+
         Log.d("Entrea ", id_therapy);
         Log.d("comentariotext ", comentario.getText().toString().trim());
-        Log.d("tiempolog ", ""+timeInMilliseconds);
-        Log.d("estadoPacLog", ""+estadoPaciente);
+        Log.d("fechaa ", Date);
+        //Log.d("estadoPacLog", ""+estadoPaciente);
+
+
+        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
-        /*String url = "";//falta url
+
+        String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/savecomments";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -465,8 +485,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_therapy", id_therapy);
                 params.put("comentario", comentario.getText().toString().trim());
-                params.put("tiempo", (""+timeInMilliseconds));
-                params.put("estado_paciente", (""+estadoPaciente));
+                params.put("tiempo", (""+Date));
+                //params.put("estado_paciente", (""+estadoPaciente));
                 //falta enviar eleccion de estado del paciente
                 return params;
             }
@@ -474,7 +494,55 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);*/
+        requestQueue.add(stringRequest);
+    }
+
+    public void finalizar_terapia(final String id_therapy, final int estado_paciente){
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date = simpleDateFormat.format(calendar.getTime());
+
+
+        Log.d("Entrea ", id_therapy);
+        Log.d("comentariotext ", comentario.getText().toString().trim());
+        Log.d("fechaa ", Date);
+        Log.d("estadoPacLog", ""+estadoPaciente);
+
+
+        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+
+        String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", response);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_therapy", id_therapy);
+                params.put("estado_paciente", (""+estadoPaciente));
+                params.put("tiempo_tr", (""));
+                params.put("comentario", comentario.getText().toString().trim());
+                params.put("tiempo", (""+Date));
+
+                //falta enviar eleccion de estado del paciente
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
     public void enviar_foto(){

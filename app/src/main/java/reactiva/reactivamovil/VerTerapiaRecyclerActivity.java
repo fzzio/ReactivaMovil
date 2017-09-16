@@ -192,7 +192,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
     private boolean esperar_respuesta(){
         for(int iwait=0;iwait<10;iwait++){
             try{
-                Thread.sleep(1000);
+                Thread.sleep(50);
             }catch (InterruptedException e){
                 e.printStackTrace();
                 break;
