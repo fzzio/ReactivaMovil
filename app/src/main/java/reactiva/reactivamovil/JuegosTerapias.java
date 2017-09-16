@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
@@ -50,6 +51,8 @@ public class JuegosTerapias extends AppCompatActivity {
 
 
         Button btnGetParatametrosJuegos = (Button) findViewById(R.id.btGetParametrosJuegos);
+        ((TextView)findViewById(R.id.lbl_welcome)).setText(getIntent().getExtras().getString("nombre"));
+        ((TextView)findViewById(R.id.lbl_ubicacion)).setText("Historial de Terapias");
 
         btnGetParatametrosJuegos.setOnClickListener(new View.OnClickListener() {
 
@@ -111,7 +114,17 @@ public class JuegosTerapias extends AppCompatActivity {
         ((FrameLayout)recyclerViewJuegos.getParent()).removeView(recyclerViewJuegos);
         frameJuegos.addView(recyclerViewJuegos);
 
-        funciones_del_menu();
+        Menu.funciones_del_menu(JuegosTerapias.this,getIntent().getExtras().getString("nombre"),"Historial de Terapias");
+
+        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VerPerfilActivity.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                startActivityForResult(intent,0);
+            }
+        });
 
     }
 
@@ -150,88 +163,5 @@ public class JuegosTerapias extends AppCompatActivity {
         JuegoDataList.add(new JuegoTerapia("CORRER",R.drawable.juego2));
         JuegoDataList.add(new JuegoTerapia("NADAR",R.drawable.juego3));
         JuegoDataList.add(new JuegoTerapia("VOLAR",R.drawable.juego1));
-    }
-
-    private void funciones_del_menu(){
-        clicks_del_menu();
-        activar_menu();
-        LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-        lyt_menu.setVisibility(LinearLayout.GONE);
-    }
-    private void clicks_del_menu(){
-        final ImageButton btn_terapia=(ImageButton)findViewById(R.id.btn_terapias);
-        btn_terapia.setImageDrawable(getDrawable(R.drawable.terapia_activo));
-
-        final ImageButton btn_terapias=(ImageButton)findViewById(R.id.btn_terapias);
-        btn_terapias.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapias.this, VerTerapiaRecyclerActivity.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_calendario=(ImageButton)findViewById(R.id.btn_calendario);
-        btn_calendario.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapias.this, CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_paciente=(ImageButton)findViewById(R.id.btn_paciente);
-        btn_paciente.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapias.this, VerTerapiaRecyclerActivity.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_historial=(ImageButton)findViewById(R.id.btn_historial);
-        btn_historial.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapias.this, VerHistorialTerapias.class);
-                startActivity(intent);
-            }
-        });
-        final ImageButton btn_perfil=(ImageButton)findViewById(R.id.btn_perfil);
-        btn_perfil.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(JuegosTerapias.this, VerPerfilActivity.class);
-                startActivity(intent);
-            }
-        });
-
-    }
-
-    public boolean menu_activo(){
-        LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-        int dato= lyt_menu.getVisibility();
-        if(dato==LinearLayout.VISIBLE){
-            return true;
-        }else {
-            return false;
-        }
-    }
-
-    private void activar_menu() {
-        final ImageButton btn_oc=(ImageButton)findViewById(R.id.btn_oc);
-        btn_oc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout lyt_menu=(LinearLayout)findViewById(R.id.lyt_menu);
-                ConstraintLayout cont_terapias = (ConstraintLayout) findViewById(R.id.layout_count_terapias);
-                if(menu_activo()){
-                    lyt_menu.setVisibility(LinearLayout.GONE);
-                    cont_terapias.setVisibility(ConstraintLayout.VISIBLE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu));
-                }else {
-                    lyt_menu.setVisibility(LinearLayout.VISIBLE);
-                    cont_terapias.setVisibility(ConstraintLayout.GONE);
-                    btn_oc.setImageDrawable(getDrawable(R.drawable.menu_close));
-                }
-            }
-        });
     }
 }

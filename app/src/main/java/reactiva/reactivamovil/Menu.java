@@ -98,7 +98,7 @@ public class Menu extends AppCompatActivity{
                 intent.putExtra("nombre",nombre);
                 act.startActivity(intent);
             }
-        });
+        });/*DISPONIBLE DESDE LA VERSION 2
         btn_paciente.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -106,7 +106,8 @@ public class Menu extends AppCompatActivity{
                 intent.putExtra("nombre",nombre);
                 act.startActivity(intent);
             }
-        });
+        });*/
+
         btn_historial.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -159,5 +160,8 @@ public class Menu extends AppCompatActivity{
                 }
             }
         });
+    }
+    public static void activarBackButton(final Activity act){
+        act.findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
     }
 }

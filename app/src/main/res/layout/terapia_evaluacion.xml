@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/osa_inactive_1"/>
+            app:srcCompat="@drawable/reaccion1_inactiva"/>
 
 
         <ImageView
@@ -36,14 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/osa_inactive_2" />
+            app:srcCompat="@drawable/reaccion2_inactiva" />
 
         <ImageView
             android:id="@+id/imgv_alto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/osa_inactive_3" />
+            app:srcCompat="@drawable/reaccion3_inactiva" />
     </LinearLayout>
 
     <EditText

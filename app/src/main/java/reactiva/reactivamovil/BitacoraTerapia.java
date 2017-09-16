@@ -1,11 +1,16 @@
 package reactiva.reactivamovil;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -80,6 +85,17 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
 
         ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
         frameSucesosBitacoraTerapia.addView(listaDeObservacionesMedicas);
+
+        /*findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
+        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                startActivityForResult(intent,0);
+            }
+        });*/
 
 
     }

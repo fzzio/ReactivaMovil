@@ -23,9 +23,12 @@ public class ItemTerapiaView {
     private int btn_camara;
     private int btn_pause_detail;
     private int ver_perfil;
+    private String id_therapy;
+    private String id_consulta;
+    private String id_patient;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
-    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<Integer> extremidades_pic) {
+    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<Integer> extremidades_pic, String id_therapy, String id_consulta, String id_patient) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
@@ -41,6 +44,9 @@ public class ItemTerapiaView {
         this.ver_perfil = ver_perfil;
         this.extremidades_pic = extremidades_pic;
         this.estado = false;
+        this.id_therapy = id_therapy;
+        this.id_consulta = id_consulta;
+        this.id_patient = id_patient;
     }
 
     public int getProfile_pic() {
@@ -162,5 +168,17 @@ public class ItemTerapiaView {
 
     public void setVer_perfil(int ver_perfil) {
         this.ver_perfil = ver_perfil;
+    }
+
+    public String getId_therapy() {
+        return id_therapy;
+    }
+
+    public String getId_consulta() {
+        return id_consulta;
+    }
+
+    public String getId_patient() {
+        return id_patient;
     }
 }

@@ -118,10 +118,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Response: ",response);
                         try {
                             JSONObject g = new JSONObject(response);
-                            if(true){
-                                //if(g.get("event").toString().equals("1")){
-                                Intent i = new Intent(LoginActivity.this,VerPerfilActivity.class);
-                                i.putExtra("nombre","Erick Joel Rocafuerte Villón");
+                            if(g.get("event").toString().equals("1")){
+                                Toast.makeText(LoginActivity.this,"Iniciando sesión...",Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(LoginActivity.this,VerTerapiaRecyclerActivity.class);
+                                i.putExtra("nombre",g.get("user").toString());
                                 startActivity(i);
                             }else if(g.get("data").toString().equals("0")) {
                                 Toast.makeText(LoginActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();

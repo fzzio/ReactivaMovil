@@ -25,8 +25,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TimeZone;
 
 import reactiva.reactivamovil.CalendarActivity;
 import reactiva.reactivamovil.R;
@@ -56,16 +62,16 @@ public class CalendarAppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Se define el XML para CalendarAppointmentFragment
         View v = inflater.inflate(R.layout.calendar_fragment, container, false);
-        //Se definen las variables necesarias para procesar el JSONResponse
+        //Se define las variables para JSONResponse
         String selected_date = getArguments().getString("selected_date", "");
         String words [] = selected_date.split(" ");
         String mes = words[2];
-        String mes_mcv = monthFormatter(mes);
-        String año_mcv = words[3];
+        final String mes_mcv = monthFormatter(mes);
+        final String año_mcv = words[3];
         final String dia_mcv = words[1];
         //Create the Volley request Queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        //Remover todos los elementos de la lista
+        //Remove all elements from list
         appointmentList.clear();
         //Se define el RecyclerView
         appointmentRecyclerView = (RecyclerView) v.findViewById(R.id.calendar_recycler_view);
@@ -95,9 +101,32 @@ public class CalendarAppointmentFragment extends Fragment {
                                 String words_fullname [] = fullname.split(" ");
                                 String name = words_fullname[0] + " " + words_fullname[1] ;
                                 String last_names = " " + words_fullname[2] + " " + words_fullname[3];
-                                String hour = "12:50 PM";
-                                appointmentList.add(new Appointment(name, last_names, hour));
+                                //Time parsing
+                                String time = therapies.getJSONObject(j).get("time").toString();
+                                String date_mcv = dia_mcv + "-" + mes_mcv + "-" + año_mcv + " " + time;
+                                String timeStamp = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
+                                System.out.println(date_mcv);
+                                System.out.println(timeStamp);
+                                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat fromService = new SimpleDateFormat("hh:mm:ss");
+                                SimpleDateFormat formatReactiva = new SimpleDateFormat("hh:mm a");
+                                String reformattedStr = "";
+                                try {
+                                    reformattedStr = formatReactiva.format(fromService.parse(time));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                int result = date_mcv.compareTo(timeStamp);
+                                if (result > 0) {   //   > 0
+                                    appointmentList.add(new Appointment(name, last_names, reformattedStr, time));
+                                }
                             }
+                            Collections.sort(appointmentList, new Comparator<Appointment>() {
+                                @Override
+                                public int compare(Appointment o1, Appointment o2) {
+                                    return o1.getFormat().compareTo(o2.getFormat());
+                                }
+                            });
                             appointmentAdapterBuilder();
                         }
                     } catch (JSONException e) {
