@@ -59,7 +59,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
-        btnHistorialTerapias.setOnClickListener(this);
+        //btnHistorialTerapias.setOnClickListener(this);
         btnIniciarTerapia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         });
 
 
-        Menu.funciones_del_menu(VerPerfilActivity.this,getIntent().getExtras().getString("nombre"),"Iniciar Terapia");
+        Menu.funciones_del_menu(VerPerfilActivity.this,getIntent().getExtras().getString("nombre"),"INICIAR TERAPIA");
 
 
        /* LinearLayoutManager llm = new LinearLayoutManager(this);

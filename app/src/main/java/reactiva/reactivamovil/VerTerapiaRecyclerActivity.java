@@ -67,7 +67,6 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_terapia_recycler);
-        findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
         //terapias = cargaTerapias();
 
         rv = (RecyclerView) findViewById(R.id.recycler_view);
@@ -186,7 +185,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         Adaptador.notifyDataSetChanged();
         rv.setAdapter(Adaptador);
 
-        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"Terapias Activas");
+        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
     }
 
     private boolean esperar_respuesta(){

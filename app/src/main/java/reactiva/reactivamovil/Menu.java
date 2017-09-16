@@ -34,8 +34,9 @@ public class Menu extends AppCompatActivity{
     }
     public static void funciones_del_menu(Activity act, String nombre, String clase){
         final Typeface montR= Typeface.createFromAsset(act.getAssets(),"fonts/Montserrat-Regular.ttf");
+        final Typeface montRB= Typeface.createFromAsset(act.getAssets(),"fonts/Montserrat-Bold.ttf");
         ((TextView)act.findViewById(R.id.lbl_welcome)).setTypeface(montR);
-        ((TextView)act.findViewById(R.id.lbl_ubicacion)).setTypeface(montR);
+        ((TextView)act.findViewById(R.id.lbl_ubicacion)).setTypeface(montRB);
         TextView lbl_welcome=(TextView)act.findViewById(R.id.lbl_welcome);
         lbl_welcome.setText("¡Hola, "+nombre+"!");
         Menu.clicks_del_menu(act,nombre,clase);
@@ -65,6 +66,7 @@ public class Menu extends AppCompatActivity{
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
         }else if(clase == "Terapias Activas"){
+            act.findViewById(R.id.txt_terapias_activas_count).setVisibility(LinearLayout.VISIBLE);
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia_activo));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
@@ -160,8 +162,5 @@ public class Menu extends AppCompatActivity{
                 }
             }
         });
-    }
-    public static void activarBackButton(final Activity act){
-        act.findViewById(R.id.lyt_back).setVisibility(LinearLayout.VISIBLE);
     }
 }
