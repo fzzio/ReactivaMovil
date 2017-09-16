@@ -8,11 +8,13 @@ public class Appointment {
     private String nombres;
     private String apellidos;
     private String hora;
+    private String format;
 
-    public Appointment(String nombres, String apellidos, String hora) {
+    public Appointment(String nombres, String apellidos, String hora, String format) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.hora = hora;
+        this.format = format;
     }
 
     public String getNombres() { return nombres; }
@@ -26,4 +28,12 @@ public class Appointment {
     public String getHora() { return hora; }
 
     public void setHora(String hora) { this.hora = hora; }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
 }

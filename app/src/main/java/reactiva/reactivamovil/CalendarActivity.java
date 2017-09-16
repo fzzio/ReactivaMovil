@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import reactiva.reactivamovil.classes.Appointment;
@@ -105,17 +107,6 @@ public class CalendarActivity extends AppCompatActivity {
                 //Appointments Verify
                 CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 isAppointment(selected_date, calendar_closed);
-                /*System.out.println("AJA");
-                System.out.println(isTherapies());
-                if (isTherapies()) {
-                    Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarEmptyAppointmentFragment();
-                } else {
-                    Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarAppointmentFragment();
-                }*/
             }
 
             public void onSwipeLeft() {
@@ -123,9 +114,6 @@ public class CalendarActivity extends AppCompatActivity {
                 Calendar this_date = materialCalendarView.getSelectedDate().getCalendar();
                 this_date.add(Calendar.DATE, 1);
                 materialCalendarView.setSelectedDate(this_date);
-                /*isAppointment(materialCalendarView.getSelectedDate(), calendar_closed);
-                System.out.println("AJA");
-                System.out.println(isTherapies());*/
                 if (isToday(materialCalendarView.getSelectedDate())){
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
@@ -144,17 +132,6 @@ public class CalendarActivity extends AppCompatActivity {
                 //Appointments Verify
                 CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 isAppointment(selected_date, calendar_closed);
-                /*System.out.println("AJA");
-                System.out.println(isTherapies());
-                if (isTherapies()) {
-                    Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarEmptyAppointmentFragment();
-                } else {
-                    Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarAppointmentFragment();
-                }*/
             }
         });
 
@@ -184,9 +161,6 @@ public class CalendarActivity extends AppCompatActivity {
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
-                /*isAppointment(materialCalendarView.getSelectedDate(), calendar_closed);
-                System.out.println("AJA");
-                System.out.println(isTherapies());*/
                 if (isToday(materialCalendarView.getSelectedDate())){
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
@@ -205,17 +179,6 @@ public class CalendarActivity extends AppCompatActivity {
                 //Appointments Verify
                 CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 isAppointment(selected_date, calendar_closed);
-                /*System.out.println("AJA");
-                System.out.println(isTherapies());
-                if (isTherapies()) {
-                    Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarEmptyAppointmentFragment();
-                } else {
-                    Toast.makeText(CalendarActivity.this, "NO HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                    removeCalendarAppointmentFragment();
-                }*/
             }
         });
 
@@ -239,11 +202,6 @@ public class CalendarActivity extends AppCompatActivity {
                     //Appointments Verify
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     isAppointment(selected_date, calendar_closed);
-                    /*if (isTherapies()) {
-                        Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                        displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                        removeCalendarEmptyAppointmentFragment();
-                    }*/
                 }
 
             }
@@ -328,11 +286,6 @@ public class CalendarActivity extends AppCompatActivity {
             //Appointments Verify
             CalendarDay selected_date = materialCalendarView.getSelectedDate();
             isAppointment(selected_date, calendar_closed);
-            /*if (isTherapies()) {
-                Toast.makeText(CalendarActivity.this, "HAY CITAS PROGRAMADAS", Toast.LENGTH_SHORT).show();
-                displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
-                removeCalendarEmptyAppointmentFragment();
-            }*/
         }
     }
 
@@ -412,8 +365,8 @@ public class CalendarActivity extends AppCompatActivity {
         int mes = selected_date.getMonth();
         int año = selected_date.getYear();
         final String dia_mcv = Integer.toString(day);
-        String mes_mcv = monthFormatter(mes);
-        String año_mcv = Integer.toString(año);
+        final String mes_mcv = monthFormatter(mes);
+        final String año_mcv = Integer.toString(año);
         //Create the Volley request Queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         //Add parameters to URL from arguments
@@ -433,6 +386,41 @@ public class CalendarActivity extends AppCompatActivity {
                         String dia_ws = day.getString("day");
                         //Verify selected_date
                         if (dia_mcv.equals(dia_ws)){
+                            int counter = 0;
+                            JSONArray therapies = response.getJSONObject(i).getJSONArray("therapies");
+                            //Iterate JSONArray
+                            for(int j =0;j<therapies.length();j++) {
+                                Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
+                                //Add to list elements with the adapter class
+                                String fullname = therapies.getJSONObject(j).get("fullname").toString();
+                                String words_fullname [] = fullname.split(" ");
+                                String name = words_fullname[0] + " " + words_fullname[1] ;
+                                String last_names = " " + words_fullname[2] + " " + words_fullname[3];
+                                //Time parsing
+                                String time = therapies.getJSONObject(j).get("time").toString();
+                                String date_mcv = dia_mcv + "-" + mes_mcv + "-" + año_mcv + " " + time;
+                                String timeStamp = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
+                                System.out.println(date_mcv);
+                                System.out.println(timeStamp);
+                                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat fromService = new SimpleDateFormat("hh:mm:ss");
+                                SimpleDateFormat formatReactiva = new SimpleDateFormat("hh:mm a");
+                                String reformattedStr = "";
+                                try {
+                                    reformattedStr = formatReactiva.format(fromService.parse(time));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                int result = date_mcv.compareTo(timeStamp);
+                                if (result > 0) {   //   > 0
+                                    counter = counter + 1;
+                                }
+                            }
+                            if (counter == 0) {
+                                displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+                                removeCalendarAppointmentFragment();
+                                break;
+                            }
                             displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                             removeCalendarEmptyAppointmentFragment();
                             break;
