@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent i = new Intent(LoginActivity.this,VerTerapiaRecyclerActivity.class);
                                 i.putExtra("nombre",g.get("user").toString());
                                 startActivity(i);
-                            }else if(g.get("data").toString().equals("0")) {
+                            }else if(g.get("event").toString().equals("0")) {
                                 Toast.makeText(LoginActivity.this,"Usuario y/o Constraseña erróneos",Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(LoginActivity.this,"Error FATAL",Toast.LENGTH_LONG).show();

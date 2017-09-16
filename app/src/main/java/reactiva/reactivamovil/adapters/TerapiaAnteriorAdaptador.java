@@ -63,6 +63,7 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
                 Toast.makeText(activity,terapiaAnt.getTerapistaTerapiaAnterior(),Toast.LENGTH_SHORT).show();
                 ///LLAMO A LA ACTIVIDAD BITACORA
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
+                intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivity(intent);
 
             }
