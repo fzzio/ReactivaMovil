@@ -74,7 +74,7 @@ public class Menu extends AppCompatActivity{
         }else if(clase == "INICIAR TERAPIA"){
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
-            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente_activo));
+            btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
         }else if(clase == "HISTORIAL"){

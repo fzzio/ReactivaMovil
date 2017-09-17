@@ -146,7 +146,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                 TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
                 contador.setText(list.size() + " activas");
                 ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
-                TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+                TextView txt_no_terapia = (TextView) findViewById(R.id.txt_terapias_activas_count);
                 if(list.size() <= 0)
                 {
                     //hacer visible el layout con mensaje en caso de no existir terapias

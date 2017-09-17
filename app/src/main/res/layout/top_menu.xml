@@ -195,7 +195,7 @@
                 android:id="@+id/txt_terapias_activas_count"
                 android:layout_width="134dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="right"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
