@@ -269,9 +269,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         holder.imgVVerPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
+                String id = listaTerapias.get(position).getId_therapy();
+                Toast.makeText(activity,id,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
+                intent.putExtra("id_therapy",listaTerapias.get(position).getId_therapy());
                 //Log.d("intent0", listaTerapias.get(position).getId_therapy());
                 //intent.putExtra("id_therapy",activity.getIntent().getExtras().getString("id_therapy"));
                 activity.startActivityForResult(intent, 0);
