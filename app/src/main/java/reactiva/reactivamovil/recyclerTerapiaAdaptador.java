@@ -486,7 +486,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", response);
+                Log.d("Error.Response", error.toString());
             }
         }){
             @Override

@@ -33,7 +33,7 @@ public class ConstructorObservacionTerapia {
         return db.obtenerTodasLasObservacionesDeUnaTerapiaPorIDTerapia(idTerapia);
     }
 
-    public void insertaPacientesPruebas(BaseDeDatosPT db){
+   /* public void insertaPacientesPruebas(BaseDeDatosPT db){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_ID,5);
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_TERAPIA_ID, 5);
@@ -43,7 +43,7 @@ public class ConstructorObservacionTerapia {
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_PROXIMA_CITA, "15/09/17");
 
         db.insertarPacientes(contentValues);
-    }
+    }*/
 
     public void insertarObservacionTerapiaspruebas(BaseDeDatosPT db){
         ContentValues contentValues = new ContentValues();

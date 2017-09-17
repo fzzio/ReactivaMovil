@@ -45,8 +45,8 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         String nombre = bundle.getString("nombre");
         Log.d("Nombrexxx", nombre);
         String IdPaciente = bundle.getString("id_therapy");
-//        int idFinal = Integer.parseInt(IdPaciente);
-        //Log.d("id final paciente", IdPaciente);
+        int idFinal = Integer.parseInt(IdPaciente);
+        Log.d("id final paciente", IdPaciente);
 
         TextView nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
         TextView fechaBitacora    = (TextView) findViewById(R.id.tvBfecha);
@@ -84,8 +84,8 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         generarLinearLayoutVertical();
         //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
 
-        idprueba = 5;
-        obtenerObservacionesByIdTerapia(idprueba);
+        //idprueba = 5;
+        obtenerObservacionesByIdTerapia(idFinal);
 
         mostrarDatosEnRVobsernacionesTerapia();
 
