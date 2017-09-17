@@ -235,7 +235,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         //Set visibility to GONE in main activities
         final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
-        btn_back.setVisibility(GONE);
+        btn_back.setVisibility(View.INVISIBLE);
         Menu.funciones_del_menu(CalendarActivity.this,nombre,"AGENDA");
     }
 
