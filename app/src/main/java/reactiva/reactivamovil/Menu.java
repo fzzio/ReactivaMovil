@@ -59,26 +59,26 @@ public class Menu extends AppCompatActivity{
         TextView ubicacion = (TextView)act.findViewById(R.id.lbl_ubicacion);
         ubicacion.setText(clase);
         //verPerfil, verCalendario,verTerapia,verHistorial
-        if(clase == "Agenda"){
+        if(clase == "AGENDA"){
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda_activo));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
-        }else if(clase == "Terapias Activas"){
+        }else if(clase == "TERAPIAS ACTIVAS"){
             act.findViewById(R.id.txt_terapias_activas_count).setVisibility(LinearLayout.VISIBLE);
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia_activo));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
-        }else if(clase == "Iniciar Terapia"){
+        }else if(clase == "INICIAR TERAPIA"){
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente_activo));
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
-        }else if(clase == "Historial"){
+        }else if(clase == "HISTORIAL DE TERAPIAS"){
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
