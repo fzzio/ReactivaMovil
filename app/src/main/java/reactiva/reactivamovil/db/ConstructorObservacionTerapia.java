@@ -35,8 +35,8 @@ public class ConstructorObservacionTerapia {
 
     public void insertaPacientesPruebas(BaseDeDatosPT db){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_ID,1);
-        contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_TERAPIA_ID, 7);
+        contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_ID,5);
+        contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_TERAPIA_ID, 5);
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_NOMBRE,"israel Zurita");
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_EDAD, "33");
         contentValues.put(ConstantesDataBasePT.TABLE_PACIENTE_HORA_TERAPIA, "14:00");

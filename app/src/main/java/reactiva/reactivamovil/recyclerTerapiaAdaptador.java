@@ -274,7 +274,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 //Log.d("intent0", listaTerapias.get(position).getId_therapy());
                 //intent.putExtra("id_therapy",activity.getIntent().getExtras().getString("id_therapy"));
-                activity.startActivityForResult(intent, 0);
+//                Log.d("intentX", activity.getIntent().getExtras().getString("id_therapy"));
+                activity.startActivityForResult(intent, 0); //edgar
+                //activity.startActivity(intent);
             }
         });
 
@@ -456,8 +458,10 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     public void enviar_comentario(final String id_therapy){
         calendar = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       // simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        simpleDateFormat = new SimpleDateFormat("HH:mm");
         Date = simpleDateFormat.format(calendar.getTime());
+
 
 
         Log.d("Entrea ", id_therapy);
@@ -466,9 +470,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         //Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
-        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy),Date,comentario.getText().toString().trim());
+        Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/savecomments";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -513,8 +517,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
 
         ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy), Date, comentario.getText().toString().trim());
-        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy),"9:00", comentario.getText().toString().trim());
+        Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
