@@ -59,7 +59,16 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
-        //btnHistorialTerapias.setOnClickListener(this);
+        btnHistorialTerapias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Historial.class);
+                intent.putExtra("nombre","Juan");
+                startActivity(intent);
+            }
+        });
+
+
         btnIniciarTerapia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
