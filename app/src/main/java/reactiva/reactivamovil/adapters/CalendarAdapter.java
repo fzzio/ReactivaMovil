@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,8 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
                 intent.putExtra("patient", patient); //Nombre completo del paciente
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivityForResult(intent, 0);
-                System.out.println(id_patient);
-                System.out.println(patient);
+                Log.d("Pass.id_patient: ",id_patient);
+                Log.d("Pass.fullname ",patient);
             }
         });
     }
