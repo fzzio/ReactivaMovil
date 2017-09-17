@@ -46,6 +46,8 @@ import java.util.Map;
 import reactiva.reactivamovil.db.BaseDeDatosPT;
 import reactiva.reactivamovil.db.ConstructorObservacionTerapia;
 
+import static android.view.View.GONE;
+
 /**
  * Created by edgardan on 18/07/2017.
  */
@@ -185,6 +187,9 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         Adaptador.notifyDataSetChanged();
         rv.setAdapter(Adaptador);
 
+        //Set visibility to GONE in main activities
+        final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
+        btn_back.setVisibility(GONE);
         Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
     }
 

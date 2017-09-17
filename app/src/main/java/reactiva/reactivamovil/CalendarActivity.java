@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,6 +38,8 @@ import reactiva.reactivamovil.decorators.TodayDecorator;
 import reactiva.reactivamovil.fragments.CalendarAppointmentFragment;
 import reactiva.reactivamovil.fragments.CalendarEmptyAppointmentFragment;
 
+import static android.view.View.GONE;
+
 /**
  * Created by Fernando on 09/07/2017.
  */
@@ -58,7 +61,6 @@ public class CalendarActivity extends AppCompatActivity {
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
         final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.appointmentContainer);
-
         final Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
         calendar_month.setTypeface(type);
         calendar_today.setTypeface(type);
@@ -153,7 +155,7 @@ public class CalendarActivity extends AppCompatActivity {
                 removeCalendarEmptyAppointmentFragment();
                 removeCalendarAppointmentFragment();
                 //Change visibility
-                calendar_closed.setVisibility(View.GONE);
+                calendar_closed.setVisibility(GONE);
             }
         });
 
@@ -227,10 +229,13 @@ public class CalendarActivity extends AppCompatActivity {
                 removeCalendarEmptyAppointmentFragment();
                 removeCalendarAppointmentFragment();
                 //Change visibility
-                calendar_closed.setVisibility(View.GONE);
+                calendar_closed.setVisibility(GONE);
             }
         });
 
+        //Set visibility to GONE in main activities
+        final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
+        btn_back.setVisibility(GONE);
         Menu.funciones_del_menu(CalendarActivity.this,nombre,"AGENDA");
     }
 

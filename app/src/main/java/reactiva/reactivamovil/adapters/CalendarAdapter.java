@@ -50,12 +50,12 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
             public void onClick(View v) {
                 final Activity activity = (Activity) v.getContext();
                 Intent intent = new Intent(activity,VerPerfilActivity.class);
-                intent.putExtra("id_patient", id_patient); //ID del paciente
-                intent.putExtra("patient", patient); //Nombre completo del paciente
+                intent.putExtra("id_patient", id_patient); //Patien ID
+                intent.putExtra("patient", patient); //Complete name of the patient
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivityForResult(intent, 0);
-                Log.d("Pass.id_patient: ",id_patient);
-                Log.d("Pass.fullname ",patient);
+                Log.d("Parse.id_patient: ",id_patient);
+                Log.d("Parse.patient: ",patient);
             }
         });
     }

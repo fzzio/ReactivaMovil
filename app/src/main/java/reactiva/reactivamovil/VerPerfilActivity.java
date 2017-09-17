@@ -1,6 +1,7 @@
 package reactiva.reactivamovil;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import static android.view.View.GONE;
 
 public class VerPerfilActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -59,7 +62,15 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
-        //btnHistorialTerapias.setOnClickListener(this);
+        btnHistorialTerapias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                startActivity(intent);
+            }
+        });
+
         btnIniciarTerapia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +80,9 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-
+        //Underline ~ver info del paciente
+        final TextView tvVPlinkInfoPaciente = (TextView) findViewById(R.id.tvVPlinkInfoPaciente);
+        tvVPlinkInfoPaciente.setPaintFlags(tvVPlinkInfoPaciente.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
         Menu.funciones_del_menu(VerPerfilActivity.this,getIntent().getExtras().getString("nombre"),"INICIAR TERAPIA");
 
 

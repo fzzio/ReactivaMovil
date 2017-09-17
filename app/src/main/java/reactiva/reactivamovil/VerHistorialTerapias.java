@@ -75,6 +75,17 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
         ((ScrollView)registroDeTerapiasAnteriores.getParent()).removeView(registroDeTerapiasAnteriores);
         frameRegistroTerapiasAnteriores.addView(registroDeTerapiasAnteriores);
+
+        //Necessary for btn_back
+        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VerPerfilActivity.class);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                startActivityForResult(intent,0);
+            }
+        });
         Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
 
     }
