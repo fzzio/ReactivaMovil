@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/fondo_gradiente_perfil_terapias"
-    tools:context="reactiva.reactivamovil.VerHistorialTerapias">
+    android:background="@drawable/fondo_gradiente_perfil_terapias">
 
     <include layout="@layout/top_menu"/>
 
@@ -139,8 +138,6 @@
             android:layout_width="450dp"
             android:layout_height="227dp"
             android:layout_gravity="center">
-
-            -->
 
             <ScrollView
                 android:layout_width="match_parent"

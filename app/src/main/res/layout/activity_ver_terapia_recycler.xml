@@ -1,53 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAzulMarino">
     <include layout="@layout/top_menu"></include>
-
-
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="760dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/recycler_view">
-
-
-
-
-
+            android:layout_width="match_parent"
+            android:layout_height="760dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/recycler_view">
     </android.support.v7.widget.RecyclerView>
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAzulOscuro"
         android:id="@+id/layout_no_terapias">
-
-        <TextView
-            android:id="@+id/txtNoTerapias"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_column="0"
-            android:layout_marginTop="30dp"
-            android:layout_row="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="NO HAY TERAPIAS ACTIVAS"
-            android:textAlignment="center"
-            android:textColor="@color/colorCeleste"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </android.support.constraint.ConstraintLayout>
-
 </LinearLayout>

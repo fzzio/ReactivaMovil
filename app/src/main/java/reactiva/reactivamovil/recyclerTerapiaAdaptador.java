@@ -272,6 +272,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 Toast.makeText(activity,terapiaView.getNombre_detalle(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity,BitacoraTerapia.class);
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
+                //Log.d("intent0", listaTerapias.get(position).getId_therapy());
+                //intent.putExtra("id_therapy",activity.getIntent().getExtras().getString("id_therapy"));
                 activity.startActivityForResult(intent, 0);
             }
         });
@@ -510,8 +512,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy), Date, comentario.getText().toString().trim());
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
