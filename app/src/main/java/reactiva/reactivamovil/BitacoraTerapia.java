@@ -95,7 +95,7 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
                 startActivityForResult(intent,0);
             }
         });
-        Menu.funciones_del_menu(BitacoraTerapia.this,getIntent().getExtras().getString("nombre"),"Historial");
+        Menu.funciones_del_menu(BitacoraTerapia.this,getIntent().getExtras().getString("nombre"),"BITÁCORA DE TERAPIA");
     }
 
    /* public void inicializarAdaptadorObservacionesMedicas() {

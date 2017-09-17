@@ -134,7 +134,7 @@
                 android:src="@drawable/calendar_close_button"
                 android:visibility="gone"
                 android:layout_marginEnd="15dp"
-                android:layout_marginTop="2.5dp"
+                android:layout_marginTop="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>

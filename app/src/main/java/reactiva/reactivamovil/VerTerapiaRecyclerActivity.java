@@ -46,6 +46,8 @@ import java.util.Map;
 import reactiva.reactivamovil.db.BaseDeDatosPT;
 import reactiva.reactivamovil.db.ConstructorObservacionTerapia;
 
+import static android.view.View.GONE;
+
 /**
  * Created by edgardan on 18/07/2017.
  */
@@ -144,7 +146,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                 TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
                 contador.setText(list.size() + " activas");
                 ConstraintLayout layout_no_terapias = (ConstraintLayout) findViewById(R.id.layout_no_terapias);
-                TextView txt_no_terapia = (TextView) findViewById(R.id.txtNoTerapias);
+                TextView txt_no_terapia = (TextView) findViewById(R.id.txt_terapias_activas_count);
                 if(list.size() <= 0)
                 {
                     //hacer visible el layout con mensaje en caso de no existir terapias
@@ -185,6 +187,9 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         Adaptador.notifyDataSetChanged();
         rv.setAdapter(Adaptador);
 
+        //Set visibility to GONE in main activities
+        final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
+        btn_back.setVisibility(View.INVISIBLE);
         Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
     }
 

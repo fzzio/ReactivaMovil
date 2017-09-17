@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAzulMarino">
     <include layout="@layout/top_menu"></include>
-    <!--
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="0dp"
-            android:layout_alignParentTop="true"
-            android:id="@+id/layout_count_terapias"
-            android:background="@color/colorAzulMenu">
 
-<<<<<<< HEAD
-    <android.support.constraint.ConstraintLayout
+    <!--<android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginTop="0dp"
@@ -46,87 +35,19 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.484" />
-    </android.support.constraint.ConstraintLayout>
-=======
-            <TextView
-                android:id="@+id/txt_titulo_terapias"
-                android:layout_width="279dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="TERAPIAS ACTIVAS"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlanco"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.555"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@+id/txt_terapias_activas_count"
-                app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>-->
 
-            <TextView
-                android:id="@+id/txt_terapias_activas_count"
-                android:layout_width="134dp"
-                android:layout_height="37dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="N terapias activas"
-                android:textAlignment="textEnd"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.965"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.38" />
-        </android.support.constraint.ConstraintLayout>
--->
-
-        <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="760dp"
             android:layout_alignParentBottom="true"
             android:id="@+id/recycler_view">
->>>>>>> 032dd741502a98666f7998f31e832e5a46e489d2
+    </android.support.v7.widget.RecyclerView>
 
-
-
-
-
-        </android.support.v7.widget.RecyclerView>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAzulOscuro"
-            android:id="@+id/layout_no_terapias">
-
-            <TextView
-                android:id="@+id/txtNoTerapias"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_column="0"
-                android:layout_marginTop="30dp"
-                android:layout_row="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="NO HAY TERAPIAS ACTIVAS"
-                android:textAlignment="center"
-                android:textColor="@color/colorCeleste"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAzulOscuro"
+        android:id="@+id/layout_no_terapias">
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>
