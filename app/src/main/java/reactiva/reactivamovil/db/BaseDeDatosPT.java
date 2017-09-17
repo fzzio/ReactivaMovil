@@ -45,9 +45,9 @@ public class BaseDeDatosPT extends SQLiteOpenHelper{
                 ConstantesDataBasePT.TABLE_OBS_TERAPIA_ID_TERAPIA        + " INTEGER, " +  // clave foranea, el id de la terapia del paciente
                 ConstantesDataBasePT.TABLE_OBS_TERAPIA_COMENTARIO        + " TEXT, " +
                 ConstantesDataBasePT.TABLE_OBS_TERAPIA_HORA_COMENTARIO   + " TEXT, " +
-                ConstantesDataBasePT.TABLE_OBS_TERAPIA_ESTADO            + " TEXT, " +
-                "FOREIGN KEY (" + ConstantesDataBasePT.TABLE_OBS_TERAPIA_ID_TERAPIA + ") " +
-                "REFERENCES " + ConstantesDataBasePT.TABLE_PACIENTE + "("+ConstantesDataBasePT.TABLE_PACIENTE_ID + ")" +
+                ConstantesDataBasePT.TABLE_OBS_TERAPIA_ESTADO            + " TEXT " +
+               // "FOREIGN KEY (" + ConstantesDataBasePT.TABLE_OBS_TERAPIA_ID_TERAPIA + ") " +
+               // "REFERENCES " + ConstantesDataBasePT.TABLE_PACIENTE + "("+ConstantesDataBasePT.TABLE_PACIENTE_ID + ")" +
                 ")" ;
 
 

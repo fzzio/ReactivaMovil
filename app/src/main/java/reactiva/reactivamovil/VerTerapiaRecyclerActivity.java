@@ -77,7 +77,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         // inicializo la base de datos, grabo datos de prueba
         BaseDeDatosPT db = new BaseDeDatosPT(getApplicationContext());
         constructorObservacionTerapia = new ConstructorObservacionTerapia(getApplicationContext());
-        constructorObservacionTerapia.insertaPacientesPruebas(db);
+        //constructorObservacionTerapia.insertaPacientesPruebas(db);
         constructorObservacionTerapia.insertarObservacionTerapiaspruebas(db);
         ////////////////////////////////////////////////////////////////////
 
