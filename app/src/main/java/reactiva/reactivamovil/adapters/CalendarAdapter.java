@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,8 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
     @Override
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
         String  hour = appointmentList.get(position).getHora();
-        String patient = appointmentList.get(position).getNombres() +
-                appointmentList.get(position).getApellidos();
-
+        final String patient = appointmentList.get(position).getNombres() + appointmentList.get(position).getApellidos();
+        final String id_patient = appointmentList.get(position).getId_patient();
         holder.text_view_hour.setText(hour);
         holder.text_view_patient.setText(patient);
 
@@ -50,8 +50,12 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
             public void onClick(View v) {
                 final Activity activity = (Activity) v.getContext();
                 Intent intent = new Intent(activity,VerPerfilActivity.class);
+                intent.putExtra("id_patient", id_patient); //ID del paciente
+                intent.putExtra("patient", patient); //Nombre completo del paciente
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivityForResult(intent, 0);
+                Log.d("Pass.id_patient: ",id_patient);
+                Log.d("Pass.fullname ",patient);
             }
         });
     }
