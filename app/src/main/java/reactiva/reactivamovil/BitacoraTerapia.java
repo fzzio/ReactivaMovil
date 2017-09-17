@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -39,6 +40,13 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bitacora_terapia);
+
+        Bundle bundle = getIntent().getExtras();
+        String nombre = bundle.getString("nombre");
+        Log.d("Nombrexxx", nombre);
+        String IdPaciente = bundle.getString("id_therapy");
+        int idFinal = Integer.parseInt(IdPaciente);
+        Log.d("id final paciente", IdPaciente);
 
         TextView nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
         TextView fechaBitacora    = (TextView) findViewById(R.id.tvBfecha);
@@ -76,8 +84,8 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         generarLinearLayoutVertical();
         //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
 
-        idprueba = 7;
-        obtenerObservacionesByIdTerapia(idprueba);
+        //idprueba = 5;
+        obtenerObservacionesByIdTerapia(idFinal);
 
         mostrarDatosEnRVobsernacionesTerapia();
 
