@@ -6,6 +6,7 @@
     android:layout_height="50dp">
 
     <LinearLayout
+        android:id="@+id/calendar_item"
         android:layout_width="match_parent"
         android:layout_marginTop="1.9dp"
         android:layout_height="wrap_content"
@@ -36,6 +37,8 @@
             android:background="@color/colorMoradoOpaco"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="Mario Peréz Contreras"
             android:textColor="@color/colorBlanco"
             android:textSize="20sp" />
