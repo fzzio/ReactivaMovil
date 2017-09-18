@@ -5,13 +5,15 @@ package reactiva.reactivamovil.classes;
  */
 
 public class Appointment {
+    private String id_therapy;
     private String id_patient;
     private String nombres;
     private String apellidos;
     private String hora;
     private String format;
 
-    public Appointment(String id_patient, String nombres, String apellidos, String hora, String format) {
+    public Appointment(String id_therapy, String id_patient, String nombres, String apellidos, String hora, String format) {
+        this.id_therapy = id_therapy;
         this.id_patient = id_patient;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -45,5 +47,13 @@ public class Appointment {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public String getId_therapy() {
+        return id_therapy;
+    }
+
+    public void setId_therapy(String id_therapy) {
+        this.id_therapy = id_therapy;
     }
 }
