@@ -97,6 +97,7 @@ public class CalendarAppointmentFragment extends Fragment {
                             for(int j =0;j<therapies.length();j++) {
                                 Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
                                 //Add to list elements with the adapter class
+                                String id_therapy = therapies.getJSONObject(j).get("id_therapy").toString();
                                 String id_patient = therapies.getJSONObject(j).get("id_patient").toString();
                                 String name = therapies.getJSONObject(j).get("name").toString() + " ";
                                 String last_name = therapies.getJSONObject(j).get("last_name").toString();
@@ -116,7 +117,7 @@ public class CalendarAppointmentFragment extends Fragment {
                                 }
                                 int result = date_mcv.compareTo(timeStamp);
                                 if (result > 0) {   //   > 0
-                                    appointmentList.add(new Appointment(id_patient, name, last_name, reformattedStr, time));
+                                    appointmentList.add(new Appointment(id_therapy, id_patient, name, last_name, reformattedStr, time));
                                 }
                             }
                             Collections.sort(appointmentList, new Comparator<Appointment>() {
