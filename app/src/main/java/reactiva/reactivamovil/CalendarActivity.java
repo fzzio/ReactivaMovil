@@ -468,7 +468,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  month the numeric value
      *  @return name of a month
      */
-    public String current_month(int month) {
+    public static String current_month(int month) {
         String[] month_array = {"ENERO", "FEBRERO",
                 "MARZO", "ABRIL",
                 "MAYO", "JUNIO",
@@ -482,7 +482,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @return true if is today
      *          false otherwise
      */
-    public boolean isToday(CalendarDay selected_date) {
+    public static boolean isToday(CalendarDay selected_date) {
         CalendarDay current_date = CalendarDay.today();
         if (current_date.equals(selected_date))
             return true;
@@ -493,7 +493,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  month the numeric value
      *  @return name of a month
      */
-    public String get_month(int month) {
+    public static String get_month(int month) {
         String[] month_array = {"ene.", "feb.",
                 "mar.", "abr.",
                 "may.", "jun.",
@@ -507,7 +507,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  week the numeric value
      *  @return name of a week
      */
-    public String get_week(int week) {
+    public static String get_week(int week) {
         String[] week_array = {"Domingo", "Lunes",
                 "Martes", "Miércoles",
                 "Jueves", "Viernes",
@@ -515,7 +515,7 @@ public class CalendarActivity extends AppCompatActivity {
         return week_array[week-1];
     }
 
-    public String monthFormatter(int value) {
+    public static String monthFormatter(int value) {
         String mes="";
         switch(value) {
             case 0:    mes="01";
