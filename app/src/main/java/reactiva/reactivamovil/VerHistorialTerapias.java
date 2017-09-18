@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -17,7 +18,17 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import reactiva.reactivamovil.adapters.TerapiaAnteriorAdaptador;
 import reactiva.reactivamovil.classes.TerapiaAnterior;
@@ -57,6 +68,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
         encabezadoRegistro.setTypeface(fontMedium);
 
 
+
         ImageView imagenOjoHumano = (ImageView) findViewById(R.id.imgVerTerapia);
 
 
@@ -69,6 +81,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
         registroDeTerapiasAnteriores.setLayoutManager(llRegistroTera);
 
 
+        ///
         inicializadorTerapiasRegistrosData();
         inicilaizarAdaptadorRegistroTerapiasAnteriores();
 
@@ -98,14 +111,18 @@ public class VerHistorialTerapias extends AppCompatActivity {
     }
 
     public void inicializadorTerapiasRegistrosData () {
+
         terapiasAnterioresData = new ArrayList<TerapiaAnterior>();
-        terapiasAnterioresData.add(new TerapiaAnterior("15 Jul. 2017","Daniel Garcia Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Fernando Sanchez Garcia"));
+        terapiasAnterioresData.add(new TerapiaAnterior("15 Jul. 2017","Daniel Garcia Arreaga",""));
+
+
+
+       /* terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Fernando Sanchez Garcia"));
         terapiasAnterioresData.add(new TerapiaAnterior("5 Jul. 2017","Edgar Moreira Arreaga"));
         terapiasAnterioresData.add(new TerapiaAnterior("1 Jul. 2017","Israel Zurita Garcia"));
         terapiasAnterioresData.add(new TerapiaAnterior("25 Jun. 2017","Manuel Zurita Arreaga"));
         terapiasAnterioresData.add(new TerapiaAnterior("20 Jun. 2017","Kevin Sanchez Arreaga"));
         terapiasAnterioresData.add(new TerapiaAnterior("15 Jun. 2017","Daniel Garcia Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Dolores Garcia Arreaga"));
+        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Dolores Garcia Arreaga"));*/
     }
 }

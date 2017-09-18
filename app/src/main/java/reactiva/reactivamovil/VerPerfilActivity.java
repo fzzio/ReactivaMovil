@@ -34,6 +34,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
 
     private Button btnHistorialTerapias;
     private Button btnIniciarTerapia;
+    String textEdad;
 
     // Web service Ejemplo: http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyStartInfo?id=1
 
@@ -55,7 +56,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
 
         TextView nombresPacienteVP          = (TextView) findViewById(R.id.tvVPPacienteNombres);
         TextView apellidosPacienteVP        = (TextView) findViewById(R.id.tvVPPacienteApellidos);
-        TextView edadPacienteVP             = (TextView) findViewById(R.id.tvVPedadpaciente);
+        final TextView edadPacienteVP             = (TextView) findViewById(R.id.tvVPedadpaciente);
         TextView encabezadoProxCitaVP       = (TextView) findViewById(R.id.tvVPproxiCita);
         TextView fechaProximaCitaVP         = (TextView) findViewById(R.id.tvVPproxCitaData);
         TextView encabezadoZonasEjercitarVP = (TextView) findViewById(R.id.tvVPzonasEjercitar);
@@ -80,6 +81,19 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("respuesta", String.valueOf(response));
+                JSONObject edadP = null;
+                try {
+                    edadP = response.getJSONObject("patient");
+                    String edadF = edadP.getString("age");
+                    Log.d("respuesta2", edadP.toString());
+                    Log.d("respuesta3", edadF);
+                    textEdad = edadF + " años";
+                    edadPacienteVP.setText(textEdad);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -89,6 +103,8 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         }
 
         );
+
+
                /* try {
                     JSONObject jsonPatient = response.getJSONObject("patient");
                     String edadPaciente = jsonPatient.getString("age");
