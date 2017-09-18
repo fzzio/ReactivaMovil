@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,6 +26,14 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_perfil);
 
+        //Recibo los datos del paciente para crear el perfil del paciente indicado
+
+        Bundle bundle = getIntent().getExtras();
+        String id_patientP = bundle.getString("id_patient");
+        String namePacienteP = bundle.getString("patient");
+        Log.d("id perfil", id_patientP);
+        Log.d("id perfil", namePacienteP);
+
         TextView nombresPacienteVP          = (TextView) findViewById(R.id.tvVPPacienteNombres);
         TextView apellidosPacienteVP        = (TextView) findViewById(R.id.tvVPPacienteApellidos);
         TextView edadPacienteVP             = (TextView) findViewById(R.id.tvVPedadpaciente);
@@ -33,6 +42,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         TextView encabezadoZonasEjercitarVP = (TextView) findViewById(R.id.tvVPzonasEjercitar);
         TextView encabezadoInformacionLinkInfo = (TextView) findViewById(R.id.tvVPlinkInfoPaciente);
 
+        nombresPacienteVP.setText(namePacienteP);
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
         Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
