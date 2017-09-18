@@ -12,13 +12,32 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import static android.view.View.GONE;
+import static com.android.volley.Request.Method.POST;
 
 public class VerPerfilActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private Button btnHistorialTerapias;
     private Button btnIniciarTerapia;
+
+    // Web service Ejemplo: http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyStartInfo?id=1
+
+    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyStartInfo";
 
 
     @Override
@@ -42,7 +61,44 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         TextView encabezadoZonasEjercitarVP = (TextView) findViewById(R.id.tvVPzonasEjercitar);
         TextView encabezadoInformacionLinkInfo = (TextView) findViewById(R.id.tvVPlinkInfoPaciente);
 
-        nombresPacienteVP.setText(namePacienteP);
+        String[] nameFull = namePacienteP.split(" ");
+        String namesPacienteF = nameFull[0] + " " + nameFull[1];
+        String lastNamepaciente = nameFull[2] + " " + nameFull[3];
+
+        nombresPacienteVP.setText(namesPacienteF);
+        apellidosPacienteVP.setText(lastNamepaciente);
+
+        url = url + "?id="+ id_patientP;
+        Log.d("Ruta al web service: ", url);
+        ////Uso del web service para traer la edad y las extremidasdes del paciente a ejercitar
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        HashMap<String,String> parametros = new HashMap<>();
+        parametros.put("id",id_patientP);
+
+        JsonObjectRequest jsonObjectRequestX = new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("respuesta", String.valueOf(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.getMessage());
+            }
+        }
+
+        );
+               /* try {
+                    JSONObject jsonPatient = response.getJSONObject("patient");
+                    String edadPaciente = jsonPatient.getString("age");
+                    Log.d("La edad es ",edadPaciente);
+                    Log.d("respuesta", response.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }*/
+
+        requestQueue.add(jsonObjectRequestX);
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
         Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
@@ -66,7 +122,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+               // intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
                 startActivity(intent);
             }
         });

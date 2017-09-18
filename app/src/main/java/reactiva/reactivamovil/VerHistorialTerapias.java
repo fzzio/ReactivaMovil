@@ -86,7 +86,7 @@ public class VerHistorialTerapias extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-        Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
+        //Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
 
     }
 

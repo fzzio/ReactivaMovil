@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.BitacoraTerapia;
+import reactiva.reactivamovil.BitacoraTerapiaAnterior;
 import reactiva.reactivamovil.R;
 import reactiva.reactivamovil.classes.TerapiaAnterior;
 
@@ -62,8 +63,8 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
                 ///MUESTRO EL DOCTOR QUE HIZO LA TERAPIA
                 Toast.makeText(activity,terapiaAnt.getTerapistaTerapiaAnterior(),Toast.LENGTH_SHORT).show();
                 ///LLAMO A LA ACTIVIDAD BITACORA
-                Intent intent = new Intent(activity,BitacoraTerapia.class);
-                intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
+                Intent intent = new Intent(activity,BitacoraTerapiaAnterior.class);
+                //intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivity(intent);
 
             }
