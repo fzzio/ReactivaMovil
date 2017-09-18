@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 /**
  * Created by Fernando on 18/9/2017.
- * Unit Test for Calendar Activity
+ * Unit Test for Calendar Activity (Black Box Test)
  */
 
 public class CalendarActivityTest {
