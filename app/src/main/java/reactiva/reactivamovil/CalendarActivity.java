@@ -63,7 +63,6 @@ public class CalendarActivity extends AppCompatActivity {
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
-        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.appointmentContainer);
         final Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
         calendar_month.setTypeface(type);
         calendar_today.setTypeface(type);
@@ -236,7 +235,6 @@ public class CalendarActivity extends AppCompatActivity {
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     isAppointment(selected_date, calendar_closed);
                 }
-
             }
         });
 
@@ -427,26 +425,10 @@ public class CalendarActivity extends AppCompatActivity {
                             //Iterate JSONArray
                             for(int j =0;j<therapies.length();j++) {
                                 Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
-                                //Add to list elements with the adapter class
-                                String fullname = therapies.getJSONObject(j).get("fullname").toString();
-                                String words_fullname [] = fullname.split(" ");
-                                String name = words_fullname[0] + " " + words_fullname[1] ;
-                                String last_names = " " + words_fullname[2] + " " + words_fullname[3];
                                 //Time parsing
                                 String time = therapies.getJSONObject(j).get("time").toString();
                                 String date_mcv = dia_mcv + "-" + mes_mcv + "-" + año_mcv + " " + time;
                                 String timeStamp = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
-                                System.out.println(date_mcv);
-                                System.out.println(timeStamp);
-                                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-                                SimpleDateFormat fromService = new SimpleDateFormat("hh:mm:ss");
-                                SimpleDateFormat formatReactiva = new SimpleDateFormat("hh:mm a");
-                                String reformattedStr = "";
-                                try {
-                                    reformattedStr = formatReactiva.format(fromService.parse(time));
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
                                 int result = date_mcv.compareTo(timeStamp);
                                 if (result > 0) {   //   > 0
                                     counter = counter + 1;
