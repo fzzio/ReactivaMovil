@@ -3,6 +3,7 @@ package reactiva.reactivamovil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+import com.prolificinteractive.materialcalendarview.TitleChanger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,6 +162,17 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
+        //Every time when OnMonthChangeListener hear somethin update month_text_view
+        materialCalendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                if (materialCalendarView.state().edit().getCalendarDisplayMode().equals("MONTHS")) {
+                    materialCalendarView.updateUi();
+                    calendar_month.setText(materialCalendarView.getTitle());
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                }
+            }
+        });
 
         //Every time when OnDateChangedListener hear something DisplayMode is changed to WEEKS
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -190,6 +204,22 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isSelectedDateNull(materialCalendarView.getSelectedDate()) && !isToday(materialCalendarView.getSelectedDate())) {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                    //SetSelectedDate to CurrentDate
+                    materialCalendarView.setSelectedDate(CalendarDay.today());
+                    //Update Calendar DisplayMode to WEEKS
+                    materialCalendarView.state().edit()
+                            .setCalendarDisplayMode(CalendarMode.WEEKS)
+                            .commit();
+                    //Update Dynamic Month Label
+                    CalendarDay day = materialCalendarView.getSelectedDate();
+                    int month_label = day.getMonth();
+                    calendar_month.setText(current_month(month_label));
+                    //Appointments Verify
+                    CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                    isAppointment(selected_date, calendar_closed);
+                } else if(!materialCalendarView.getCurrentMonth().equals(current_month(CalendarDay.from(Calendar.getInstance()).getMonth()))) {
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
                     //SetSelectedDate to CurrentDate
