@@ -540,15 +540,15 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date = simpleDateFormat.format(calendar.getTime());
 
-
+        int id_therapyint = Integer.parseInt(id_therapy);
         Log.d("Entrea ", id_therapy);
         Log.d("comentariotext ", comentario.getText().toString().trim());
         Log.d("fechaa ", Date);
         //Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(id_therapyint,Date,comentario.getText().toString().trim());
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/savecomments";//falta url
@@ -586,15 +586,15 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date = simpleDateFormat.format(calendar.getTime());
 
-
+        int id_therapyint = Integer.parseInt(id_therapy);
         Log.d("Entrea ", id_therapy);
         Log.d("comentariotext ", comentario.getText().toString().trim());
         Log.d("fechaa ", Date);
         Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(id_therapyint,Date,comentario.getText().toString().trim());
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
