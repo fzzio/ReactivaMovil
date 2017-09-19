@@ -65,6 +65,9 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
         final TextView nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
         final TextView fechaBitacora    = (TextView) findViewById(R.id.tvBfecha);
 
+        final TextView nombreTerapista = (TextView) findViewById(R.id.tvHTterapista);
+        final TextView fechaTerapia = (TextView) findViewById(R.id.tvHTfecha);
+
         //nombrePacienteBitacora.setText(nombre);
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
@@ -73,8 +76,9 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
         Typeface fontBlack = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Black.ttf");
 
         nombrePacienteBitacora.setTypeface(fontBold);
-        fechaBitacora.setTypeface(fontMedium);
-
+        //fechaBitacora.setTypeface(fontMedium);
+        nombreTerapista.setTypeface(fontMedium);
+        fechaTerapia.setTypeface(fontMedium);
 
 
         frameSucesosBitacoraTerapia = (FrameLayout) findViewById(R.id.frameObsMedicasBitacora);
@@ -105,7 +109,10 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
                     Log.d(" Historial Paciente: ", namePaciente);
 
                     nombrePacienteBitacora.setText(namePaciente);
-                    fechaBitacora.setText(dateTerapiaAnte);
+                    //fechaBitacora.setText(dateTerapiaAnte);
+                    nombreTerapista.setText(nameTerapista);
+                    fechaTerapia.setText(dateTerapiaAnte);
+
 
                     if (dataFull.getJSONArray("history").length()== 0) {
                         Log.d("No llegaron los datos: ", "No terapias anteriorres y comentarios");
