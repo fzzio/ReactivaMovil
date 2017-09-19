@@ -16,7 +16,7 @@ public class ItemTerapiaView {
     private String nombre_detalle;
     private String edad_detalle;
     private int profile_pic_detalle;
-    private ArrayList<Integer> extremidades_pic;
+    private ArrayList<String> extremidades_pic;
     private int btn_stop;
     private int btn_pausa;
     private int btn_comentario;
@@ -28,7 +28,7 @@ public class ItemTerapiaView {
     private String id_patient;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
 
-    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<Integer> extremidades_pic, String id_therapy, String id_consulta, String id_patient) {
+    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<String> extremidades_pic, String id_therapy, String id_consulta, String id_patient) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
@@ -97,11 +97,11 @@ public class ItemTerapiaView {
         this.edad_detalle = edad_detalle;
     }
 
-    public ArrayList<Integer> getExtremidades_pic() {
+    public ArrayList<String> getExtremidades_pic() {
         return extremidades_pic;
     }
 
-    public void setExtremidades_pic(ArrayList<Integer> extremidades_pic) {
+    public void setExtremidades_pic(ArrayList<String> extremidades_pic) {
         this.extremidades_pic = extremidades_pic;
     }
 

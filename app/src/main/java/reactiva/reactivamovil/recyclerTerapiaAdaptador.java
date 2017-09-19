@@ -118,7 +118,10 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
         //holder.imgExtremidad1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
         //holder.imgExtremidadDetalle1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
-        cargarExtremidades(listaTerapias.get(position).getExtremidades_pic(), holder);
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //cargarExtremidades(listaTerapias.get(position).getExtremidades_pic(), holder);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
 

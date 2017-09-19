@@ -112,11 +112,12 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                         String id_consulta = ids.getString("id_consulta");
                         String id_patient = ids.getString("id_patient");
 
-                        ArrayList<Integer> lstExtremidades = new ArrayList<Integer>();
+                        //ArrayList<Integer> lstExtremidades = new ArrayList<Integer>();
+                        ArrayList<String> lstExtremidades = new ArrayList<String>();
 
                         for(int j =0;j<pacienteExtremidades.length();j++){
-                            Log.d("Extremidad detalle: ",pacienteExtremidades.getJSONObject(j).get("id_limb").toString());
-                            int extre = pacienteExtremidades.getJSONObject(j).getInt("id_limb");
+                            Log.d("Extremidad detalle: ",pacienteExtremidades.getJSONObject(j).get("icon").toString());
+                            String extre = pacienteExtremidades.getJSONObject(j).getString("icon");
                             System.out.print(extre);
                             lstExtremidades.add(extre);
                         }
@@ -133,6 +134,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                         //ItemTerapiaView pctTerap = new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, lstExtremidades);
 
                         list.add(new ItemTerapiaView(R.drawable.profile_m, nombre, "00:00:00", "00:00:00", nombre, edad+" años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, lstExtremidades, id_therapy, id_consulta, id_patient));
+                        //check tipo de variable de los campos
 
 
                     } catch (JSONException e) {
