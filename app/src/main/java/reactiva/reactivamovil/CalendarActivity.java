@@ -3,6 +3,7 @@ package reactiva.reactivamovil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+import com.prolificinteractive.materialcalendarview.TitleChanger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +63,6 @@ public class CalendarActivity extends AppCompatActivity {
         final TextView calendar_today = (TextView) findViewById(R.id.calendar_today_txv);
         final TextView calendar_month = (TextView) findViewById(R.id.calendar_month_txv);
         final ImageView calendar_closed = (ImageView) findViewById(R.id.calendar_closed);
-        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.appointmentContainer);
         final Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
         calendar_month.setTypeface(type);
         calendar_today.setTypeface(type);
@@ -159,6 +161,17 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
+        //Every time when OnMonthChangeListener hear somethin update month_text_view
+        materialCalendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                if (materialCalendarView.state().edit().getCalendarDisplayMode().equals("MONTHS")) {
+                    materialCalendarView.updateUi();
+                    calendar_month.setText(materialCalendarView.getTitle());
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                }
+            }
+        });
 
         //Every time when OnDateChangedListener hear something DisplayMode is changed to WEEKS
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -205,8 +218,23 @@ public class CalendarActivity extends AppCompatActivity {
                     //Appointments Verify
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     isAppointment(selected_date, calendar_closed);
+                } else if(!materialCalendarView.getCurrentMonth().equals(current_month(CalendarDay.from(Calendar.getInstance()).getMonth()))) {
+                    //Update Today's Style
+                    calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                    //SetSelectedDate to CurrentDate
+                    materialCalendarView.setSelectedDate(CalendarDay.today());
+                    //Update Calendar DisplayMode to WEEKS
+                    materialCalendarView.state().edit()
+                            .setCalendarDisplayMode(CalendarMode.WEEKS)
+                            .commit();
+                    //Update Dynamic Month Label
+                    CalendarDay day = materialCalendarView.getSelectedDate();
+                    int month_label = day.getMonth();
+                    calendar_month.setText(current_month(month_label));
+                    //Appointments Verify
+                    CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                    isAppointment(selected_date, calendar_closed);
                 }
-
             }
         });
 
@@ -397,26 +425,10 @@ public class CalendarActivity extends AppCompatActivity {
                             //Iterate JSONArray
                             for(int j =0;j<therapies.length();j++) {
                                 Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
-                                //Add to list elements with the adapter class
-                                String fullname = therapies.getJSONObject(j).get("fullname").toString();
-                                String words_fullname [] = fullname.split(" ");
-                                String name = words_fullname[0] + " " + words_fullname[1] ;
-                                String last_names = " " + words_fullname[2] + " " + words_fullname[3];
                                 //Time parsing
                                 String time = therapies.getJSONObject(j).get("time").toString();
                                 String date_mcv = dia_mcv + "-" + mes_mcv + "-" + año_mcv + " " + time;
                                 String timeStamp = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
-                                System.out.println(date_mcv);
-                                System.out.println(timeStamp);
-                                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-                                SimpleDateFormat fromService = new SimpleDateFormat("hh:mm:ss");
-                                SimpleDateFormat formatReactiva = new SimpleDateFormat("hh:mm a");
-                                String reformattedStr = "";
-                                try {
-                                    reformattedStr = formatReactiva.format(fromService.parse(time));
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
                                 int result = date_mcv.compareTo(timeStamp);
                                 if (result > 0) {   //   > 0
                                     counter = counter + 1;
@@ -456,7 +468,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  month the numeric value
      *  @return name of a month
      */
-    public String current_month(int month) {
+    public static String current_month(int month) {
         String[] month_array = {"ENERO", "FEBRERO",
                 "MARZO", "ABRIL",
                 "MAYO", "JUNIO",
@@ -470,7 +482,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @return true if is today
      *          false otherwise
      */
-    public boolean isToday(CalendarDay selected_date) {
+    public static boolean isToday(CalendarDay selected_date) {
         CalendarDay current_date = CalendarDay.today();
         if (current_date.equals(selected_date))
             return true;
@@ -481,7 +493,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  month the numeric value
      *  @return name of a month
      */
-    public String get_month(int month) {
+    public static String get_month(int month) {
         String[] month_array = {"ene.", "feb.",
                 "mar.", "abr.",
                 "may.", "jun.",
@@ -495,7 +507,7 @@ public class CalendarActivity extends AppCompatActivity {
      *  @param  week the numeric value
      *  @return name of a week
      */
-    public String get_week(int week) {
+    public static String get_week(int week) {
         String[] week_array = {"Domingo", "Lunes",
                 "Martes", "Miércoles",
                 "Jueves", "Viernes",
@@ -503,7 +515,7 @@ public class CalendarActivity extends AppCompatActivity {
         return week_array[week-1];
     }
 
-    public String monthFormatter(int value) {
+    public static String monthFormatter(int value) {
         String mes="";
         switch(value) {
             case 0:    mes="01";

@@ -98,7 +98,7 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("Response: ",response.toString());
+                Log.d("ResponseX: ",response.toString());
                 for(int i=0;i<response.length();i++){
                     try {
                         JSONObject paciente = response.getJSONObject(i).getJSONObject("info");

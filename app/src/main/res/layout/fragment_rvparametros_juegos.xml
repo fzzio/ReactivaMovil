@@ -19,51 +19,51 @@
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginStart="92dp"
-                android:text="PARAMETROS"
-                android:textColor="#1c3651"
-                android:textStyle="bold"
                 android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/textView14" />
+                android:layout_alignParentStart="true"
+                android:layout_gravity="left"
+                android:text="PARAMETROS"
+                android:textAlignment="viewStart"
+                android:textColor="#1c3651"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvX"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="X"
+                android:textAlignment="center"
                 android:textColor="#1c3651"
                 android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@+id/tvZ"
-                android:layout_marginEnd="46dp" />
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/textView13" />
 
             <TextView
                 android:id="@+id/tvY"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="23dp"
                 android:text="Z"
+                android:textAlignment="center"
                 android:textColor="#1c3651"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvZ"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Y"
-                android:textColor="#1c3651"
-                android:textStyle="bold"
                 android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
                 android:layout_toStartOf="@+id/tvY"
-                android:layout_marginEnd="31dp" />
+                android:text="Y"
+                android:textAlignment="center"
+                android:textColor="#1c3651"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

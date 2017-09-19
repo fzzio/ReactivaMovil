@@ -40,6 +40,7 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
     @Override
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
         String  hour = appointmentList.get(position).getHora();
+        final String id_therapy = appointmentList.get(position).getId_therapy();
         final String patient = appointmentList.get(position).getNombres() + appointmentList.get(position).getApellidos();
         final String id_patient = appointmentList.get(position).getId_patient();
         holder.text_view_hour.setText(hour);
@@ -50,10 +51,12 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.Calen
             public void onClick(View v) {
                 final Activity activity = (Activity) v.getContext();
                 Intent intent = new Intent(activity,VerPerfilActivity.class);
-                intent.putExtra("id_patient", id_patient); //Patien ID
-                intent.putExtra("patient", patient); //Complete name of the patient
+                intent.putExtra("id_therapy", id_therapy); // Therapy ID
+                intent.putExtra("id_patient", id_patient); // Patient ID
+                intent.putExtra("patient", patient); // Complete name of the patient
                 intent.putExtra("nombre",activity.getIntent().getExtras().getString("nombre"));
                 activity.startActivityForResult(intent, 0);
+                Log.d("Parse.id_therapy: ",id_therapy);
                 Log.d("Parse.id_patient: ",id_patient);
                 Log.d("Parse.patient: ",patient);
             }

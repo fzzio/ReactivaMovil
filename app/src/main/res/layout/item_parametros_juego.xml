@@ -12,7 +12,7 @@
 
        <TextView
            android:id="@+id/tvDetalleParamJ"
-           android:layout_width="wrap_content"
+           android:layout_width="225dp"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
            android:layout_weight="0.07"
@@ -26,12 +26,13 @@
 
        <TextView
            android:id="@+id/tvParamX"
-           android:layout_width="wrap_content"
-           android:layout_marginLeft="5dp"
+           android:layout_width="75dp"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
+           android:layout_marginLeft="5dp"
            android:layout_weight="0.01"
-           android:text="49,3" />
+           android:text="49,3"
+           android:textAlignment="center" />
 
        <View
            android:layout_width="1.5dp"
@@ -41,12 +42,13 @@
 
        <TextView
            android:id="@+id/tvParamY"
-           android:layout_width="wrap_content"
+           android:layout_width="75dp"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="5dp"
            android:layout_gravity="center"
+           android:layout_marginLeft="5dp"
            android:layout_weight="0.01"
-           android:text="12" />
+           android:text="12"
+           android:textAlignment="center" />
 
        <View
            android:layout_width="1.5dp"
@@ -56,12 +58,13 @@
 
        <TextView
            android:id="@+id/tvParamZ"
-           android:layout_marginLeft="5dp"
-           android:layout_width="wrap_content"
+           android:layout_width="75dp"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
+           android:layout_marginLeft="5dp"
            android:layout_weight="0.01"
-           android:text="5.5" />
+           android:text="5.5"
+           android:textAlignment="center" />
 
    </LinearLayout>
 

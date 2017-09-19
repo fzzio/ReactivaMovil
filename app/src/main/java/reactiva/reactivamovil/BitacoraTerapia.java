@@ -42,7 +42,7 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         setContentView(R.layout.bitacora_terapia);
 
         Bundle bundle = getIntent().getExtras();
-        String nombre = bundle.getString("nombre");
+        String nombre = bundle.getString("full_name");
         Log.d("Nombrexxx", nombre);
         String IdPaciente = bundle.getString("id_therapy");
         int idFinal = Integer.parseInt(IdPaciente);
@@ -54,7 +54,7 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
        // TextView nombrePaciente      = (TextView) findViewById(R.id.tvHTNombreCompletoPaciente);
         //TextView encabezadoUltimaObs = (TextView) findViewById(R.id.tvHTultimaObservacion);
 
-
+        nombrePacienteBitacora.setText(nombre);
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
         Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");

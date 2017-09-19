@@ -10,11 +10,20 @@ public class TerapiaAnterior {
 
     String fechaTerapiaAnterior;
     String terapistaTerapiaAnterior;
+    String idTerapiaAnterior;
     int view_terapy;
 
-    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior) {
+    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior, String idTerapiaAnterior, int view_terapy) {
         this.fechaTerapiaAnterior = fechaTerapiaAnterior;
         this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
+        this.idTerapiaAnterior = idTerapiaAnterior;
+        this.view_terapy = view_terapy;
+    }
+
+    public TerapiaAnterior(String fechaTerapiaAnterior, String terapistaTerapiaAnterior, String idTerapiaAnterior) {
+        this.fechaTerapiaAnterior = fechaTerapiaAnterior;
+        this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
+        this.idTerapiaAnterior = idTerapiaAnterior;
     }
 
     public String getFechaTerapiaAnterior() {
@@ -33,7 +42,20 @@ public class TerapiaAnterior {
         this.terapistaTerapiaAnterior = terapistaTerapiaAnterior;
     }
 
-    public void setView_terapy() {
-        this.view_terapy = R.drawable.view_therapy;
+    public String getIdTerapiaAnterior() {
+        return idTerapiaAnterior;
+    }
+
+    public void setIdTerapiaAnterior(String idTerapiaAnterior) {
+        this.idTerapiaAnterior = idTerapiaAnterior;
+    }
+
+    public int getView_terapy() {
+        return view_terapy;
+    }
+
+    public void setView_terapy(int view_terapy) {
+        this.view_terapy = view_terapy;
     }
 }
+

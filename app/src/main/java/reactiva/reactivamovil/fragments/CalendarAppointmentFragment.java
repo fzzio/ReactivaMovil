@@ -97,18 +97,16 @@ public class CalendarAppointmentFragment extends Fragment {
                             for(int j =0;j<therapies.length();j++) {
                                 Log.d("Therapies.Details: ",therapies.getJSONObject(j).get("id_therapy").toString());
                                 //Add to list elements with the adapter class
+                                String id_therapy = therapies.getJSONObject(j).get("id_therapy").toString();
                                 String id_patient = therapies.getJSONObject(j).get("id_patient").toString();
-                                String fullname = therapies.getJSONObject(j).get("fullname").toString();
-                                String words_fullname [] = fullname.split(" ");
-                                String name = words_fullname[0] + " " + words_fullname[1] ;
-                                String last_names = " " + words_fullname[2] + " " + words_fullname[3];
+                                String name = therapies.getJSONObject(j).get("name").toString() + " ";
+                                String last_name = therapies.getJSONObject(j).get("last_name").toString();
                                 //Time parsing
                                 String time = therapies.getJSONObject(j).get("time").toString();
                                 String date_mcv = dia_mcv + "-" + mes_mcv + "-" + año_mcv + " " + time;
                                 String timeStamp = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
                                 System.out.println(date_mcv);
                                 System.out.println(timeStamp);
-                                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
                                 SimpleDateFormat fromService = new SimpleDateFormat("hh:mm:ss");
                                 SimpleDateFormat formatReactiva = new SimpleDateFormat("hh:mm a");
                                 String reformattedStr = "";
@@ -119,7 +117,7 @@ public class CalendarAppointmentFragment extends Fragment {
                                 }
                                 int result = date_mcv.compareTo(timeStamp);
                                 if (result > 0) {   //   > 0
-                                    appointmentList.add(new Appointment(id_patient, name, last_names, reformattedStr, time));
+                                    appointmentList.add(new Appointment(id_therapy, id_patient, name, last_name, reformattedStr, time));
                                 }
                             }
                             Collections.sort(appointmentList, new Comparator<Appointment>() {
@@ -147,7 +145,6 @@ public class CalendarAppointmentFragment extends Fragment {
         requestQueue.add(jsonArrayRequest);
         //Se define el TextView
         TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
-        //String selected_date = getArguments().getString("selected_date", "");
         selected_date_txv.setText(selected_date);
         //Se define fonts
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
