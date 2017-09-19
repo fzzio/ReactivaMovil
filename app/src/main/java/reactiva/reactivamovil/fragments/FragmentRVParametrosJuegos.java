@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import reactiva.reactivamovil.LoginActivity;
@@ -39,7 +40,7 @@ import reactiva.reactivamovil.classes.ParametrosJuego;
 public class FragmentRVParametrosJuegos extends Fragment {
 
 
-    ArrayList<ParametrosJuego> parametrosJuegoDataList;
+    public ArrayList<ParametrosJuego> parametrosJuegoDataList;
     private FrameLayout frameParametrosJuego;
     private RecyclerView recyclerViewParametrosJuego;
 
@@ -61,21 +62,21 @@ public class FragmentRVParametrosJuegos extends Fragment {
         recyclerViewParametrosJuego.setLayoutManager(llParametrosJuego);
 
         inicializadorParametrosJuegoData();
-        inicilaizarAdaptadorParametrosJuego();
+        //inicializarAdaptadorParametrosJuego();
 
         return v;
     }
 
 
-    public void inicilaizarAdaptadorParametrosJuego(){
-        ParametrosJuegoAdaptador adaptadorParametrosJuego = new ParametrosJuegoAdaptador(parametrosJuegoDataList);
+    public void inicializarAdaptadorParametrosJuego(ArrayList<ParametrosJuego> a){
+        ParametrosJuegoAdaptador adaptadorParametrosJuego = new ParametrosJuegoAdaptador(a);
         recyclerViewParametrosJuego.setAdapter(adaptadorParametrosJuego);
     }
 
     public void inicializadorParametrosJuegoData () {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url ="http://107.170.105.224:6522/reactiva-api/index.php/web_api/get_game_parameters?game=1";
-        parametrosJuegoDataList = new ArrayList<ParametrosJuego>();
+        final ArrayList<ParametrosJuego> params = new ArrayList<ParametrosJuego>();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -95,15 +96,24 @@ public class FragmentRVParametrosJuegos extends Fragment {
                                         Toast.makeText(getActivity(),elementoLista.getString("mensaje"),Toast.LENGTH_LONG).show();
                                         return;
                                     }else{
-                                        Toast.makeText(getActivity(),"Si hubo datos",Toast.LENGTH_LONG).show();
-                                        activarBotonInicioTerapia();
-                                        parametrosJuegoDataList.add(new ParametrosJuego(nombres.getString(i),elementoLista.getString("x"),elementoLista.getString("y"),elementoLista.getString("z")));
-                                    }
 
+                                        activarBotonInicioTerapia();
+
+                                        DecimalFormat dc = new DecimalFormat("00.00");
+                                        String x = dc.format(elementoLista.getDouble("x"));
+                                        String y = dc.format(elementoLista.getDouble("y"));
+                                        String z = dc.format(elementoLista.getDouble("z"));
+                                        ParametrosJuego pj = new ParametrosJuego(nombres.getString(i),x,y,z);
+                                        //parametrosJuegoDataList.add(new ParametrosJuego("eje1","1","2","3"));
+                                        params.add(pj);
+                                        Toast.makeText(getActivity(),"Si hubo datos",Toast.LENGTH_LONG).show();
+                                    }
                                 }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }finally {
+                            inicializarAdaptadorParametrosJuego(params);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -116,6 +126,9 @@ public class FragmentRVParametrosJuegos extends Fragment {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
+        if(params.size()>0){
+            inicializarAdaptadorParametrosJuego(params);
+        }
     }
     public void activarBotonInicioTerapia(){
         getActivity().findViewById(R.id.btnIniciarTerapia).setVisibility(Button.VISIBLE);
@@ -127,6 +140,9 @@ public class FragmentRVParametrosJuegos extends Fragment {
             @Override
             public void onClick(View v) {
                 //aqui deberia actualizar el valor de la terapia que le pasan a este activity
+                Intent i = new Intent(getActivity(),VerTerapiaRecyclerActivity.class);
+                i.putExtra("nombre", getActivity().getIntent().getExtras().getString("nombre"));
+                startActivity(i);
             }
         });
     }
