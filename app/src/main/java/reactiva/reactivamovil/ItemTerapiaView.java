@@ -27,8 +27,9 @@ public class ItemTerapiaView {
     private String id_consulta;
     private String id_patient;
     private boolean estado;//True cuando esta activo, False cuando esta inactivo
+    private int btn_start;
 
-    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<String> extremidades_pic, String id_therapy, String id_consulta, String id_patient) {
+    public ItemTerapiaView(int profile_pic, String nombre, String temporizador, String hora, String nombre_detalle, String edad_detalle, int btn_comentario, int btn_stop, int btn_pausa, int btn_camara, int ver_perfil, ArrayList<String> extremidades_pic, String id_therapy, String id_consulta, String id_patient, int btn_start) {
         this.profile_pic = profile_pic;
         this.nombre = nombre;
         this.temporizador = temporizador;
@@ -47,6 +48,7 @@ public class ItemTerapiaView {
         this.id_therapy = id_therapy;
         this.id_consulta = id_consulta;
         this.id_patient = id_patient;
+        this.btn_start = btn_start;
     }
 
     public int getProfile_pic() {
@@ -180,5 +182,13 @@ public class ItemTerapiaView {
 
     public String getId_patient() {
         return id_patient;
+    }
+
+    public int getBtn_start() {
+        return btn_start;
+    }
+
+    public void setBtn_start(int btn_start) {
+        this.btn_start = btn_start;
     }
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -38,9 +39,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+//import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,6 +67,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     public String response;
     public EditText comentario;
     int estadoPaciente = -1;
+    boolean flag = false;
+    String tiempoTotalTerapia;
+    int tiempoTotalInt;
 
     Handler customHandler = new Handler();
     long startTime = 0L, timeInMilliseconds = 0L, timeSwapBuff = 0L, updateTime = 0L;
@@ -72,6 +80,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
     String Date;
+
+    private Bitmap bitmap;
+    ImageView urlpic;
 
     ConstructorObservacionTerapia constructorObservacionTerapia;
 
@@ -102,9 +113,14 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         final ItemTerapiaView terapiaView = listaTerapias.get(position);
 
         holder.profile_pic.setImageResource(listaTerapias.get(position).getProfile_pic());
+        //bitmap = getBitmapFromURL(listaTerapias.get(position).getProfile_pic());
+        //holder.profile_pic.setImageBitmap(bitmap);
+        //holder.profile_pic.
+        //loadImageFromURL(listaTerapias.get(position).getProfile_pic(), holder.profile_pic);
+
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
         //holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
-        holder.profile_pic_detalle.setImageResource(listaTerapias.get(position).getProfile_pic());
+        //holder.profile_pic_detalle.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtHora.setText(listaTerapias.get(position).getHora());
         holder.txtNombreDetalle.setText(listaTerapias.get(position).getNombre_detalle());
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
@@ -112,6 +128,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         //holder.btnPausa.setImageResource(listaTerapias.get(position).getBtn_pausa());//poner imagen que es
 
         holder.imgVComentario.setImageResource(listaTerapias.get(position).getBtn_comentario());
+        //////////////////////////////////
+        holder.imgVStart.setImageResource(listaTerapias.get(position).getBtn_start());
+        //////////////////////////
         holder.imgVStop.setImageResource(listaTerapias.get(position).getBtn_stop());
         holder.imgVPause.setImageResource(listaTerapias.get(position).getBtn_pause_detail());
         holder.imgVCamara.setImageResource(listaTerapias.get(position).getBtn_camara());
@@ -119,9 +138,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         //holder.imgExtremidad1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
         //holder.imgExtremidadDetalle1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
         //cargarExtremidades(listaTerapias.get(position).getExtremidades_pic(), holder);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
 
         holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
 
@@ -148,14 +167,27 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         final Runnable updateTimerThread = new Runnable() {
             @Override
             public void run() {
-                timeInMilliseconds = SystemClock.uptimeMillis()-startTime;
+                //timeInMilliseconds = SystemClock.uptimeMillis()-startTime;
+                //tiempoTotalTerapia = holder.txtHora.getText().toString();
+                //parsear el tiempo en minutos segundos millisegundos
+                //tiempoTotalInt = Integer.parseInt(tiempoTotalTerapia);
+                //timeInMilliseconds = tiempoTotalInt+(SystemClock.uptimeMillis()-startTime);
+                timeInMilliseconds = 0+(SystemClock.uptimeMillis()-startTime);
+                //se le suma la cantidad de tiempo transucrrido en millisegundos, setearlo como variable global y cargar
                 updateTime = timeSwapBuff+timeInMilliseconds;
                 int secs= (int) (updateTime/1000);
                 int mins= secs/60;
                 secs%=60;
                 int milliseconds= (int) (updateTime%1000);
-                holder.txtHora.setText(""+mins+":"+String.format("%2d",secs)+":"+String.format("%3d",milliseconds));
+                holder.txtHora.setText(""+mins+":"+String.format("%2d",secs)+":"+String.format("%2d",milliseconds));
                 customHandler.postDelayed(this,0);
+                //Log.d("mins", ""+mins);
+                Log.d("secs", ""+secs);
+
+                if(flag){
+                    return;
+                }
+
             }
         };
 
@@ -178,7 +210,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     recyclerv.getChildAt(i).findViewById(R.id.section).setVisibility(View.GONE);
                     recyclerv.getChildAt(i).findViewById(R.id.header).setVisibility(View.VISIBLE);
                     //Log.d("Title", "Value: " + Integer.toString(i));
-                    timeSwapBuff+=timeInMilliseconds;
+                    //timeSwapBuff+=timeInMilliseconds;
                     customHandler.removeCallbacks(updateTimerThread);
                     //}
                 }
@@ -299,14 +331,24 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
+
+                String tiempoTotalTerapia;
+
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     holder.imgVStop.setImageResource(R.drawable.finish_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     holder.imgVStop.setImageResource(R.drawable.finish);
 
+                    flag = true;
+
                     //ContextThemeWrapper ctw = new ContextThemeWrapper(v.getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
-                    timeSwapBuff+=timeInMilliseconds;
+                    //timeSwapBuff+=timeInMilliseconds;
+                    //esta linea de codigo me suma lo anterior
                     customHandler.removeCallbacks(updateTimerThread);
+                    tiempoTotalTerapia = holder.txtHora.getText().toString();
+                    Log.d("cronometro", tiempoTotalTerapia);
+                    Log.d("cronometro", tiempoTotalTerapia);
+
 
                     final AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
 
@@ -444,19 +486,42 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
 
 
+
+        holder.imgVStart.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.imgVStart.setImageResource(R.drawable.play_active);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVStart.setImageResource(R.drawable.play_active);
+                    holder.imgVStart.setVisibility(View.GONE);
+                    holder.imgVPause.setVisibility(View.VISIBLE);
+
+                    startTime = SystemClock.uptimeMillis();
+                    //starttime empieza el cronometro
+
+                    customHandler.postDelayed(updateTimerThread, 0);
+                    //aqui pasar los valores
+
+                    flag = false;
+
+                }
+                return true;
+            }
+        });
+
         holder.imgVPause.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVPause.setImageResource(R.drawable.pause_active);
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
                     holder.imgVPause.setImageResource(R.drawable.pause);
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    holder.imgVPause.setImageResource(R.drawable.pause_active);
+                    holder.imgVPause.setVisibility(View.GONE);
+                    holder.imgVStart.setVisibility(View.VISIBLE);
 
-                    startTime = SystemClock.uptimeMillis();
-
-                    customHandler.postDelayed(updateTimerThread, 0);
                 }
-                return true;
+                return false;
             }
         });
 
@@ -472,10 +537,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
     public void enviar_comentario(final String id_therapy){
         calendar = Calendar.getInstance();
-       // simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        simpleDateFormat = new SimpleDateFormat("HH:mm");
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date = simpleDateFormat.format(calendar.getTime());
-
 
 
         Log.d("Entrea ", id_therapy);
@@ -484,9 +547,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         //Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy),Date,comentario.getText().toString().trim());
-        Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/savecomments";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -497,7 +560,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
+                Log.d("Error.Response", response);
             }
         }){
             @Override
@@ -530,9 +593,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         Log.d("estadoPacLog", ""+estadoPaciente);
 
 
-        ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
-        constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(Integer.parseInt(id_therapy),"9:00", comentario.getText().toString().trim());
-        Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
+        //ConstructorObservacionTerapia constructorObservacionTerapia = new ConstructorObservacionTerapia(context);
+        //constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(idTerapia,horaComentario,comentario);
+        //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
         String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -952,6 +1015,38 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         return listaTerapias.size();
     }
 
+    public Bitmap getBitmapFromURL (String src){
+        try{
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        }catch (Exception e){
+            //TODO handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /*private void loadImageFromURL (String url, ImageView imagen) {
+        Picasso.with(context).load(url).placeholder(R.drawable.profile_m)
+                .error(R.drawable.profile_m)
+                .into(imagen, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }*/
+
     /*@Override
     public void onClick(View v) {
         if (v.getId() == boton_test.getId()){
@@ -978,6 +1073,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         ImageButton imgVPause;
         ImageButton imgVCamara;
         ImageButton imgVVerPerfil;
+        ImageButton imgVStart;
 
         ImageView imgExtremidad1;
         ImageView imgExtremidad2;
@@ -1007,6 +1103,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             imgVPause = (ImageButton) itemView.findViewById(R.id.imageViewPause);
             imgVCamara = (ImageButton) itemView.findViewById(R.id.imageViewGallery);
             imgVVerPerfil = (ImageButton) itemView.findViewById(R.id.imageViewViewTherapy);
+            imgVStart = (ImageButton) itemView.findViewById(R.id.imageViewStart);
 
             imgExtremidad1 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad1);
             imgExtremidad2 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad2);
