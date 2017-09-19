@@ -279,6 +279,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 intent.putExtra("id_patient",listaTerapias.get(position).getId_patient());
                 intent.putExtra("full_name",listaTerapias.get(position).getNombre());
 
+                /*for(int i = 0; i< listaTerapias.get(position).getExtremidades_pic().size();i++){
+                    intent.putExtra("extremidad"+i, listaTerapias.get(position).getExtremidades_pic().get(i));
+                }*/
 
                 //Log.d("intent0", listaTerapias.get(position).getId_therapy());
                 //intent.putExtra("id_therapy",activity.getIntent().getExtras().getString("id_therapy"));
