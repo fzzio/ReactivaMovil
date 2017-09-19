@@ -98,16 +98,20 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
         /// llamo al web services para ver el histroial del terapias
 
-        //url = url + "?id=" + IdPacienteF;
+
+        url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory";
+        url = url + "?id=" + IdPacienteF;
+        //url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory?id=2";
         Log.d("Ruta al web service: ", url);
         ////Uso del web service para traer la edad y las extremidasdes del paciente a ejercitar
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        HashMap<String,String> parametros = new HashMap<>();
-        parametros.put("id",IdPacienteF);
-        JSONObject bodyParam = new JSONObject(parametros);
+        //HashMap<String,String> parametros = new HashMap<>();
+        //parametros.put("id",IdPacienteF);
+        //JSONObject bodyParam = new JSONObject(parametros);
 
-        StringRequest stringRequestX = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+        //StringRequest stringRequestX = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+        StringRequest stringRequestX = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("respuesta", String.valueOf(response));
@@ -128,9 +132,20 @@ public class VerHistorialTerapias extends AppCompatActivity {
                     } else {
                         JSONArray terapiasHistorial = dataHistory.getJSONArray("therapies");
                         Log.d("Historial Paciente H: ", String.valueOf(terapiasHistorial));
+                        //Array list para agregar terapias anteriores
+                        terapiasAnterioresData = new ArrayList<TerapiaAnterior>();
+
+                        for (int i = 0; i < terapiasHistorial.length(); i++){
+                            String date = terapiasHistorial.getJSONObject(i).getString("date");
+                            Log.d("Historial Fecha: ", date);
+                            String terapista = terapiasHistorial.getJSONObject(i).getString("therapist");
+                            String idTerapiaAnterior = terapiasHistorial.getJSONObject(i).getString("id_therapy");
+                            terapiasAnterioresData.add(new TerapiaAnterior(date,terapista,idTerapiaAnterior));
+
+                        }
 
                         ///agrego los elmentos del web service al arraylist de terapias anteriores
-                        inicializadorTerapiasRegistrosData();
+                        ///inicializadorTerapiasRegistrosData();
                         inicilaizarAdaptadorRegistroTerapiasAnteriores();
                     }
 
@@ -143,14 +158,14 @@ public class VerHistorialTerapias extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error", error.getMessage());
             }
-        }){
+        })/*{
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("id",IdPacienteF);
                 return params;
             }
-        };
+        }*/;
 
         requestQueue.add(stringRequestX);
 
