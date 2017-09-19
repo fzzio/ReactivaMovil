@@ -49,8 +49,9 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         //Recibo los datos del paciente para crear el perfil del paciente indicado
 
         Bundle bundle = getIntent().getExtras();
-        String id_patientP = bundle.getString("id_patient");
-        String namePacienteP = bundle.getString("patient");
+        final String id_patientP = bundle.getString("id_patient");
+        final String namePacienteP = bundle.getString("patient");
+        String idTerapiapaciente = bundle.getString("id_therapy");
         Log.d("id perfil", id_patientP);
         Log.d("id perfil", namePacienteP);
 
@@ -69,7 +70,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         nombresPacienteVP.setText(namesPacienteF);
         apellidosPacienteVP.setText(lastNamepaciente);
 
-        url = url + "?id="+ id_patientP;
+        url = url + "?id="+ idTerapiapaciente;
         Log.d("Ruta al web service: ", url);
         ////Uso del web service para traer la edad y las extremidasdes del paciente a ejercitar
 
@@ -131,14 +132,18 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
 
         encabezadoInformacionLinkInfo.setTypeface(fontMedium);
 
+        //Boton azul que lleva a la ventana historial de terapias
         btnHistorialTerapias = (Button) findViewById(R.id.btnHistorialTerapias);
+
         btnIniciarTerapia    = (Button) findViewById(R.id.btnIniciarTerapia);
 
         btnHistorialTerapias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
-               // intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
+                intent.putExtra("IdPaciente", id_patientP);
+                Log.d("idxxxx",id_patientP);
+                intent.putExtra("fullName",namePacienteP);
                 startActivity(intent);
             }
         });

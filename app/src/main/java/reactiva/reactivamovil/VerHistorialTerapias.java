@@ -17,18 +17,23 @@ import android.widget.ImageView;
 
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import reactiva.reactivamovil.adapters.TerapiaAnteriorAdaptador;
 import reactiva.reactivamovil.classes.TerapiaAnterior;
@@ -40,24 +45,35 @@ public class VerHistorialTerapias extends AppCompatActivity {
     private FrameLayout frameRegistroTerapiasAnteriores;
     private RecyclerView registroDeTerapiasAnteriores;
 
+    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_historial_terapias);
 
+        //Recibo los datos del paciente
+        Bundle bundle = getIntent().getExtras();
+        final String IdPacienteF = bundle.getString("IdPaciente");
+        String nombrePacienteF = bundle.getString("fullName");
 
         TextView observacionMedica   = (TextView) findViewById(R.id.tvObservacionMedicaPrincipal);
         TextView fechaObservacion    = (TextView) findViewById(R.id.tvFechaUltimaObsMedica);
         TextView doctorObservacion   = (TextView) findViewById(R.id.tvDoctorUltimaObsMedica);
-        TextView nombrePaciente      = (TextView) findViewById(R.id.tvHTNombreCompletoPaciente);
+        final TextView nombrePaciente      = (TextView) findViewById(R.id.tvHTNombreCompletoPaciente);
         TextView encabezadoUltimaObs = (TextView) findViewById(R.id.tvHTultimaObservacion);
         TextView encabezadoRegistro  = (TextView) findViewById(R.id.tvHTregistro);
+
 
 
         Typeface fontMedium = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Medium.ttf");
         Typeface fontSemiBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-SemiBold.ttf");
         Typeface fontBold = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Bold.ttf");
         Typeface fontBlack = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Black.ttf");
+
+
+        //Seteo los datos del paciente en la vista
+        nombrePaciente.setText(nombrePacienteF);
 
         fechaObservacion.setTypeface(fontBold);
         doctorObservacion.setTypeface(fontBold);
@@ -67,6 +83,11 @@ public class VerHistorialTerapias extends AppCompatActivity {
         encabezadoUltimaObs.setTypeface(fontMedium);
         encabezadoRegistro.setTypeface(fontMedium);
 
+        final TextView noTerapiasAnteriores = new TextView(this);
+        noTerapiasAnteriores.setText("No Existen Terapias Anteriores");
+        noTerapiasAnteriores.setTextSize(30);
+        noTerapiasAnteriores.setGravity(1);
+        noTerapiasAnteriores.setTypeface(fontBold);
 
 
         ImageView imagenOjoHumano = (ImageView) findViewById(R.id.imgVerTerapia);
@@ -75,6 +96,65 @@ public class VerHistorialTerapias extends AppCompatActivity {
         frameRegistroTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
         registroDeTerapiasAnteriores    = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
 
+        /// llamo al web services para ver el histroial del terapias
+
+        //url = url + "?id=" + IdPacienteF;
+        Log.d("Ruta al web service: ", url);
+        ////Uso del web service para traer la edad y las extremidasdes del paciente a ejercitar
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        HashMap<String,String> parametros = new HashMap<>();
+        parametros.put("id",IdPacienteF);
+        JSONObject bodyParam = new JSONObject(parametros);
+
+        StringRequest stringRequestX = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("respuesta", String.valueOf(response));
+                try {
+                    JSONObject dataHistory = new JSONObject(response);
+                    JSONObject dataBasic = dataHistory.getJSONObject("patient");
+                    String namePaciente = dataBasic.getString("fullname");
+                    Log.d(" Historial Paciente: ", namePaciente);
+
+                    if (dataHistory.getJSONArray("therapies").length()== 0) {
+                        Log.d("Historial Paciente H: ", "No tiene terapias anteriores");
+                        Toast.makeText(getApplicationContext(),"No tiene Terapias Anteriores",Toast.LENGTH_LONG).show();
+                        //Si no existe ningun elemento muestro un mensahj que no hay terapias
+                        //inicializadorTerapiasRegistrosData();
+                        //inicilaizarAdaptadorRegistroTerapiasAnteriores();
+                        frameRegistroTerapiasAnteriores.addView(noTerapiasAnteriores);
+
+                    } else {
+                        JSONArray terapiasHistorial = dataHistory.getJSONArray("therapies");
+                        Log.d("Historial Paciente H: ", String.valueOf(terapiasHistorial));
+
+                        ///agrego los elmentos del web service al arraylist de terapias anteriores
+                        inicializadorTerapiasRegistrosData();
+                        inicilaizarAdaptadorRegistroTerapiasAnteriores();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.getMessage());
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("id",IdPacienteF);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequestX);
+
+
 
         LinearLayoutManager llRegistroTera = new LinearLayoutManager(this);
         llRegistroTera.setOrientation(LinearLayoutManager.VERTICAL);
@@ -82,8 +162,8 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
 
         ///
-        inicializadorTerapiasRegistrosData();
-        inicilaizarAdaptadorRegistroTerapiasAnteriores();
+        //inicializadorTerapiasRegistrosData();
+        //inicilaizarAdaptadorRegistroTerapiasAnteriores();
 
 
         ((ScrollView)registroDeTerapiasAnteriores.getParent()).removeView(registroDeTerapiasAnteriores);
