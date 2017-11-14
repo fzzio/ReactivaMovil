@@ -1,130 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/draw_login"
-android:gravity="center_horizontal"
-android:orientation="vertical"
-android:weightSum="1"
-tools:context="reactiva.reactivamovil.LoginActivity">
-
-<!-- Login progress -->
-<ImageView
-    android:id="@+id/imageView3"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:src="@drawable/rea_login"
-    android:layout_weight="0.50"
-    android:padding="50dp"/>
+    android:layout_height="match_parent"
+    android:background="@drawable/draw_login"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="reactiva.reactivamovil.LoginActivity">
 
-    <LinearLayout
-    android:id="@+id/login_form"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.50"
-    android:gravity="center"
-    android:layout_gravity="center">
-
-    <LinearLayout
-        android:id="@+id/email_login_form"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
+        android:layout_height="0dp"
+        android:layout_weight="0.4">
 
-        <TextView
-            android:id="@+id/lbl_user"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rea_login"
+            android:layout_weight="0.40"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="50dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.60"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="USUARIO"
-            android:textColor="#b67727"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-        <!--android:textColor="#294864"-->
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:id="@+id/lbl_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="USUARIO"
+                android:textColor="#b67727"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+            <!--android:textColor="#294864"-->
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#b67727"
+                android:elevation="1dp"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textColor="#294864"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbl_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:color="#b67727"
+                android:paddingTop="15dp"
+                android:text="CONTRASEÑA"
+                android:textAlignment="viewStart"
+                android:textColor="#b67727"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#b67727"
-            android:elevation="1dp"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:textColor="#294864"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#b67727"
+                android:backgroundTintMode="src_in"
+                android:elevation="1dp"
+                android:imeOptions="actionSend"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="#294864"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/lbl_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:color="#b67727"
-            android:paddingTop="15dp"
-            android:text="CONTRASEÑA"
-            android:textAlignment="viewStart"
-            android:textColor="#b67727"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/lbl_forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#b67727"
+                android:text="¿Olvidaste tu contraseña?"
+                android:textAlignment="center"
+                android:textColor="#2e4766"
+                android:textColorHighlight="#ffffff"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:typeface="normal" />
 
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_button"
+                android:elevation="5dp"
+                android:ellipsize="middle"
+                android:gravity="center_horizontal|fill_horizontal|center"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Ingresar"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#b67727"
-            android:backgroundTintMode="src_in"
-            android:elevation="1dp"
-            android:imeOptions="actionSend"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:textColor="#294864"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/lbl_forgot_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="#b67727"
-            android:text="¿Olvidaste tu contraseña?"
-            android:textAlignment="center"
-            android:textColor="#2e4766"
-            android:textColorHighlight="#ffffff"
-            android:textSize="24sp"
-            android:textStyle="normal"
-            android:typeface="normal" />
-
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="@android:style/Widget.Material.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_button"
-            android:elevation="5dp"
-            android:ellipsize="middle"
-            android:gravity="center_horizontal|fill_horizontal|center"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="Ingresar"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
 
 </LinearLayout>

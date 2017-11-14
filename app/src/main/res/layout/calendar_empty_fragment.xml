@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="550dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:background="@color/colorBlanco">
@@ -26,30 +26,33 @@
                 android:text="Viernes, 1 jul. 2017"
                 android:textColor="@color/colorMoradoMedio"
                 android:textStyle="normal"
-                android:textSize="18dp"
+                android:textSize="14sp"
                 android:layout_alignParentBottom="true" />
 
             <ImageView
                 android:id="@+id/calendar_empty_close_imv"
                 android:gravity="center"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:src="@drawable/calendar_close_button"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="15dp" />
+
         </RelativeLayout>
 
         <TextView
             android:id="@+id/empty_appointment_txv"
-            android:layout_width="550dp"
-            android:layout_height="530dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text=" NO HAY CITAS\nPROGRAMADAS"
             android:textColor="@color/colorMoradoOscuro"
             android:background="@color/colorMoradoOpaco"
             android:gravity="center"
-            android:textSize="40sp" />
+            android:textSize="18sp" />
+
     </LinearLayout>
+
 </FrameLayout>

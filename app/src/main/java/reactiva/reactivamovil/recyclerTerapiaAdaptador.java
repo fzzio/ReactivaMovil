@@ -46,6 +46,7 @@ import org.w3c.dom.Text;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -120,20 +121,20 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
 
         holder.txtNombre.setText(listaTerapias.get(position).getNombre());
         //holder.txtTemporizador.setText(listaTerapias.get(position).getTemporizador());
-        //holder.profile_pic_detalle.setImageResource(listaTerapias.get(position).getProfile_pic());
+        holder.profile_pic_detalle.setImageResource(listaTerapias.get(position).getProfile_pic());
         holder.txtHora.setText(listaTerapias.get(position).getHora());
         holder.txtNombreDetalle.setText(listaTerapias.get(position).getNombre_detalle());
         holder.txtEdadDetalle.setText(listaTerapias.get(position).getEdad_detalle());
 
         //holder.btnPausa.setImageResource(listaTerapias.get(position).getBtn_pausa());//poner imagen que es
 
-        holder.imgVComentario.setImageResource(listaTerapias.get(position).getBtn_comentario());
+        holder.imgVComentario.setBackgroundResource(listaTerapias.get(position).getBtn_comentario());
         //////////////////////////////////
-        holder.imgVStart.setImageResource(listaTerapias.get(position).getBtn_start());
+        holder.imgVStart.setBackgroundResource(listaTerapias.get(position).getBtn_start());
         //////////////////////////
-        holder.imgVStop.setImageResource(listaTerapias.get(position).getBtn_stop());
-        holder.imgVPause.setImageResource(listaTerapias.get(position).getBtn_pause_detail());
-        holder.imgVCamara.setImageResource(listaTerapias.get(position).getBtn_camara());
+        holder.imgVStop.setBackgroundResource(listaTerapias.get(position).getBtn_stop());
+        holder.imgVPause.setBackgroundResource(listaTerapias.get(position).getBtn_pause_detail());
+        holder.imgVCamara.setBackgroundResource(listaTerapias.get(position).getBtn_camara());
 
         //holder.imgExtremidad1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
         //holder.imgExtremidadDetalle1.setImageResource(listaTerapias.get(position).getExtremidades_pic().get(0));
@@ -142,7 +143,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         //cargarExtremidades(listaTerapias.get(position).getExtremidades_pic(), holder);
         //////////////////////////////////////////////////////////////////////////////////
 
-        holder.imgVVerPerfil.setImageResource(listaTerapias.get(position).getVer_perfil());
+        holder.imgVVerPerfil.setBackgroundResource(listaTerapias.get(position).getVer_perfil());
 
         //holder.txtNombre.setTypeface(type);
 
@@ -167,11 +168,11 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         final Runnable updateTimerThread = new Runnable() {
             @Override
             public void run() {
-                //timeInMilliseconds = SystemClock.uptimeMillis()-startTime;
-                //tiempoTotalTerapia = holder.txtHora.getText().toString();
-                //parsear el tiempo en minutos segundos millisegundos
-                //tiempoTotalInt = Integer.parseInt(tiempoTotalTerapia);
-                //timeInMilliseconds = tiempoTotalInt+(SystemClock.uptimeMillis()-startTime);
+
+                if(flag){
+                    return;
+                }
+
                 timeInMilliseconds = 0+(SystemClock.uptimeMillis()-startTime);
                 //se le suma la cantidad de tiempo transucrrido en millisegundos, setearlo como variable global y cargar
                 updateTime = timeSwapBuff+timeInMilliseconds;
@@ -179,14 +180,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 int mins= secs/60;
                 secs%=60;
                 int milliseconds= (int) (updateTime%1000);
-                holder.txtHora.setText(""+mins+":"+String.format("%2d",secs)+":"+String.format("%2d",milliseconds));
+                holder.txtHora.setText(new DecimalFormat("00").format(mins)
+                        +":"+new DecimalFormat("00").format(secs)
+                        +":"+new DecimalFormat("000").format(milliseconds));
                 customHandler.postDelayed(this,0);
                 //Log.d("mins", ""+mins);
                 Log.d("secs", ""+secs);
-
-                if(flag){
-                    return;
-                }
 
             }
         };
@@ -235,25 +234,15 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             public boolean onTouch(View v, MotionEvent event) {
 
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVComentario.setImageResource(R.drawable.comment_active);
+                    holder.imgVComentario.setBackgroundResource(R.drawable.comment_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVComentario.setImageResource(R.drawable.comment);
+                    holder.imgVComentario.setBackgroundResource(R.drawable.comment);
 
                     AlertDialog.Builder comentBuilder = new AlertDialog.Builder(v.getContext());
                     LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View vistaComent = li.inflate(R.layout.terapia_comentario, null);
 
                     comentario = (EditText) vistaComent.findViewById(R.id.editTxtComentario);
-
-                    TextView titulo = new TextView(context);
-                    titulo.setText(R.string.terapia_comentario_title);
-                    titulo.setGravity(Gravity.TOP);
-                    titulo.setPadding(50, 70, 30, 30);
-                    titulo.setTextSize(30);
-                    titulo.setTextColor(Color.parseColor("#163550"));
-
-                    comentBuilder.setCustomTitle(titulo);
-                    comentBuilder.setMessage(R.string.terapia_comentario_descripcion);
                     comentBuilder.setNegativeButton("Cancelar",null);
                     comentBuilder.setPositiveButton("Guardar", null);
                     comentBuilder.setView(vistaComent);
@@ -262,8 +251,8 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
                         public void onShow(final DialogInterface dialog) {
-                            holder.imgVComentario.setImageResource(R.drawable.comment_active);
-                            holder.imgVComentario.setImageResource(R.drawable.comment);
+                            holder.imgVComentario.setBackgroundResource(R.drawable.comment_active);
+                            holder.imgVComentario.setBackgroundResource(R.drawable.comment);
                             Button boton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
                             boton.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -280,21 +269,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                         }
                     });
 
-
                     dialog.show();
-
-                    TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
-                    Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                    Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-
-
-                    btnOk.setPadding(20,0,20,50);
-                    btnCancel.setPadding(20,0,20,50);
-
-                    msmTxt.setTextSize(24);
-                    btnOk.setTextSize(28);
-                    btnCancel.setTextSize(28);
-
                 }
 
                 return true;
@@ -335,9 +310,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                 String tiempoTotalTerapia;
 
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVStop.setImageResource(R.drawable.finish_active);
+                    holder.imgVStop.setBackgroundResource(R.drawable.finish_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVStop.setImageResource(R.drawable.finish);
+                    holder.imgVStop.setBackgroundResource(R.drawable.finish);
 
                     flag = true;
 
@@ -355,35 +330,16 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     LayoutInflater li = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View vistaEvaluacion = li.inflate(R.layout.terapia_evaluacion, null);
 
-                    //TextView titulo = (TextView) vistaComent.findViewById(R.id.titulo);
-
                     //*****************************************************************************************//
                     //final EditText comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
                     comentario = (EditText) vistaEvaluacion.findViewById(R.id.edit_text_obs);
                     //****************************************************************************************//
 
-                    //TextView btnGuardar = (TextView) vistaEvaluacion.findViewById(R.id.txt_guardar);
-                    //TextView btnCancelar = (TextView) vistaEvaluacion.findViewById(R.id.txt_cancelar);
-
-                    //comentBuilder.setTitle(R.string.terapia_evaluacion_title);
-                    TextView titulo = new TextView(context);
-                    titulo.setText(R.string.terapia_evaluacion_title);
-                    titulo.setGravity(Gravity.TOP);
-                    titulo.setPadding(50, 70, 30, 30);
-                    titulo.setTextSize(30);
-                    //titulo.setBackgroundColor(Color.WHITE);
-                    titulo.setTextColor(Color.parseColor("#163550"));
-
-                    comentBuilder.setCustomTitle(titulo);
-                    comentBuilder.setMessage(R.string.terapia_evaluacion_descripcion);
                     comentBuilder.setNegativeButton("Cancelar",null);
                     comentBuilder.setPositiveButton("Guardar", null);//no se setea el listener aqui para poder cerrar el dialogo unicamente cuando ya se hayan validado todos los campos
                     comentBuilder.setView(vistaEvaluacion);
 
-
                     final AlertDialog dialog = comentBuilder.create();
-                    //TextView titulo = (TextView) dialog.findViewById(android.R.id.title);
-                    //titulo.setTextSize(40);
                     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
                         public void onShow(final DialogInterface dialog) {
@@ -446,16 +402,6 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
                     });
                     dialog.show();
 
-                    TextView msmTxt = (TextView) dialog.findViewById(android.R.id.message);
-                    Button btnOk = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                    Button btnCancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-
-                    btnOk.setPadding(20,0,20,50);
-                    btnCancel.setPadding(20,0,20,50);
-
-                    btnOk.setTextSize(28);
-                    btnCancel.setTextSize(28);
-                    msmTxt.setTextSize(24);
                 }
 
                 return true;
@@ -474,9 +420,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVCamara.setImageResource(R.drawable.camera_active);
+                    holder.imgVCamara.setBackgroundResource(R.drawable.camera_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVCamara.setImageResource(R.drawable.camera);
+                    holder.imgVCamara.setBackgroundResource(R.drawable.camera);
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activity.startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
                 }
@@ -491,9 +437,9 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVStart.setImageResource(R.drawable.play_active);
+                    holder.imgVStart.setBackgroundResource(R.drawable.play_active);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVStart.setImageResource(R.drawable.play_active);
+                    holder.imgVStart.setBackgroundResource(R.drawable.play_active);
                     holder.imgVStart.setVisibility(View.GONE);
                     holder.imgVPause.setVisibility(View.VISIBLE);
 
@@ -514,12 +460,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    holder.imgVPause.setImageResource(R.drawable.pause);
+                    holder.imgVPause.setBackgroundResource(R.drawable.pause);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    holder.imgVPause.setImageResource(R.drawable.pause_active);
+                    holder.imgVPause.setBackgroundResource(R.drawable.pause_active);
                     holder.imgVPause.setVisibility(View.GONE);
                     holder.imgVStart.setVisibility(View.VISIBLE);
-
+                    customHandler.removeCallbacks(updateTimerThread);
                 }
                 return false;
             }
@@ -551,7 +497,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(id_therapyint,Date,comentario.getText().toString().trim());
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
-        String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/savecomments";//falta url
+        String url = Utils.URL+"/ReactivaWeb/index.php/requests/savecomments";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -597,7 +543,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         constructorObservacionTerapia.insertarNuevoComentarioByIdTerapia(id_therapyint,Date,comentario.getText().toString().trim());
         //Toast.makeText(this.context, id_therapy, Toast.LENGTH_SHORT).show();
 
-        String url = "http://107.170.105.224:6522/ReactivaWeb/index.php/requests/endTherapy";//falta url
+        String url = Utils.URL+"/ReactivaWeb/index.php/requests/endTherapy";//falta url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -606,7 +552,7 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", response);
+                Log.d("Error.Response", error.getMessage());
             }
         }){
             @Override
@@ -1068,12 +1014,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
         TextView txtNombreDetalle;
         TextView txtEdadDetalle;
         ImageButton btnPausa;
-        ImageButton imgVComentario;
-        ImageButton imgVStop;
-        ImageButton imgVPause;
-        ImageButton imgVCamara;
-        ImageButton imgVVerPerfil;
-        ImageButton imgVStart;
+        Button imgVComentario;
+        Button imgVStop;
+        Button imgVPause;
+        Button imgVCamara;
+        Button imgVVerPerfil;
+        Button imgVStart;
 
         ImageView imgExtremidad1;
         ImageView imgExtremidad2;
@@ -1098,12 +1044,12 @@ public class recyclerTerapiaAdaptador extends RecyclerView.Adapter<recyclerTerap
             txtEdadDetalle = (TextView) itemView.findViewById(R.id.txtEdadDetalle);
             //txtSalaDetalle = (TextView) itemView.findViewById(R.id.txtSalaDetalle);
             //btnPausa = (ImageButton) itemView.findViewById(R.id.btnIniciarTerapia);
-            imgVComentario = (ImageButton) itemView.findViewById(R.id.imageViewComment);
-            imgVStop = (ImageButton) itemView.findViewById(R.id.imageViewStop);
-            imgVPause = (ImageButton) itemView.findViewById(R.id.imageViewPause);
-            imgVCamara = (ImageButton) itemView.findViewById(R.id.imageViewGallery);
-            imgVVerPerfil = (ImageButton) itemView.findViewById(R.id.imageViewViewTherapy);
-            imgVStart = (ImageButton) itemView.findViewById(R.id.imageViewStart);
+            imgVComentario = (Button) itemView.findViewById(R.id.imageViewComment);
+            imgVStop = (Button) itemView.findViewById(R.id.imageViewStop);
+            imgVPause = (Button) itemView.findViewById(R.id.imageViewPause);
+            imgVCamara = (Button) itemView.findViewById(R.id.imageViewGallery);
+            imgVVerPerfil = (Button) itemView.findViewById(R.id.imageViewViewTherapy);
+            imgVStart = (Button) itemView.findViewById(R.id.imageViewStart);
 
             imgExtremidad1 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad1);
             imgExtremidad2 = (ImageView) itemView.findViewById(R.id.imageViewExtremidad2);

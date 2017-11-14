@@ -39,16 +39,19 @@ import reactiva.reactivamovil.presentadores.IRecyclerBitacora;
 
 public class BitacoraTerapiaAnterior extends AppCompatActivity{
 
-
     //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
     ArrayList<ObservacionMedica> observacionMedicasData;
-    private FrameLayout frameSucesosBitacoraTerapia;
     private RecyclerView listaDeObservacionesMedicas;
 
     ConstructorObservacionTerapia constructorObservacionTerapia;
 
     int idprueba;
-    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/getTherapyHistory";
+    String url =Utils.URL+"/ReactivaWeb/index.php/services/getTherapyHistory";
+
+    TextView nombrePacienteBitacora;
+    TextView nombreTerapista;
+    TextView fechaTerapia;
+    String IdTerapiaAnterior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +61,14 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
 
         /// recibo datos de la aplicacion anterior el id de la terapia el historial
         Bundle bundle = getIntent().getExtras();
-        final String IdTerapiaAnterior = bundle.getString("IDTerapia");
+        IdTerapiaAnterior = bundle.getString("IDTerapia");
         //int idFinal = Integer.parseInt(IdPaciente);
         Log.d(" id final paciente", IdTerapiaAnterior);
 
-        final TextView nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
-        final TextView fechaBitacora    = (TextView) findViewById(R.id.tvBfecha);
+        nombrePacienteBitacora   = (TextView) findViewById(R.id.tvBpaciente);
 
-        final TextView nombreTerapista = (TextView) findViewById(R.id.tvHTterapista);
-        final TextView fechaTerapia = (TextView) findViewById(R.id.tvHTfecha);
+        nombreTerapista = (TextView) findViewById(R.id.tvHTterapista);
+        fechaTerapia = (TextView) findViewById(R.id.tvHTfecha);
 
         //nombrePacienteBitacora.setText(nombre);
 
@@ -80,19 +82,40 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
         nombreTerapista.setTypeface(fontMedium);
         fechaTerapia.setTypeface(fontMedium);
 
-
-        frameSucesosBitacoraTerapia = (FrameLayout) findViewById(R.id.frameObsMedicasBitacora);
-
         listaDeObservacionesMedicas = (RecyclerView) findViewById(R.id.rvObsMedicasBitacora);
 
-
         /// Lectura de datos del web services
-        url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/getTherapyHistory";
+        url = Utils.URL+"/ReactivaWeb/index.php/services/getTherapyHistory";
         Log.d("Ruta al web service: ", url);
 
+        generarLinearLayoutVertical();
+
+        //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
+        //idprueba = 5;
+        //obtenerObservacionesByIdTerapia(idFinal);
+        //mostrarDatosEnRVobsernacionesTerapia();
+
+        Menu.funciones_del_menu(BitacoraTerapiaAnterior.this,getIntent().getExtras().getString("nombre"),"BITÁCORA DE TERAPIA");
+
+        inicializarListaDeObservacionesMedicas();
+        inicializarAdaptadorObservacionesMedicas();
+    }
+
+    public void inicializarAdaptadorObservacionesMedicas() {
+        ObservacionMedicaAdaptador adaptadorObservacionesBitacora = new ObservacionMedicaAdaptador(observacionMedicasData);
+        listaDeObservacionesMedicas.setAdapter(adaptadorObservacionesBitacora);
+    }
+
+
+    public void generarLinearLayoutVertical() {
+        ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
+        LinearLayoutManager llBitacora = new LinearLayoutManager(this);
+        llBitacora.setOrientation(LinearLayoutManager.VERTICAL);
+        listaDeObservacionesMedicas.setLayoutManager(llBitacora);
+    }
+
+    public void getInfo(){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-
         StringRequest stringRequestX = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 
             @Override
@@ -171,48 +194,9 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
         };
 
         requestQueue.add(stringRequestX);
-
-
-
-        generarLinearLayoutVertical();
-        //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
-
-        //idprueba = 5;
-        //obtenerObservacionesByIdTerapia(idFinal);
-
-        //mostrarDatosEnRVobsernacionesTerapia();
-
-
-
-        ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
-        frameSucesosBitacoraTerapia.addView(listaDeObservacionesMedicas);
-
-        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
-                startActivityForResult(intent,0);
-            }
-        });
-        //Menu.funciones_del_menu(BitacoraTerapia.this,getIntent().getExtras().getString("nombre"),"BITÁCORA DE TERAPIA");
     }
 
-    public void inicializarAdaptadorObservacionesMedicas() {
-        ObservacionMedicaAdaptador adaptadorObservacionesBitacora = new ObservacionMedicaAdaptador(observacionMedicasData);
-        listaDeObservacionesMedicas.setAdapter(adaptadorObservacionesBitacora);
-
-    }
-
-
-    public void generarLinearLayoutVertical() {
-        ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
-        LinearLayoutManager llBitacora = new LinearLayoutManager(this);
-        llBitacora.setOrientation(LinearLayoutManager.VERTICAL);
-        listaDeObservacionesMedicas.setLayoutManager(llBitacora);
-    }
-   /* public void inicializarListaDeObservacionesMedicas() {
+    public void inicializarListaDeObservacionesMedicas() {
         observacionMedicasData = new ArrayList<ObservacionMedica>();
         observacionMedicasData.add(new ObservacionMedica("9:00","Inicio"));
         observacionMedicasData.add(new ObservacionMedica("9:08","INICIO juego -Subir Escaleras-"));
@@ -230,11 +214,7 @@ public class BitacoraTerapiaAnterior extends AppCompatActivity{
         observacionMedicasData.add(new ObservacionMedica("10:25","El paciente otra vez se fue de oreja"));
         observacionMedicasData.add(new ObservacionMedica("10:35","REANUDA juego -Nombre de Juego-"));
 
-    }*/
-
-
-
-
+    }
 
    /* *//**
      * Obtengo todas las observaciones por el ID de la terpaia

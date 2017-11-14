@@ -121,7 +121,6 @@ public class FragmentRVParametrosJuegos extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error.Response: ", error.toString());
                 error.printStackTrace();
-                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());

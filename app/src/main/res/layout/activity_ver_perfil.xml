@@ -8,206 +8,209 @@
     android:background="@drawable/fondo_gradiente_perfil_terapias"
     tools:context="reactiva.reactivamovil.VerPerfilActivity"
     android:weightSum="1">
+
     <include layout="@layout/top_menu"/>
 
-
-
-        <ImageView
-            android:id="@+id/imgvVPfotoPaciente"
-            android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="15dp"
-            app:srcCompat="@drawable/profile_m"
-            android:layout_weight="0.45" />
-
-        <TextView
-            android:id="@+id/tvVPPacienteNombres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" "
-            android:layout_marginBottom="-10dp"
-            android:textColor="#1c3651"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvVPPacienteApellidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" "
-            android:textColor="#1c3651"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvVPedadpaciente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textColor="#1c3651"
-            android:textSize="22sp" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tvVPproxiCita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Prox. cita: "
-                android:textAlignment="center"
-                android:textColor="#1c3651"
-                android:textSize="27sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvVPproxCitaData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=" 20 sep. 2017"
-                android:textAlignment="center"
-                android:textColor="#1c3651"
-                android:textSize="27sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvVPzonasEjercitar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Zonas a ejercitar:"
-            android:textAlignment="center"
-            android:textColor="#1c3651"
-            android:textSize="27sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_mano_izq" />
-
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_mano_der" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_brazo_izq" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_brazo_der" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="-18dp"
-            android:layout_marginBottom="5dp">
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_codo_izq" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:srcCompat="@drawable/cuerpo_codo_der" />
-        </LinearLayout>
-
-
-
-    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnIniciarTerapia"
-                style="@android:style/Widget.Material.Button.Borderless"
-                android:layout_width="175dp"
+            <ImageView
+                android:id="@+id/imgvVPfotoPaciente"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnHistorialTerapias"
-                android:layout_alignBottom="@+id/btnHistorialTerapias"
-                android:layout_marginEnd="29dp"
-                android:layout_toStartOf="@+id/btnHistorialTerapias"
-                android:background="@drawable/rounded_button2"
-                android:elevation="5dp"
-                android:text="Iniciar terapia"
-                android:textColor="#FFF"
-                android:textSize="20dp"
-                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/profile_m"/>
+
+            <TextView
+                android:id="@+id/tvVPPacienteNombres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Daniel Andrés"
+                android:textColor="#1c3651"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-
-            <Button
-                android:id="@+id/btnHistorialTerapias"
-                style="@android:style/Widget.Material.Button.Borderless"
-                android:layout_width="175dp"
+            <TextView
+                android:id="@+id/tvVPPacienteApellidos"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="108dp"
-                android:background="@drawable/rounded_button"
-                android:elevation="5dp"
-                android:text="Historial"
-                android:textColor="#FFF"
-                android:textSize="20dp"
-                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:text="Tigse Palma"
+                android:textColor="#1c3651"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvVPedadpaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:text="28 años"
+                android:textAlignment="center"
+                android:textColor="#1c3651"
+                android:textSize="16sp" />
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp">
 
-    <TextView
-        android:id="@+id/tvVPlinkInfoPaciente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="18sp"
-        android:text="Ver informacion del paciente"
-        android:textColor="#FFF" />
+                <TextView
+                    android:id="@+id/tvVPproxiCita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Prox. cita: "
+                    android:textAlignment="center"
+                    android:textColor="#1c3651"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvVPproxCitaData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" 20 sep. 2017"
+                    android:textAlignment="center"
+                    android:textColor="#1c3651"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvVPzonasEjercitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Zonas a ejercitar:"
+                android:textAlignment="center"
+                android:textColor="#1c3651"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_mano_izq" />
+
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_mano_der" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_brazo_izq" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_brazo_der" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-18dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_codo_izq" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:srcCompat="@drawable/cuerpo_codo_der" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnIniciarTerapia"
+                    style="@android:style/Widget.Material.Button.Borderless"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_button2"
+                    android:elevation="5dp"
+                    android:text="Iniciar terapia"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btnHistorialTerapias"
+                    style="@android:style/Widget.Material.Button.Borderless"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:elevation="5dp"
+                    android:text="Historial"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvVPlinkInfoPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="Ver informacion del paciente"
+                android:textColor="#FFF"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

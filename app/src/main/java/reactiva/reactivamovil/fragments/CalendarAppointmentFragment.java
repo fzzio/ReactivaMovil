@@ -36,6 +36,7 @@ import java.util.TimeZone;
 
 import reactiva.reactivamovil.CalendarActivity;
 import reactiva.reactivamovil.R;
+import reactiva.reactivamovil.Utils;
 import reactiva.reactivamovil.VerTerapiaRecyclerActivity;
 import reactiva.reactivamovil.adapters.CalendarAdapter;
 import reactiva.reactivamovil.classes.Appointment;
@@ -45,10 +46,12 @@ import reactiva.reactivamovil.classes.Appointment;
  */
 
 public class CalendarAppointmentFragment extends Fragment {
+
     private List<Appointment> appointmentList = new ArrayList<>();
     private RecyclerView appointmentRecyclerView;
     private CalendarAdapter calendarAdapter = null;
-    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/getCalendar";
+    private String selected_date;
+    String url = Utils.URL+"/ReactivaWeb/index.php/services/getCalendar";
 
     public static CalendarAppointmentFragment newInstance(String selected_date) {
         CalendarAppointmentFragment fr = new CalendarAppointmentFragment();
@@ -62,15 +65,7 @@ public class CalendarAppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Se define el XML para CalendarAppointmentFragment
         View v = inflater.inflate(R.layout.calendar_fragment, container, false);
-        //Se define las variables para JSONResponse
-        String selected_date = getArguments().getString("selected_date", "");
-        String words [] = selected_date.split(" ");
-        String mes = words[2];
-        final String mes_mcv = monthFormatter(mes);
-        final String año_mcv = words[3];
-        final String dia_mcv = words[1];
-        //Create the Volley request Queue
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
         //Remove all elements from list
         appointmentList.clear();
         //Se define el RecyclerView
@@ -78,9 +73,51 @@ public class CalendarAppointmentFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         appointmentRecyclerView.setLayoutManager(llm);
+
+        selected_date = getArguments().getString("selected_date", "");
+
+        //Se define el TextView
+        TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
+        selected_date_txv.setText(selected_date);
+        //Se define fonts
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
+        selected_date_txv.setTypeface(type);
+
+
+        //FOR DEMO
+        appointmentList.add(new Appointment("1", "1", "Juan Sebastian Perez Inivito", "", "07:00", "AM"));
+        appointmentList.add(new Appointment("1", "1", "Ernesto Fua Suarez Pele", "", "07:30", "AM"));
+        appointmentList.add(new Appointment("1", "1", "Fabricio Daniel Moreno Ruz", "", "09:00", "AM"));
+        appointmentList.add(new Appointment("1", "1", "Mario Ivan Vanilla Zama", "", "10:00", "AM"));
+        appointmentList.add(new Appointment("1", "1", "Denisse Andrea Universo Chiquito", "", "12:00", "PM"));
+        appointmentList.add(new Appointment("1", "1", "Pedro Marto Lota Tixi", "", "02:00", "PM"));
+        appointmentList.add(new Appointment("1", "1", "Maria Gracia Ruiz Xoom", "", "04:00", "PM"));
+        appointmentAdapterBuilder();
+
+        return v;
+    }
+
+    public void appointmentAdapterBuilder(){
+        this.calendarAdapter = new CalendarAdapter(this.appointmentList);
+        this.appointmentRecyclerView.setAdapter(calendarAdapter);
+        calendarAdapter.notifyDataSetChanged();
+    }
+
+    public void getInfo(){
+
+        //Create the Volley request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        //Se define las variables para JSONResponse
+        String words [] = selected_date.split(" ");
+        String mes = words[2];
+        final String mes_mcv = monthFormatter(mes);
+        final String año_mcv = words[3];
+        final String dia_mcv = words[1];
+
         //Add parameters to URL from arguments
         url = url + "?month=" + mes_mcv + "&year=" + año_mcv;
-        System.out.println(url);
+
         //JSON Thread START
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
@@ -129,8 +166,8 @@ public class CalendarAppointmentFragment extends Fragment {
                             appointmentAdapterBuilder();
                         }
                     } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.d("Error.Super", e.toString());
+                        e.printStackTrace();
+                        Log.d("Error.Super", e.toString());
                     }
                 }
             }
@@ -143,19 +180,7 @@ public class CalendarAppointmentFragment extends Fragment {
         });
         //JSON Thread ENDS
         requestQueue.add(jsonArrayRequest);
-        //Se define el TextView
-        TextView selected_date_txv = (TextView) v.findViewById(R.id.selected_date_txv);
-        selected_date_txv.setText(selected_date);
-        //Se define fonts
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Montserrat-Regular.ttf");
-        selected_date_txv.setTypeface(type);
-        return v;
-    }
 
-    public void appointmentAdapterBuilder(){
-        this.calendarAdapter = new CalendarAdapter(this.appointmentList);
-        this.appointmentRecyclerView.setAdapter(calendarAdapter);
-        calendarAdapter.notifyDataSetChanged();
     }
 
     public String monthFormatter(String mes) {

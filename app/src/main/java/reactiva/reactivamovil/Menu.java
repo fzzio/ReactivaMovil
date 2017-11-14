@@ -55,6 +55,7 @@ public class Menu extends AppCompatActivity{
         final ImageButton btn_paciente=(ImageButton)act.findViewById(R.id.btn_paciente);
         final ImageButton btn_historial=(ImageButton)act.findViewById(R.id.btn_historial);
         final ImageButton btn_perfil=(ImageButton)act.findViewById(R.id.btn_perfil);
+        final ImageButton btn_back = (ImageButton)act.findViewById(R.id.btn_back);
         TextView ubicacion = (TextView)act.findViewById(R.id.lbl_ubicacion);
         ubicacion.setText(clase);
         //verPerfil, verCalendario,verTerapia,verHistorial
@@ -65,7 +66,7 @@ public class Menu extends AppCompatActivity{
             btn_historial.setImageDrawable(act.getDrawable(R.drawable.historial));
             btn_perfil.setImageDrawable(act.getDrawable(R.drawable.cerrar_sesion));
         }else if(clase == "TERAPIAS ACTIVAS"){
-            act.findViewById(R.id.txt_terapias_activas_count).setVisibility(LinearLayout.VISIBLE);
+            //act.findViewById(R.id.txt_terapias_activas_count).setVisibility(LinearLayout.VISIBLE);
             btn_calendario.setImageDrawable(act.getDrawable(R.drawable.agenda));
             btn_terapias.setImageDrawable(act.getDrawable(R.drawable.terapia_activo));
             btn_paciente.setImageDrawable(act.getDrawable(R.drawable.paciente));
@@ -90,14 +91,17 @@ public class Menu extends AppCompatActivity{
                 Intent intent = new Intent(act, VerTerapiaRecyclerActivity.class);
                 intent.putExtra("nombre",nombre);
                 act.startActivity(intent);
+                act.finish();
             }
         });
+
         btn_calendario.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(act, CalendarActivity.class);
                 intent.putExtra("nombre",nombre);
                 act.startActivity(intent);
+                act.finish();
             }
         });
 
@@ -111,15 +115,15 @@ public class Menu extends AppCompatActivity{
             }
         });*/
 
-        /*DISPONIBLE DESDE LA VERSION 2
         btn_historial.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(act, VerHistorialTerapias.class);
+                Intent intent = new Intent(act, HistorialActivity.class);
                 intent.putExtra("nombre",nombre);
                 act.startActivity(intent);
+                act.finish();
             }
-        });*/
+        });
 
         btn_perfil.setOnClickListener(new  View.OnClickListener(){
             @Override
@@ -127,6 +131,14 @@ public class Menu extends AppCompatActivity{
                 Toast.makeText(act,"Cerrando sesión...",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(act, LoginActivity.class);
                 act.startActivity(intent);
+                act.finish();
+            }
+        });
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                act.finish();
             }
         });
     }

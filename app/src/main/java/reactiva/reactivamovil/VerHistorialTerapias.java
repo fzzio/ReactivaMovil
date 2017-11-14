@@ -42,10 +42,9 @@ public class VerHistorialTerapias extends AppCompatActivity {
 
     //ELEMENTOS NECESARIO PARA LA LISTA DE TERAPIAS ANTERIORES
     ArrayList<TerapiaAnterior> terapiasAnterioresData;
-    private FrameLayout frameRegistroTerapiasAnteriores;
     private RecyclerView registroDeTerapiasAnteriores;
 
-    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory";
+    String url =Utils.URL+"/ReactivaWeb/index.php/services/patientHistory";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,28 +88,49 @@ public class VerHistorialTerapias extends AppCompatActivity {
         noTerapiasAnteriores.setGravity(1);
         noTerapiasAnteriores.setTypeface(fontBold);
 
-
-        ImageView imagenOjoHumano = (ImageView) findViewById(R.id.imgVerTerapia);
-
-
-        frameRegistroTerapiasAnteriores = (FrameLayout) findViewById(R.id.frameTerapAnteriores);
         registroDeTerapiasAnteriores    = (RecyclerView) findViewById(R.id.rvTerapiasAnteriores);
 
         /// llamo al web services para ver el histroial del terapias
 
-
-        url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory";
+        url = Utils.URL+"/ReactivaWeb/index.php/services/patientHistory";
         url = url + "?id=" + IdPacienteF;
-        //url = "http://107.170.105.224:6522/ReactivaWeb/index.php/services/patientHistory?id=2";
         Log.d("Ruta al web service: ", url);
         ////Uso del web service para traer la edad y las extremidasdes del paciente a ejercitar
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //HashMap<String,String> parametros = new HashMap<>();
-        //parametros.put("id",IdPacienteF);
-        //JSONObject bodyParam = new JSONObject(parametros);
+        LinearLayoutManager llRegistroTera = new LinearLayoutManager(this);
+        llRegistroTera.setOrientation(LinearLayoutManager.VERTICAL);
+        registroDeTerapiasAnteriores.setLayoutManager(llRegistroTera);
 
-        //StringRequest stringRequestX = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+        inicializadorTerapiasRegistrosData();
+
+        Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
+
+    }
+
+    public void inicilaizarAdaptadorRegistroTerapiasAnteriores(){
+        TerapiaAnteriorAdaptador adaptadorRegistroTerapiasAnte = new TerapiaAnteriorAdaptador(terapiasAnterioresData,this);
+        registroDeTerapiasAnteriores.setAdapter(adaptadorRegistroTerapiasAnte);
+
+    }
+
+    public void inicializadorTerapiasRegistrosData () {
+
+        terapiasAnterioresData = new ArrayList<TerapiaAnterior>();
+        terapiasAnterioresData.add(new TerapiaAnterior("15 Jul. 2017","Daniel Garcia Arreaga",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Fernando Sanchez Garcia",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("5 Jul. 2017","Edgar Moreira Arreaga",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("1 Jul. 2017","Israel Zurita Garcia",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("25 Jun. 2017","Manuel Zurita Arreaga",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("20 Jun. 2017","Kevin Sanchez Arreaga",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("15 Jun. 2017","Daniel Garcia Arreaga",""));
+        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Dolores Garcia Arreaga",""));
+
+        inicilaizarAdaptadorRegistroTerapiasAnteriores();
+    }
+
+    public void getHistorial(){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequestX = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -127,7 +147,6 @@ public class VerHistorialTerapias extends AppCompatActivity {
                         //Si no existe ningun elemento muestro un mensahj que no hay terapias
                         //inicializadorTerapiasRegistrosData();
                         //inicilaizarAdaptadorRegistroTerapiasAnteriores();
-                        frameRegistroTerapiasAnteriores.addView(noTerapiasAnteriores);
 
                     } else {
                         JSONArray terapiasHistorial = dataHistory.getJSONArray("therapies");
@@ -168,56 +187,6 @@ public class VerHistorialTerapias extends AppCompatActivity {
         }*/;
 
         requestQueue.add(stringRequestX);
-
-
-
-        LinearLayoutManager llRegistroTera = new LinearLayoutManager(this);
-        llRegistroTera.setOrientation(LinearLayoutManager.VERTICAL);
-        registroDeTerapiasAnteriores.setLayoutManager(llRegistroTera);
-
-
-        ///
-        //inicializadorTerapiasRegistrosData();
-        //inicilaizarAdaptadorRegistroTerapiasAnteriores();
-
-
-        ((ScrollView)registroDeTerapiasAnteriores.getParent()).removeView(registroDeTerapiasAnteriores);
-        frameRegistroTerapiasAnteriores.addView(registroDeTerapiasAnteriores);
-
-        //Necessary for btn_back
-        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),VerPerfilActivity.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
-                startActivityForResult(intent,0);
-            }
-        });
-        //Menu.funciones_del_menu(VerHistorialTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
-
     }
 
-
-    public void inicilaizarAdaptadorRegistroTerapiasAnteriores(){
-        TerapiaAnteriorAdaptador adaptadorRegistroTerapiasAnte = new TerapiaAnteriorAdaptador(terapiasAnterioresData,this);
-        registroDeTerapiasAnteriores.setAdapter(adaptadorRegistroTerapiasAnte);
-
-    }
-
-    public void inicializadorTerapiasRegistrosData () {
-
-        terapiasAnterioresData = new ArrayList<TerapiaAnterior>();
-        terapiasAnterioresData.add(new TerapiaAnterior("15 Jul. 2017","Daniel Garcia Arreaga",""));
-
-
-
-       /* terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Fernando Sanchez Garcia"));
-        terapiasAnterioresData.add(new TerapiaAnterior("5 Jul. 2017","Edgar Moreira Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("1 Jul. 2017","Israel Zurita Garcia"));
-        terapiasAnterioresData.add(new TerapiaAnterior("25 Jun. 2017","Manuel Zurita Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("20 Jun. 2017","Kevin Sanchez Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("15 Jun. 2017","Daniel Garcia Arreaga"));
-        terapiasAnterioresData.add(new TerapiaAnterior("10 Jul. 2017","Dolores Garcia Arreaga"));*/
-    }
 }

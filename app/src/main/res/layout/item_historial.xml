@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="110dp"
+              android:gravity="center"
+              android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageViewDia"
+        android:layout_width="100dp"
+        android:layout_height="78dp"
+        android:layout_margin="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/lunes"/>
+
+    <TextView
+        android:id="@+id/textViewFecha"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:text="31 Jul. 2017"
+        android:gravity="center"/>
+
+</LinearLayout>

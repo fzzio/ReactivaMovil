@@ -36,9 +36,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
     private Button btnIniciarTerapia;
     String textEdad;
 
-    // Web service Ejemplo: http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyStartInfo?id=1
-
-    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyStartInfo";
+    String url =Utils.URL+"/ReactivaWeb/index.php/services/therapyStartInfo";
 
 
     @Override
@@ -99,7 +97,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.getMessage());
+                error.printStackTrace();
             }
         }
 
@@ -142,7 +140,7 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
                 intent.putExtra("IdPaciente", id_patientP);
-                Log.d("idxxxx",id_patientP);
+                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
                 intent.putExtra("fullName",namePacienteP);
                 startActivity(intent);
             }
@@ -154,16 +152,6 @@ public class VerPerfilActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(getApplicationContext(),JuegosTerapias.class);
                 intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
                 startActivity(intent);
-            }
-        });
-
-        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CalendarActivity.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
-                startActivityForResult(intent,0);
             }
         });
 

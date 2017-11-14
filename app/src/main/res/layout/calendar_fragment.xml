@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="550dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:background="@color/colorBlanco">
@@ -26,14 +26,14 @@
                 android:text="Viernes, 1 jul. 2017"
                 android:textColor="@color/colorMoradoMedio"
                 android:textStyle="normal"
-                android:textSize="18dp"
+                android:textSize="14sp"
                 android:layout_alignParentBottom="true" />
 
             <ImageView
                 android:id="@+id/calendar_close_imv"
                 android:gravity="center"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 android:src="@drawable/calendar_close_button"
@@ -44,8 +44,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/calendar_recycler_view"
-            android:layout_width="550dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
     </LinearLayout>
+
 </FrameLayout>

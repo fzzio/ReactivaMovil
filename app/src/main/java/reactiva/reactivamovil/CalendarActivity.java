@@ -177,12 +177,18 @@ public class CalendarActivity extends AppCompatActivity {
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
+
+                CalendarDay selected_date = materialCalendarView.getSelectedDate();
+                removeCalendarAppointmentFragment();
+                removeCalendarEmptyAppointmentFragment();
                 if (isToday(materialCalendarView.getSelectedDate())){
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                 } else {
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorCeleste));
+                    displayCalendarEmptyAppointmentFragment(dateFormatter(selected_date), calendar_closed);
                 }
                 //Update Calendar DisplayMode to MONTHS
                 materialCalendarView.state().edit()
@@ -193,7 +199,6 @@ public class CalendarActivity extends AppCompatActivity {
                 int month_label = day.getMonth();
                 calendar_month.setText(current_month(month_label));
                 //Appointments Verify
-                CalendarDay selected_date = materialCalendarView.getSelectedDate();
                 isAppointment(selected_date, calendar_closed);
             }
         });
@@ -218,6 +223,12 @@ public class CalendarActivity extends AppCompatActivity {
                     //Appointments Verify
                     CalendarDay selected_date = materialCalendarView.getSelectedDate();
                     isAppointment(selected_date, calendar_closed);
+
+                    //FOR DEMO
+                    removeCalendarAppointmentFragment();
+                    removeCalendarEmptyAppointmentFragment();
+                    displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
+
                 } else if(!materialCalendarView.getCurrentMonth().equals(current_month(CalendarDay.from(Calendar.getInstance()).getMonth()))) {
                     //Update Today's Style
                     calendar_today.setTextColor(getResources().getColor(R.color.colorMoradoOpaco));
@@ -265,6 +276,10 @@ public class CalendarActivity extends AppCompatActivity {
         final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
         btn_back.setVisibility(View.INVISIBLE);
         Menu.funciones_del_menu(CalendarActivity.this,nombre,"AGENDA");
+
+        //FOR DEMO
+        CalendarDay selected_date = materialCalendarView.getSelectedDate();
+        displayCalendarAppointmentFragment(dateFormatter(selected_date), calendar_closed);
     }
 
     /**
@@ -394,7 +409,7 @@ public class CalendarActivity extends AppCompatActivity {
      *         false if there isn't an existing appointment
      */
     public void isAppointment(final CalendarDay selected_date, final ImageView calendar_closed) {
-        String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/getCalendar";
+        String url =Utils.URL+"/ReactivaWeb/index.php/services/getCalendar";
         int day = selected_date.getDay();
         int mes = selected_date.getMonth();
         int año = selected_date.getYear();

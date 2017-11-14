@@ -60,10 +60,6 @@ public class TerapiaAnteriorAdaptador extends RecyclerView.Adapter<TerapiaAnteri
         terapiaAnteriorViewHolder.imgTerapy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ///MUESTRO EL DOCTOR QUE HIZO LA TERAPIA
-                //Toast.makeText(activity,terapiaAnt.getTerapistaTerapiaAnterior(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(activity,terapiaAnt.getIdTerapiaAnterior(),Toast.LENGTH_SHORT).show();
-
                 ///LLAMO A LA ACTIVIDAD BITACORA
                 Intent intent = new Intent(activity,BitacoraTerapiaAnterior.class);
                 intent.putExtra("IDTerapia",terapiaAnt.getIdTerapiaAnterior());

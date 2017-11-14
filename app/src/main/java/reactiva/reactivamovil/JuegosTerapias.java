@@ -114,17 +114,7 @@ public class JuegosTerapias extends AppCompatActivity {
         ((FrameLayout)recyclerViewJuegos.getParent()).removeView(recyclerViewJuegos);
         frameJuegos.addView(recyclerViewJuegos);
 
-        Menu.funciones_del_menu(JuegosTerapias.this,getIntent().getExtras().getString("nombre"),"HISTORIAL DE TERAPIAS");
-
-        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),VerPerfilActivity.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
-                startActivityForResult(intent,0);
-            }
-        });
+        Menu.funciones_del_menu(JuegosTerapias.this,getIntent().getExtras().getString("nombre"),"SELECCION DE JUEGOS");
 
     }
 

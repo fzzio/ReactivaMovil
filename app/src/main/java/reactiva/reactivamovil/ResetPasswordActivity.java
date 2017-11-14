@@ -36,7 +36,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     LinearLayout layout_codigo,layout_new_password,layout_restablecer;
     String nombre;
     TextView txt_email,txt_nuevo_pass,txt_confirmar_pass,txt_digitos;
-    //String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
     String url ="http://192.168.0.5:8081/ws/restablecer.php";
     String url_login ="http://192.168.0.5:8081/ws/login.php";
     public String md5(String s) {

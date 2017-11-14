@@ -11,16 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="450dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:background="#fff">
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="225dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="left"
@@ -31,8 +32,9 @@
 
             <TextView
                 android:id="@+id/tvX"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.16"
                 android:layout_gravity="center"
                 android:text="X"
                 android:textAlignment="center"
@@ -43,8 +45,9 @@
 
             <TextView
                 android:id="@+id/tvY"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.16"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
@@ -55,8 +58,9 @@
 
             <TextView
                 android:id="@+id/tvZ"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.16"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:layout_toStartOf="@+id/tvY"
@@ -65,14 +69,16 @@
                 android:textColor="#1c3651"
                 android:textStyle="bold" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvParametrosJuego"
-            android:layout_width="450dp"
-            android:layout_height="400dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="center"/>
 
     </LinearLayout>
+
 </FrameLayout>

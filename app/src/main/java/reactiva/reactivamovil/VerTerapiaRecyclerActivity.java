@@ -54,15 +54,12 @@ import static android.view.View.GONE;
 
 public class VerTerapiaRecyclerActivity extends AppCompatActivity {
 
-    private Button button;
-    Context context = this.getApplication();
-    Activity activity = this;
-    public String response = "";
-
     ConstructorObservacionTerapia constructorObservacionTerapia;
 
-    String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/therapyGet";
+    String url =Utils.URL+"/ReactivaWeb/index.php/services/therapyGet";
     private RecyclerView rv;
+
+    List<ItemTerapiaView> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -84,16 +81,34 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        //inicializarAdaptador(terapias);
+        list = new ArrayList<ItemTerapiaView>();
+        ItemTerapiaView terapia1 = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:00:00",
+                "00:00:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish,
+                R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, new ArrayList<String>(),
+                "1", "2", "3", R.drawable.play_active);
+        ItemTerapiaView terapia2 = new ItemTerapiaView(R.drawable.profile_m,"Ronald Reyes","00:00:00",
+                "00:00:00", "Ronald Reyes", "50 años", R.drawable.comment, R.drawable.finish,
+                R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, new ArrayList<String>(),
+                "1", "2", "3", R.drawable.play_active);
+        ItemTerapiaView terapia3 = new ItemTerapiaView(R.drawable.profile_f,"Lolita Franco","00:00:00",
+                "00:00:00", "Lolita Franco", "28 años", R.drawable.comment, R.drawable.finish,
+                R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, new ArrayList<String>(),
+                "1", "2", "3", R.drawable.play_active);
+        list.add(terapia1);
+        list.add(terapia2);
+        list.add(terapia3);
 
-        List<ItemTerapiaView> listaTerapias = Arrays.asList();
-        /*ArrayList<Integer> listaExtremidades= new ArrayList<Integer>();
-        listaExtremidades.add(12);
-        listaExtremidades.add(0);
-        listaExtremidades.add(2);
-        ItemTerapiaView terapia = new ItemTerapiaView(R.drawable.profile_f,"Maria Perez","00:12:00", "00:12:00", "Maria Perez", "20 años", R.drawable.comment, R.drawable.finish, R.drawable.pause, R.drawable.camera, R.drawable.view_therapy, listaExtremidades);
-        final List<ItemTerapiaView> list = new ArrayList<ItemTerapiaView>(Arrays.asList(terapia));*/
-        final List<ItemTerapiaView> list = new ArrayList();
+        recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(list, this.getApplication(), this);
+        Adaptador.notifyDataSetChanged();
+        rv.setAdapter(Adaptador);
+
+        //Set visibility to GONE in main activities
+        final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
+        btn_back.setVisibility(View.INVISIBLE);
+        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
+    }
+
+    public void getTerapias(){
 
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
@@ -142,8 +157,6 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
                         Log.d("Errorsote", e.toString());
                     }
                 }
-        /*        recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(list, context, activity);
-                rv.setAdapter(Adaptador);*/
 
                 TextView contador = (TextView) findViewById(R.id.txt_terapias_activas_count);
                 contador.setText(list.size() + " activas");
@@ -176,41 +189,12 @@ public class VerTerapiaRecyclerActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error.Response: ",error.toString());
                 error.printStackTrace();
-                Toast.makeText(VerTerapiaRecyclerActivity.this,error.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
 
-        esperar_respuesta();
-
-        recyclerTerapiaAdaptador Adaptador = new recyclerTerapiaAdaptador(list, this.getApplication(), this);
-        Adaptador.notifyDataSetChanged();
-        rv.setAdapter(Adaptador);
-
-        //Set visibility to GONE in main activities
-        final ImageButton btn_back = (ImageButton) findViewById(R.id.btn_back);
-        btn_back.setVisibility(View.INVISIBLE);
-        Menu.funciones_del_menu(VerTerapiaRecyclerActivity.this,getIntent().getExtras().getString("nombre"),"TERAPIAS ACTIVAS");
     }
-
-    private boolean esperar_respuesta(){
-        for(int iwait=0;iwait<10;iwait++){
-            try{
-                Thread.sleep(50);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-                break;
-            }
-
-            if(response!=""){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
 }

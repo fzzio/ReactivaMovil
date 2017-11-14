@@ -29,7 +29,6 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
 
     //ELEMENTOS NECESARIOS PARA LA LISTA DE OBSERVACIONES MEDICAS
     ArrayList<ObservacionTerapia> observacionMedicasData;
-    private FrameLayout frameSucesosBitacoraTerapia;
     private RecyclerView listaDeObservacionesMedicas;
 
     ConstructorObservacionTerapia constructorObservacionTerapia;
@@ -64,73 +63,34 @@ public class BitacoraTerapia extends AppCompatActivity implements IRecyclerBitac
         nombrePacienteBitacora.setTypeface(fontBold);
         fechaBitacora.setTypeface(fontMedium);
 
-
-
-        frameSucesosBitacoraTerapia = (FrameLayout) findViewById(R.id.frameObsMedicasBitacora);
-
         listaDeObservacionesMedicas = (RecyclerView) findViewById(R.id.rvObsMedicasBitacora);
-
-
-       /* ///DEFINO EL LAYOUT DE OBSERVACIONES MEDDICAS
-        LinearLayoutManager llBitacora = new LinearLayoutManager(this);
-        llBitacora.setOrientation(LinearLayoutManager.VERTICAL);
-        listaDeObservacionesMedicas.setLayoutManager(llBitacora);
-*/
-        //inicializarListaDeObservacionesMedicas();
-
-        //inicializarAdaptadorObservacionesMedicas();
-
 
         generarLinearLayoutVertical();
         //LEEO LOS DATOS DE LA BASE Y LOS TRAIGO
-
         //idprueba = 5;
         obtenerObservacionesByIdTerapia(idFinal);
-
         mostrarDatosEnRVobsernacionesTerapia();
 
-
-
-        ((ScrollView)listaDeObservacionesMedicas.getParent()).removeView(listaDeObservacionesMedicas);
-        frameSucesosBitacoraTerapia.addView(listaDeObservacionesMedicas);
-
-        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),VerHistorialTerapias.class);
-                intent.putExtra("nombre",getIntent().getExtras().getString("nombre"));
-                startActivityForResult(intent,0);
-            }
-        });
         Menu.funciones_del_menu(BitacoraTerapia.this,getIntent().getExtras().getString("nombre"),"BITÁCORA DE TERAPIA");
+
+        inicializarListaDeObservacionesMedicas();
+        inicializarAdaptadorObservacionesMedicas();
     }
 
-   /* public void inicializarAdaptadorObservacionesMedicas() {
-        ObservacionMedicaAdaptador adaptadorObservacionesBitacora = new ObservacionMedicaAdaptador(observacionMedicasData);
+    public void inicializarAdaptadorObservacionesMedicas() {
+        ObservacionTerapiaAdaptador adaptadorObservacionesBitacora = new ObservacionTerapiaAdaptador(observacionMedicasData);
         listaDeObservacionesMedicas.setAdapter(adaptadorObservacionesBitacora);
 
-    }*/
+    }
 
-   /* public void inicializarListaDeObservacionesMedicas() {
-        observacionMedicasData = new ArrayList<ObservacionMedica>();
-        observacionMedicasData.add(new ObservacionMedica("9:00","Inicio"));
-        observacionMedicasData.add(new ObservacionMedica("9:08","INICIO juego -Subir Escaleras-"));
-        observacionMedicasData.add(new ObservacionMedica("9:12","Imagen"));
-        observacionMedicasData.add(new ObservacionMedica("9:16","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."));
-        observacionMedicasData.add(new ObservacionMedica("9:23","FIN juego -Subir Escaleras-"));
-        observacionMedicasData.add(new ObservacionMedica("9:29","INICIO juego -Nombre De Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("9:36","PAUSA juego -Nombre De Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("9:36","El paciente tropezo y callo"));
-        observacionMedicasData.add(new ObservacionMedica("9:45","REANUDA juego -Nombre de Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("9:50","PAUSA juego -Nombre De Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("10:00","El paciente se fue de oreja"));
-        observacionMedicasData.add(new ObservacionMedica("10:05","REANUDA juego -Nombre de Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("10:15","PAUSA juego -Nombre De Juego-"));
-        observacionMedicasData.add(new ObservacionMedica("10:25","El paciente otra vez se fue de oreja"));
-        observacionMedicasData.add(new ObservacionMedica("10:35","REANUDA juego -Nombre de Juego-"));
-
-    }*/
+    public void inicializarListaDeObservacionesMedicas() {
+        observacionMedicasData = new ArrayList<ObservacionTerapia>();
+        //int idObservacionTerapia, int idTerapia, String obsComentario, String obsHoraComentario, String obsEstado
+        observacionMedicasData.add(new ObservacionTerapia(1, 1, "Inicio","9:00", "1"));
+        observacionMedicasData.add(new ObservacionTerapia(1, 1, "INICIO juego -Subir Escaleras-","9:08","INICIO juego -Subir Escaleras-"));
+        observacionMedicasData.add(new ObservacionTerapia(1, 1, "Imagen","9:12","Imagen"));
+        observacionMedicasData.add(new ObservacionTerapia(1, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","9:16",""));
+    }
 
     @Override
     public void generarLinearLayoutVertical() {

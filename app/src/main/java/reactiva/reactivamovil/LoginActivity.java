@@ -32,6 +32,7 @@ import java.util.Map;
 import static android.R.attr.id;
 
 public class LoginActivity extends AppCompatActivity {
+
     EditText txt_email;
     EditText txt_password;
     TextView forgot_pass;
@@ -85,31 +86,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-    public String md5(String s) {
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
 
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString((messageDigest[i] & 0xFF) | 0x100).substring(1, 3));
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
     public void verificarLogin(){
-        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        //String url ="http://192.168.0.5:8081/ws/login.php";
-        String url ="http://107.170.105.224:6522/ReactivaWeb/index.php/services/checklogin";
+
+        if(Utils.DEMO_MODE){
+            Intent i = new Intent(LoginActivity.this,VerTerapiaRecyclerActivity.class);
+            i.putExtra("nombre", "Juan Piguave");
+            startActivity(i);
+            finish();
+            return;
+        }
+
+        String url = Utils.URL+"/ReactivaWeb/index.php/services/checklogin";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -144,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("user",txt_email.getText().toString().trim());
-                String aConvertir=md5(txt_password.getText().toString().trim());
+                String aConvertir = Utils.md5(txt_password.getText().toString().trim());
                 if (!aConvertir.isEmpty()){
                     params.put("pass",aConvertir);
                 }

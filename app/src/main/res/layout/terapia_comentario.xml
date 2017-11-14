@@ -3,55 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<TextView
+    <TextView
         android:id="@+id/txt_comentario_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:text="Comentarios" />
 
     <TextView
         android:id="@+id/txt_descripcion_coment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_marginTop="5dp"
         android:text="Ingresa tu comentario sobre la sesión de terapia"
-        android:textAlignment="center"/>-->
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 
     <EditText
         android:id="@+id/editTxtComentario"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:textSize="24sp"
+        android:textSize="14sp"
         android:hint="Escribe algo"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp">
-
-        <!--<Button
-            android:id="@+id/btnGuardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="73dp"
-            android:layout_marginStart="73dp"
-            android:text="Guardar" />
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="63dp"
-            android:layout_marginRight="63dp"
-            android:text="Cancelar" />-->
-    </RelativeLayout>
 </LinearLayout>
