@@ -49,6 +49,9 @@
         </activity>
         <activity android:name=".CitasDiaActivity">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d309433f20fde90890870dc70b5940fa71c05d30" />
     </application>
 
 </manifest>
